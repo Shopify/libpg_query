@@ -519,7 +519,6 @@ runner.blocklist('pgstat_get_kind_info')
 runner.blocklist('pgstat_kind_infos')
 runner.blocklist('pgstat_database_flush_cb')
 runner.blocklist('pgstat_lock_entry')
-runner.blocklist('FetchUniqueConstraintName')
 
 # Mocks REQUIRED for basic operations (error handling, memory management)
 runner.mock('ProcessInterrupts', 'void ProcessInterrupts(void) {}') # Required by errfinish
