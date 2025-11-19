@@ -3,10 +3,10 @@ word-dot = $(word $2,$(subst ., ,$1))
 
 TARGET = pg_query
 ARLIB = lib$(TARGET).a
-PGDIR = $(root_dir)/tmp/postgres
+PGDIR = $(root_dir)/../yugabyte-db/src/postgres
 PGDIRBZ2 = $(root_dir)/tmp/postgres.tar.bz2
 
-PG_VERSION = 15.1
+PG_VERSION = 15.2
 PG_VERSION_MAJOR = $(call word-dot,$(PG_VERSION),1)
 PROTOC_VERSION = 3.14.0
 
@@ -110,9 +110,6 @@ clean:
 .PHONY: all clean build build_shared extract_source examples test install
 
 $(PGDIR):
-	curl -o $(PGDIRBZ2) https://ftp.postgresql.org/pub/source/v$(PG_VERSION)/postgresql-$(PG_VERSION).tar.bz2
-	tar -xjf $(PGDIRBZ2)
-	mv $(root_dir)/postgresql-$(PG_VERSION) $(PGDIR)
 	cd $(PGDIR); patch -p1 < $(root_dir)/patches/01_parser_additional_param_ref_support.patch
 	cd $(PGDIR); patch -p1 < $(root_dir)/patches/03_lexer_track_yyllocend.patch
 	cd $(PGDIR); patch -p1 < $(root_dir)/patches/04_lexer_comments_as_tokens.patch
