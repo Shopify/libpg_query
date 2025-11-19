@@ -152,7 +152,7 @@ move_source:
 	echo "#define HAVE_STRCHRNUL" >> $(PGDIR)/src/include/pg_config.h
 	echo "#endif" >> $(PGDIR)/src/include/pg_config.h
 
-extract_source: $(PGDIR)
+extract_source:
 	-@ $(RM) -rf ./src/postgres/
 	mkdir ./src/postgres
 	mkdir ./src/postgres/include
@@ -163,9 +163,9 @@ extract_source: $(PGDIR)
 	cp $(PGDIR)/src/include/port/atomics/arch-ppc.h ./src/postgres/include/port/atomics
 	touch ./src/postgres/guc-file.c
 	# Copy version information so its easily accessible
-	sed -i "" '$(shell echo 's/\#define PG_MAJORVERSION .*/'`grep "\#define PG_MAJORVERSION " ./src/postgres/include/pg_config.h`'/')' pg_query.h
-	sed -i "" '$(shell echo 's/\#define PG_VERSION .*/'`grep "\#define PG_VERSION " ./src/postgres/include/pg_config.h`'/')' pg_query.h
-	sed -i "" '$(shell echo 's/\#define PG_VERSION_NUM .*/'`grep "\#define PG_VERSION_NUM " ./src/postgres/include/pg_config.h`'/')' pg_query.h
+	sed -i '$(shell echo 's/\#define PG_MAJORVERSION .*/'`grep "\#define PG_MAJORVERSION " ./src/postgres/include/pg_config.h`'/')' pg_query.h
+	sed -i '$(shell echo 's/\#define PG_VERSION .*/'`grep "\#define PG_VERSION " ./src/postgres/include/pg_config.h`'/')' pg_query.h
+	sed -i '$(shell echo 's/\#define PG_VERSION_NUM .*/'`grep "\#define PG_VERSION_NUM " ./src/postgres/include/pg_config.h`'/')' pg_query.h
 	# Copy regress SQL files so we can use them in tests
 	rm -f ./test/sql/postgres_regress/*.sql
 	cp $(PGDIR)/src/test/regress/sql/*.sql ./test/sql/postgres_regress/

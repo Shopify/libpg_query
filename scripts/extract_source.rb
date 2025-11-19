@@ -212,13 +212,27 @@ class Runner
 
   def analyze_file(file)
     index = FFI::Clang::Index.new(true, true)
-    translation_unit = index.parse_translation_unit(file, [
+
+    # Detect if we're analyzing YugabyteDB source
+    yugabyte_root = File.absolute_path(File.join(@basepath, '../..'))
+
+    clang_args = [
       '-I', @basepath + 'src/include',
       '-I', '/usr/local/opt/openssl/include',
-      '-DDLSUFFIX=".bundle"',
+      '-I', '/opt/rh/gcc-toolset-14/root//usr/lib/gcc/x86_64-redhat-linux/14/include',
+      '-DDLSUFFIX=".so"',
       '-g',
-      '-DUSE_ASSERT_CHECKING'
-    ])
+      '-DUSE_ASSERT_CHECKING',
+      '-Wno-macro-redefined',
+      '-Wno-ignored-attributes'
+    ]
+
+    # Add YugabyteDB include paths if they exist
+    if File.directory?(yugabyte_root + '/src')
+      clang_args += ['-I', yugabyte_root + '/src']
+    end
+
+    translation_unit = index.parse_translation_unit(file, clang_args)
     cursor = translation_unit.cursor
 
     func_cursor = nil
@@ -251,9 +265,17 @@ class Runner
             end_offset += 1 if cursor.kind == :cursor_variable # The ";" isn't counted correctly by clang
 
             if cursor.kind == :cursor_variable && (cursor.linkage == :external || cursor.linkage == :internal) &&
-              !cursor.type.const_qualified? && !cursor.type.array_element_type.const_qualified? &&
+              !cursor.type.const_qualified? &&
               cursor.type.pointee.kind != :type_function_proto
-              analysis.external_variables << cursor.spelling
+              # Check if this is an array and if it's const-qualified
+              is_const_array = false
+              if cursor.type.kind == :type_constant_array && cursor.type.respond_to?(:array_element_type)
+                is_const_array = cursor.type.array_element_type.const_qualified?
+              elsif cursor.type.kind == :type_constant_array && cursor.type.respond_to?(:element_type)
+                is_const_array = cursor.type.element_type.const_qualified?
+              end
+
+              analysis.external_variables << cursor.spelling unless is_const_array
             end
 
             analysis.file_to_symbol_positions[cursor.location.file] ||= {}
