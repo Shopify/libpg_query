@@ -162,12 +162,15 @@ extract_source:
 	cp $(PGDIR)/src/include/port/atomics/arch-arm.h ./src/postgres/include/port/atomics
 	cp $(PGDIR)/src/include/port/atomics/arch-ppc.h ./src/postgres/include/port/atomics
 	# Generate and copy PL/pgSQL headers
-	cd $(PGDIR)/src/pl/plpgsql/src && $(MAKE) plerrcodes.h pl_reserved_kwlist_d.h pl_unreserved_kwlist_d.h pl_reserved_kwlist.h pl_unreserved_kwlist.h
-	cp $(PGDIR)/src/pl/plpgsql/src/plerrcodes.h ./src/postgres/
-	cp $(PGDIR)/src/pl/plpgsql/src/pl_reserved_kwlist_d.h ./src/postgres/
-	cp $(PGDIR)/src/pl/plpgsql/src/pl_unreserved_kwlist_d.h ./src/postgres/
-	cp $(PGDIR)/src/pl/plpgsql/src/pl_reserved_kwlist.h ./src/postgres/
-	cp $(PGDIR)/src/pl/plpgsql/src/pl_unreserved_kwlist.h ./src/postgres/
+	@echo "Generating PL/pgSQL headers..."
+	@cd $(PGDIR)/src/pl/plpgsql/src && $(MAKE) plerrcodes.h pl_reserved_kwlist_d.h pl_unreserved_kwlist_d.h pl_reserved_kwlist.h pl_unreserved_kwlist.h || echo "Warning: Could not generate some PL/pgSQL headers"
+	@for f in plerrcodes.h pl_reserved_kwlist_d.h pl_unreserved_kwlist_d.h pl_reserved_kwlist.h pl_unreserved_kwlist.h; do \
+		if [ -f $(PGDIR)/src/pl/plpgsql/src/$$f ]; then \
+			cp $(PGDIR)/src/pl/plpgsql/src/$$f ./src/postgres/ && echo "Copied $$f"; \
+		else \
+			echo "Warning: $$f not found"; \
+		fi; \
+	done
 	touch ./src/postgres/guc-file.c
 	# Copy version information so its easily accessible
 	sed -i "s/\#define PG_MAJORVERSION .*/$$( grep '\#define PG_MAJORVERSION ' ./src/postgres/include/pg_config.h )/" pg_query.h
