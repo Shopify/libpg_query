@@ -171,6 +171,11 @@ extract_source:
 			echo "Warning: $$f not found"; \
 		fi; \
 	done
+	# Fix missing ReservedPLKeywordTokens array definition (removed by extraction script)
+	@if ! grep -q "ReservedPLKeywordTokens\[\]" ./src/postgres/src_pl_plpgsql_src_pl_scanner.c; then \
+		echo "Patching pl_scanner.c to restore ReservedPLKeywordTokens array..."; \
+		sed -i '/^#define PG_KEYWORD/a\\nstatic const uint16 ReservedPLKeywordTokens[] = {\n#include "pl_reserved_kwlist.h"\n};\n' ./src/postgres/src_pl_plpgsql_src_pl_scanner.c; \
+	fi
 	touch ./src/postgres/guc-file.c
 	# Copy version information so its easily accessible
 	sed -i "s/\#define PG_MAJORVERSION .*/$$( grep '\#define PG_MAJORVERSION ' ./src/postgres/include/pg_config.h )/" pg_query.h
