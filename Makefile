@@ -161,7 +161,9 @@ extract_source:
 	cp $(PGDIR)/src/include/port/atomics/arch-x86.h ./src/postgres/include/port/atomics
 	cp $(PGDIR)/src/include/port/atomics/arch-arm.h ./src/postgres/include/port/atomics
 	cp $(PGDIR)/src/include/port/atomics/arch-ppc.h ./src/postgres/include/port/atomics
-	cp $(PGDIR)/src/pl/plpgsql/src/plerrcodes.h ./src/postgres/ 2>/dev/null || true
+	cp $(PGDIR)/src/pl/plpgsql/src/plerrcodes.h ./src/postgres/ 2>/dev/null || \
+		(cd $(PGDIR)/src/pl/plpgsql/src && $(MAKE) plerrcodes.h && cp plerrcodes.h $(root_dir)/src/postgres/) || \
+		echo "/* Stub plerrcodes.h */" > ./src/postgres/plerrcodes.h
 	touch ./src/postgres/guc-file.c
 	# Copy version information so its easily accessible
 	sed -i "s/\#define PG_MAJORVERSION .*/$$( grep '\#define PG_MAJORVERSION ' ./src/postgres/include/pg_config.h )/" pg_query.h
