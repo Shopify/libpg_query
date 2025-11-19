@@ -215,7 +215,6 @@ class Runner
     translation_unit = index.parse_translation_unit(file, [
       '-I', @basepath + 'src/include',
       '-I', '/usr/local/opt/openssl/include',
-      '-I', `xcrun --sdk macosx --show-sdk-path`.strip + '/usr/include',
       '-DDLSUFFIX=".bundle"',
       '-g',
       '-DUSE_ASSERT_CHECKING'
