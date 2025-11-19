@@ -161,6 +161,14 @@ extract_source:
 	cp $(PGDIR)/src/include/port/atomics/arch-x86.h ./src/postgres/include/port/atomics
 	cp $(PGDIR)/src/include/port/atomics/arch-arm.h ./src/postgres/include/port/atomics
 	cp $(PGDIR)/src/include/port/atomics/arch-ppc.h ./src/postgres/include/port/atomics
+	# Copy YugabyteDB headers that are referenced in extracted PostgreSQL headers
+	@echo "Copying YugabyteDB headers..."
+	@mkdir -p ./src/postgres/include/yb/yql/pggate/util
+	@if [ -f $(root_dir)/../yugabyte-db/src/yb/yql/pggate/util/ybc_util.h ]; then \
+		cp $(root_dir)/../yugabyte-db/src/yb/yql/pggate/util/ybc_util.h ./src/postgres/include/yb/yql/pggate/util/ && echo "Copied ybc_util.h"; \
+	else \
+		echo "Warning: ybc_util.h not found"; \
+	fi
 	# Generate and copy PL/pgSQL headers
 	@echo "Generating PL/pgSQL headers..."
 	@cd $(PGDIR)/src/pl/plpgsql/src && $(MAKE) plerrcodes.h pl_reserved_kwlist_d.h pl_unreserved_kwlist_d.h pl_reserved_kwlist.h pl_unreserved_kwlist.h || echo "Warning: Could not generate some PL/pgSQL headers"
