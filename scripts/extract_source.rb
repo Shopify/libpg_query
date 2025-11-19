@@ -116,6 +116,10 @@ class Runner
       @basepath + 'src/backend/libpq/be-gssapi-common.c', # Requires GSSAPI (which we don't want to require)
       @basepath + 'src/backend/libpq/be-secure-gssapi.c', # Requires GSSAPI (which we don't want to require)
       @basepath + 'src/common/protocol_openssl.c', # Requires OpenSSL (which we don't want to require)
+      @basepath + 'src/common/logging.c', # Frontend only - not for backend code
+      @basepath + 'src/port/pthread_barrier_wait.c', # Linux has native pthread_barrier support
+      @basepath + 'src/port/pg_crc32c_sse42_choose.c', # Architecture-specific, causes parsing errors
+      @basepath + 'src/common/hmac_openssl.c', # OpenSSL version compatibility issues
     ] -
     Dir.glob(@basepath + 'src/backend/port/dynloader/*.c') -
     Dir.glob(@basepath + 'src/backend/port/win32/*.c') -
@@ -498,12 +502,35 @@ runner.blocklist('SPI_freeplan')
 runner.blocklist('get_ps_display')
 runner.blocklist('pq_beginmessage')
 
+# YugabyteDB-specific blocklist entries
+runner.blocklist('YbgStatusCreate')
+runner.blocklist('CreateThreadLocalCurrentMemoryContext')
+runner.blocklist('RelationIdGetRelation')
+runner.blocklist('RelationReloadIndexInfo')
+runner.blocklist('smgrclose')
+runner.blocklist('smgrsw')
+runner.blocklist('mdclose')
+runner.blocklist('FileClose')
+runner.blocklist('ReportTemporaryFileUsage')
+runner.blocklist('pgstat_report_tempfile')
+runner.blocklist('pgstat_prep_database_pending')
+runner.blocklist('pgstat_prep_pending_entry')
+runner.blocklist('pgstat_get_kind_info')
+runner.blocklist('pgstat_kind_infos')
+runner.blocklist('pgstat_database_flush_cb')
+runner.blocklist('pgstat_lock_entry')
+runner.blocklist('FetchUniqueConstraintName')
+runner.blocklist('GetStatusMsgAndArgumentsByCode')
+
 # Mocks REQUIRED for basic operations (error handling, memory management)
 runner.mock('ProcessInterrupts', 'void ProcessInterrupts(void) {}') # Required by errfinish
 runner.mock('PqCommMethods', 'const PQcommMethods *PqCommMethods = NULL;') # Required by errfinish
 runner.mock('proc_exit', 'void proc_exit(int code) { printf("Terminating process due to FATAL error\n"); exit(1); }') # Required by errfinish (we use PG_TRY/PG_CATCH, so this should never be reached in practice)
 runner.mock('send_message_to_server_log', 'static void send_message_to_server_log(ErrorData *edata) {}')
 runner.mock('send_message_to_frontend', 'static void send_message_to_frontend(ErrorData *edata) {}')
+
+# YugabyteDB-specific mocks for error handling
+runner.mock('yb_errstart', 'bool yb_errstart(int elevel, const char *domain) { return errstart(elevel, domain); }')
 
 # Mocks REQUIRED for PL/pgSQL parsing
 runner.mock('format_type_be', 'char * format_type_be(Oid type_oid) { return pstrdup("-"); }')
