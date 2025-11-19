@@ -56,6 +56,14 @@ class Runner
 
     @basepath = File.absolute_path(ARGV[0]) + '/'
     @out_path = File.absolute_path(ARGV[1]) + '/'
+
+    # Detect YugabyteDB root directory (parent of postgres directory)
+    # If basepath is .../yugabyte-db/src/postgres/, yugabyte_root is .../yugabyte-db/
+    if @basepath.end_with?('src/postgres/')
+      @yugabyte_root = File.absolute_path(File.join(@basepath, '../..')) + '/'
+    else
+      @yugabyte_root = nil
+    end
   end
 
   def blocklist(symbol)
@@ -244,7 +252,10 @@ class Runner
 
     included_files = []
     translation_unit.inclusions do |included_file, _inclusions|
-      next if !included_file.start_with?(@basepath) || included_file == file
+      # Accept headers from PostgreSQL source (@basepath) or YugabyteDB source (@yugabyte_root/src/yb/)
+      next if included_file == file
+      next if !included_file.start_with?(@basepath) &&
+              !(@yugabyte_root && included_file.start_with?(@yugabyte_root + 'src/yb/'))
 
       included_files << included_file
     end
@@ -472,11 +483,11 @@ class Runner
       next if special_include_file?(include_file)
 
       if include_file.start_with?(@basepath + 'src/include')
-        # PostgreSQL headers: src/include/utils/acl.h -> include/utils/acl.h
+        # PostgreSQL headers: .../postgres/src/include/utils/acl.h -> include/utils/acl.h
         out_file = @out_path + include_file.gsub(%r{^#{@basepath}src/}, '')
-      elsif include_file.start_with?(@basepath + 'src/yb')
-        # YugabyteDB headers: src/yb/yql/pggate/util/ybc_util.h -> include/yb/yql/pggate/util/ybc_util.h
-        out_file = @out_path + 'include/' + include_file.gsub(%r{^#{@basepath}src/}, '')
+      elsif @yugabyte_root && include_file.start_with?(@yugabyte_root + 'src/yb/')
+        # YugabyteDB headers: .../yugabyte-db/src/yb/yql/pggate/util/ybc_util.h -> include/yb/yql/pggate/util/ybc_util.h
+        out_file = @out_path + 'include/' + include_file.gsub(%r{^#{@yugabyte_root}src/}, '')
       else
         out_file = @out_path + 'include/' + File.basename(include_file)
       end
