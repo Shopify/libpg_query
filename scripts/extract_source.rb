@@ -578,6 +578,8 @@ runner.deep_resolve('raw_parser')
 # PL/pgSQL Parsing
 runner.deep_resolve('plpgsql_compile_inline')
 runner.deep_resolve('plpgsql_free_function_memory')
+runner.deep_resolve('plpgsql_scanner_init')
+runner.deep_resolve('ReservedPLKeywordTokens')
 
 # Basic Postgres needed to call parser
 runner.deep_resolve('SetDatabaseEncoding')
