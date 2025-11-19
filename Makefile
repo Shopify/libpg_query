@@ -163,11 +163,25 @@ extract_source:
 	cp $(PGDIR)/src/include/port/atomics/arch-ppc.h ./src/postgres/include/port/atomics
 	# Copy YugabyteDB headers that are referenced in extracted PostgreSQL headers
 	@echo "Copying YugabyteDB headers..."
-	@mkdir -p ./src/postgres/include/yb/yql/pggate/util
-	@if [ -f $(root_dir)/../yugabyte-db/src/yb/yql/pggate/util/ybc_util.h ]; then \
-		cp $(root_dir)/../yugabyte-db/src/yb/yql/pggate/util/ybc_util.h ./src/postgres/include/yb/yql/pggate/util/ && echo "Copied ybc_util.h"; \
+	@if [ -d $(root_dir)/../yugabyte-db/src/yb/yql/pggate ]; then \
+		mkdir -p ./src/postgres/include/yb/yql/pggate; \
+		cp -r $(root_dir)/../yugabyte-db/src/yb/yql/pggate/*.h ./src/postgres/include/yb/yql/pggate/ 2>/dev/null || true; \
+		mkdir -p ./src/postgres/include/yb/yql/pggate/util; \
+		cp -r $(root_dir)/../yugabyte-db/src/yb/yql/pggate/util/*.h ./src/postgres/include/yb/yql/pggate/util/ 2>/dev/null || true; \
+		echo "Copied YugabyteDB pggate headers"; \
 	else \
-		echo "Warning: ybc_util.h not found"; \
+		echo "Warning: YugabyteDB pggate directory not found"; \
+	fi
+	# Copy additional YugabyteDB headers that might be needed
+	@if [ -d $(root_dir)/../yugabyte-db/src/yb/common ]; then \
+		mkdir -p ./src/postgres/include/yb/common; \
+		cp $(root_dir)/../yugabyte-db/src/yb/common/*.h ./src/postgres/include/yb/common/ 2>/dev/null || true; \
+		echo "Copied YugabyteDB common headers"; \
+	fi
+	@if [ -d $(root_dir)/../yugabyte-db/src/yb/util ]; then \
+		mkdir -p ./src/postgres/include/yb/util; \
+		cp $(root_dir)/../yugabyte-db/src/yb/util/*.h ./src/postgres/include/yb/util/ 2>/dev/null || true; \
+		echo "Copied YugabyteDB util headers"; \
 	fi
 	# Generate and copy PL/pgSQL headers
 	@echo "Generating PL/pgSQL headers..."
