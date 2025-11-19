@@ -472,7 +472,11 @@ class Runner
       next if special_include_file?(include_file)
 
       if include_file.start_with?(@basepath + 'src/include')
+        # PostgreSQL headers: src/include/utils/acl.h -> include/utils/acl.h
         out_file = @out_path + include_file.gsub(%r{^#{@basepath}src/}, '')
+      elsif include_file.start_with?(@basepath + 'src/yb')
+        # YugabyteDB headers: src/yb/yql/pggate/util/ybc_util.h -> include/yb/yql/pggate/util/ybc_util.h
+        out_file = @out_path + 'include/' + include_file.gsub(%r{^#{@basepath}src/}, '')
       else
         out_file = @out_path + 'include/' + File.basename(include_file)
       end
