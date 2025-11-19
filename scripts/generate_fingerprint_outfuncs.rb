@@ -258,7 +258,7 @@ class Generator
     ['RawStmt', 'stmt_location'] => :skip,
   }
   INT_TYPES = ['bits32', 'uint32', 'int', 'int32', 'uint16', 'int16', 'Oid', 'Index', 'AclMode', 'AttrNumber', 'SubTransactionId']
-  LONG_INT_TYPES = ['long', 'uint64']
+  LONG_INT_TYPES = ['long', 'uint64', 'uint64_t']
   INT_ARRAY_TYPES = ['Bitmapset*', 'Bitmapset', 'Relids']
   FLOAT_TYPES = ['Cost', 'double', 'Cardinality']
 
