@@ -176,6 +176,12 @@ extract_source:
 		echo "Patching pl_scanner.c to restore ReservedPLKeywordTokens array..."; \
 		sed -i '/^#define PG_KEYWORD/a\\nstatic const uint16 ReservedPLKeywordTokens[] = {\n#include "pl_reserved_kwlist.h"\n};\n' ./src/postgres/src_pl_plpgsql_src_pl_scanner.c; \
 	fi
+	# Remove YugabyteDB includes from extracted headers
+	@echo "Removing YugabyteDB includes from extracted headers..."
+	@if grep -q 'yb/yql' ./src/postgres/include/utils/elog.h; then \
+		sed -i '/^#include "yb\/yql/d' ./src/postgres/include/utils/elog.h; \
+		echo "Removed YugabyteDB includes from elog.h"; \
+	fi
 	touch ./src/postgres/guc-file.c
 	# Copy version information so its easily accessible
 	sed -i "s/\#define PG_MAJORVERSION .*/$$( grep '\#define PG_MAJORVERSION ' ./src/postgres/include/pg_config.h )/" pg_query.h
