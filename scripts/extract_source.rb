@@ -530,7 +530,7 @@ runner.mock('send_message_to_frontend', 'static void send_message_to_frontend(Er
 
 # YugabyteDB-specific mocks for error handling
 runner.mock('yb_errstart', 'bool yb_errstart(int elevel, const char *domain) { return errstart(elevel, domain); }')
-runner.mock('FetchUniqueConstraintName', 'const char * FetchUniqueConstraintName(Oid conoid, bool missing_ok) { return NULL; }')
+runner.mock('FetchUniqueConstraintName', 'const char * FetchUniqueConstraintName(Oid conoid) { return NULL; }')
 
 # Mocks REQUIRED for PL/pgSQL parsing
 runner.mock('format_type_be', 'char * format_type_be(Oid type_oid) { return pstrdup("-"); }')
