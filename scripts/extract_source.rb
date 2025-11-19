@@ -519,7 +519,6 @@ runner.blocklist('pgstat_get_kind_info')
 runner.blocklist('pgstat_kind_infos')
 runner.blocklist('pgstat_database_flush_cb')
 runner.blocklist('pgstat_lock_entry')
-runner.blocklist('FetchUniqueConstraintName')
 runner.blocklist('RelationIdGetRelation')
 
 # Mocks REQUIRED for basic operations (error handling, memory management)
@@ -531,17 +530,7 @@ runner.mock('send_message_to_frontend', 'static void send_message_to_frontend(Er
 
 # YugabyteDB-specific mocks for error handling
 runner.mock('yb_errstart', 'bool yb_errstart(int elevel, const char *domain) { return errstart(elevel, domain); }')
-runner.mock('GetStatusMsgAndArgumentsByCode', %(
-void
-GetStatusMsgAndArgumentsByCode(int code,
-								const char **status_msg,
-								int *msg_nargs,
-								char **msg_arg_names)
-{
-	*status_msg = "Unknown error";
-	*msg_nargs = 0;
-}
-))
+runner.mock('FetchUniqueConstraintName', 'const char * FetchUniqueConstraintName(Oid conoid, bool missing_ok) { return NULL; }')
 
 # Mocks REQUIRED for PL/pgSQL parsing
 runner.mock('format_type_be', 'char * format_type_be(Oid type_oid) { return pstrdup("-"); }')
