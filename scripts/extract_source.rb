@@ -265,17 +265,24 @@ class Runner
             end_offset += 1 if cursor.kind == :cursor_variable # The ";" isn't counted correctly by clang
 
             if cursor.kind == :cursor_variable && (cursor.linkage == :external || cursor.linkage == :internal) &&
-              !cursor.type.const_qualified? &&
-              cursor.type.pointee.kind != :type_function_proto
-              # Check if this is an array and if it's const-qualified
-              is_const_array = false
-              if cursor.type.kind == :type_constant_array && cursor.type.respond_to?(:array_element_type)
-                is_const_array = cursor.type.array_element_type.const_qualified?
-              elsif cursor.type.kind == :type_constant_array && cursor.type.respond_to?(:element_type)
-                is_const_array = cursor.type.element_type.const_qualified?
+              !cursor.type.const_qualified?
+              # Skip function pointers
+              is_function_pointer = false
+              if cursor.type.respond_to?(:pointee)
+                is_function_pointer = cursor.type.pointee.kind == :type_function_proto
               end
 
-              analysis.external_variables << cursor.spelling unless is_const_array
+              # Check if this is an array and if it's const-qualified
+              is_const_array = false
+              if cursor.type.kind == :type_constant_array
+                if cursor.type.respond_to?(:array_element_type)
+                  is_const_array = cursor.type.array_element_type.const_qualified?
+                elsif cursor.type.respond_to?(:element_type)
+                  is_const_array = cursor.type.element_type.const_qualified?
+                end
+              end
+
+              analysis.external_variables << cursor.spelling unless is_function_pointer || is_const_array
             end
 
             analysis.file_to_symbol_positions[cursor.location.file] ||= {}
