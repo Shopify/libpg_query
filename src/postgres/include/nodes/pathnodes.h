@@ -378,6 +378,30 @@ struct PlannerInfo
 
 	/* Does this query modify any partition key columns? */
 	bool		partColsUpdated;
+
+	/*
+	 * These are used to transfer information about batching in createplan.c
+	 * and indxpath.c
+	 */
+	Relids		yb_cur_batched_relids; /* valid if we are processing a batched
+								  	    * NL join */
+	Relids		yb_cur_unbatched_relids;
+
+	/*
+	 * List of Relids. Each element is a Bitmapset that encodes the batched rels
+	 * available from the outer path of a particular Batched Nested Loop join
+	 * node.
+	 */
+	List		*yb_availBatchedRelids;
+
+	int yb_cur_batch_no;		/* Used in replace_nestloop_params to keep
+								 * track of current batch */
+
+	/*
+	 * Number of relations that are still referenced by the plan after
+	 * constraint exclusion and partition pruning.
+	 */
+	int     yb_num_referenced_relations;
 };
 
 
@@ -774,6 +798,9 @@ typedef struct RelOptInfo
 	Relids		all_partrels;	/* Relids set of all partition relids */
 	List	  **partexprs;		/* Non-nullable partition key expressions */
 	List	  **nullable_partexprs; /* Nullable partition key expressions */
+
+	/* used for YB relations */
+	bool		is_yb_relation;	/* Is a YbRelation */
 } RelOptInfo;
 
 /*
@@ -848,6 +875,7 @@ struct IndexOptInfo
 	/* index descriptor information */
 	int			ncolumns;		/* number of columns in index */
 	int			nkeycolumns;	/* number of key columns in index */
+	int			nhashcolumns;	/* number of hash key columns in index */
 	int		   *indexkeys;		/* column numbers of index's attributes both
 								 * key and included columns, or 0 */
 	Oid		   *indexcollations;	/* OIDs of collations of index columns */
@@ -888,6 +916,11 @@ struct IndexOptInfo
 	bool		amcanmarkpos;	/* does AM support mark/restore? */
 	/* Rather than include amapi.h here, we declare amcostestimate like this */
 	void		(*amcostestimate) ();	/* AM's cost estimator */
+
+	bool		yb_amhasgetbitmap; /* does AM have yb_amgetbitmap interface? */
+
+	/* Used for YB base scans cost model */
+	int32_t 	yb_cached_ybctid_size;
 };
 
 /*
@@ -1143,7 +1176,51 @@ typedef struct ParamPathInfo
 	Relids		ppi_req_outer;	/* rels supplying parameters used by path */
 	Cardinality ppi_rows;		/* estimated number of result tuples */
 	List	   *ppi_clauses;	/* join clauses available from outer rels */
+
+	/* Yugabyte attributes */
+	Relids		yb_ppi_req_outer_batched; /* outer rels that can be batched */
 } ParamPathInfo;
+
+
+/*
+ * Indicates whether locking can happen during an index scan in all isolation
+ * levels, avoiding two RPCs to lock (read, then lock). This is set in all
+ * isolation levels because plans can be executed at a different isolation level
+ * from that of planning.
+ */
+typedef enum YbLockMechanism
+{
+	YB_NO_SCAN_LOCK,		/* no locks taken in this scan */
+	YB_LOCK_CLAUSE_ON_PK,	/* may take locks on PK for locking clause */
+} YbLockMechanism;
+
+/*
+ * Info propagated for YugabyteDB, for scans.
+ *
+ * 'yb_uniqkeys' Set of exprs that the path is distinct on. NIL by default.
+ * NIL signifies that the set is indeterminate.
+ */
+typedef struct YbPathInfo {
+	List		   *yb_uniqkeys;		/* list keys that are distinct */
+} YbPathInfo;
+
+typedef struct YbPlanInfo {
+	double		estimated_num_nexts;
+	double		estimated_num_seeks;
+	int 		estimated_docdb_result_width;
+} YbPlanInfo;
+
+/*
+ * Info propagated for YugabyteDB, for index scans.
+ *
+ * 'yb_lock_mechanism' indicates what kind of lock can or must be taken as part
+ * of a scan.
+ */
+typedef struct YbIndexPathInfo
+{
+	int				yb_distinct_prefixlen;
+	YbLockMechanism yb_lock_mechanism;	/* what lock as part of a scan */
+} YbIndexPathInfo;
 
 
 /*
@@ -1174,6 +1251,8 @@ typedef struct ParamPathInfo
  *
  * "pathkeys" is a List of PathKey nodes (see above), describing the sort
  * ordering of the path's output rows.
+ *
+ * 'yb_path_info' contains info propagated for YugabyteDB.
  */
 typedef struct Path
 {
@@ -1197,11 +1276,24 @@ typedef struct Path
 
 	List	   *pathkeys;		/* sort ordering of path's output */
 	/* pathkeys is a List of PathKey nodes; see above */
+
+	YbPlanInfo	yb_plan_info;
+	YbPathInfo	yb_path_info;	/* fields used for YugabyteDB */
 } Path;
 
 /* Macro for extracting a path's parameterization relids; beware double eval */
 #define PATH_REQ_OUTER(path)  \
 	((path)->param_info ? (path)->param_info->ppi_req_outer : (Relids) NULL)
+
+#define YB_PATH_REQ_OUTER_BATCHED(path)  \
+	((path)->param_info ? ((path)->param_info->yb_ppi_req_outer_batched) : \
+	(Relids) NULL)
+
+#define YB_PATH_NEEDS_BATCHED_RELS(path) \
+	!bms_is_empty(YB_PATH_REQ_OUTER_BATCHED(path))
+
+#define YB_PATH_REQ_OUTER_UNBATCHED(path)  \
+	(bms_difference(PATH_REQ_OUTER(path), YB_PATH_REQ_OUTER_BATCHED(path)))
 
 /*----------
  * IndexPath represents an index scan over a single index.
@@ -1214,6 +1306,10 @@ typedef struct Path
  * 'indexclauses' is a list of IndexClause nodes, each representing one
  * index-checkable restriction, with implicit AND semantics across the list.
  * An empty list implies a full index scan.
+ *
+ * 'yb_bitmap_idx_pushdowns' is a set of pushable clauses for a bitmap index scan.
+ * These are extracted during bitmap planning and allow pushdowns that are not
+ * possible to determine at a later stage.
  *
  * 'indexorderbys', if not NIL, is a list of ORDER BY expressions that have
  * been found to be usable as ordering operators for an amcanorderbyop index.
@@ -1237,8 +1333,11 @@ typedef struct Path
  *
  * 'indextotalcost' and 'indexselectivity' are saved in the IndexPath so that
  * we need not recompute them when considering using the same index in a
- * bitmap index/heap scan (see BitmapHeapPath).  The costs of the IndexPath
- * itself represent the costs of an IndexScan or IndexOnlyScan plan type.
+ * bitmap index/heap scan (see BitmapHeapPath / YbBitmapTableScan).  The costs
+ * of the IndexPath itself represent the costs of an IndexScan or IndexOnlyScan
+ * plan type.
+ *
+ * 'yb_index_path_info' contains info propagated for YugabyteDB.
  *----------
  */
 typedef struct IndexPath
@@ -1246,11 +1345,15 @@ typedef struct IndexPath
 	Path		path;
 	IndexOptInfo *indexinfo;
 	List	   *indexclauses;
+	List	   *yb_bitmap_idx_pushdowns;
 	List	   *indexorderbys;
 	List	   *indexorderbycols;
 	ScanDirection indexscandir;
 	Cost		indextotalcost;
 	Selectivity indexselectivity;
+	int			ybctid_width;
+	YbPlanInfo	yb_plan_info;
+	YbIndexPathInfo yb_index_path_info;	/* fields used for YugabyteDB */
 } IndexPath;
 
 /*
@@ -1321,29 +1424,55 @@ typedef struct BitmapHeapPath
 } BitmapHeapPath;
 
 /*
+ * YbBitmapTablePath represents one or more indexscans that generate YbTID
+ * bitmaps instead of directly accessing the heap, followed by AND/OR
+ * combinations to produce a single bitmap, followed by a table scan that uses
+ * the bitmap. Note that the output is always considered unordered, since it
+ * will come out in physical heap order no matter what the underlying indexes
+ * did.
+ *
+ * The individual indexscans are represented by IndexPath nodes, and any
+ * logic on top of them is represented by a tree of BitmapAndPath and
+ * BitmapOrPath nodes.  Notice that we can use the same IndexPath node both
+ * to represent a regular (or index-only) index scan plan, and as the child
+ * of a YbBitmapTablePath that represents scanning the same index using a
+ * BitmapIndexScan.  The startup_cost and total_cost figures of an IndexPath
+ * always represent the costs to use it as a regular (or index-only)
+ * IndexScan.  The costs of a BitmapIndexScan can be computed using the
+ * IndexPath's indextotalcost and indexselectivity.
+ */
+typedef struct YbBitmapTablePath
+{
+	Path		path;
+	Path	   *bitmapqual;		/* IndexPath, BitmapAndPath, BitmapOrPath */
+} YbBitmapTablePath;
+
+/*
  * BitmapAndPath represents a BitmapAnd plan node; it can only appear as
- * part of the substructure of a BitmapHeapPath.  The Path structure is
- * a bit more heavyweight than we really need for this, but for simplicity
- * we make it a derivative of Path anyway.
+ * part of the substructure of a BitmapHeapPath or YbBitmapTablePath.  The Path
+ * structure is a bit more heavyweight than we really need for this, but for
+ * simplicity we make it a derivative of Path anyway.
  */
 typedef struct BitmapAndPath
 {
 	Path		path;
 	List	   *bitmapquals;	/* IndexPaths and BitmapOrPaths */
 	Selectivity bitmapselectivity;
+	int			ybctid_width;
 } BitmapAndPath;
 
 /*
  * BitmapOrPath represents a BitmapOr plan node; it can only appear as
- * part of the substructure of a BitmapHeapPath.  The Path structure is
- * a bit more heavyweight than we really need for this, but for simplicity
- * we make it a derivative of Path anyway.
+ * part of the substructure of a BitmapHeapPath or YbBitmapTablePath.  The Path
+ * structure is a bit more heavyweight than we really need for this, but for
+ * simplicity we make it a derivative of Path anyway.
  */
 typedef struct BitmapOrPath
 {
 	Path		path;
 	List	   *bitmapquals;	/* IndexPaths and BitmapAndPaths */
 	Selectivity bitmapselectivity;
+	int			ybctid_width;
 } BitmapOrPath;
 
 /*
@@ -1513,8 +1642,8 @@ typedef struct MemoizePath
 {
 	Path		path;
 	Path	   *subpath;		/* outerpath to cache tuples from */
-	List	   *hash_operators; /* hash operators for each key */
-	List	   *param_exprs;	/* cache keys */
+	List	   *hash_operators; /* OIDs of hash equality ops for cache keys */
+	List	   *param_exprs;	/* expressions that are cache keys */
 	bool		singlerow;		/* true if the cache entry is to be marked as
 								 * complete after caching the first record. */
 	bool		binary_mode;	/* true when cache key should be compared bit
@@ -2134,6 +2263,13 @@ typedef struct RestrictInfo
 	/* hash equality operators used for memoize nodes, else InvalidOid */
 	Oid			left_hasheqoperator;
 	Oid			right_hasheqoperator;
+
+	/* Yugabyte attributes */
+	bool		yb_pushable;	/* true if can be pushed down to DocDB */
+
+	List *yb_batched_rinfo; /* If there is a batched version of
+							 * this clause, this is a pointer to
+							 * a list of possible batched versions. */
 } RestrictInfo;
 
 /*
@@ -2193,6 +2329,20 @@ typedef struct PlaceHolderVar
 	Index		phid;			/* ID for PHV (unique within planner run) */
 	Index		phlevelsup;		/* > 0 if PHV belongs to outer query */
 } PlaceHolderVar;
+
+/*
+ * Used to represent a batched version of a Var. Currently used for
+ * batched NL joins. These are replaced by exec params during plan creation.
+ * For example, a join clause of the form (Var_o = Var_i) where Var_o is an
+ * outer relation Var and Var_i is an inner relation Var, might be turned into
+ * (Var_i IN (BVar_o(0),BVar_o(1),BVar_o(0)...)) where BVar_o(i) represents the
+ * ith batched variable of Var_o.
+ */
+typedef struct YbBatchedExpr
+{
+	Expr xpr;
+	Expr *orig_expr; /* Original Var this is a batched version of. */
+} YbBatchedExpr;
 
 /*
  * "Special join" info.

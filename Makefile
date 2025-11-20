@@ -196,13 +196,14 @@ extract_source:
 	# Fix missing ReservedPLKeywordTokens array definition (removed by extraction script)
 	@if ! grep -q "ReservedPLKeywordTokens\[\]" ./src/postgres/src_pl_plpgsql_src_pl_scanner.c; then \
 		echo "Patching pl_scanner.c to restore ReservedPLKeywordTokens array..."; \
-		sed -i '/^#define PG_KEYWORD/a\\nstatic const uint16 ReservedPLKeywordTokens[] = {\n#include "pl_reserved_kwlist.h"\n};\n' ./src/postgres/src_pl_plpgsql_src_pl_scanner.c; \
+		awk '/^#define PG_KEYWORD/ { print; print ""; print "static const uint16 ReservedPLKeywordTokens[] = {"; print "#include \"pl_reserved_kwlist.h\""; print "};"; print ""; next } 1' ./src/postgres/src_pl_plpgsql_src_pl_scanner.c > ./src/postgres/src_pl_plpgsql_src_pl_scanner.c.tmp && \
+		mv ./src/postgres/src_pl_plpgsql_src_pl_scanner.c.tmp ./src/postgres/src_pl_plpgsql_src_pl_scanner.c; \
 	fi
 	touch ./src/postgres/guc-file.c
 	# Copy version information so its easily accessible
-	sed -i "s/\#define PG_MAJORVERSION .*/$$( grep '\#define PG_MAJORVERSION ' ./src/postgres/include/pg_config.h )/" pg_query.h
-	sed -i "s/\#define PG_VERSION .*/$$( grep '\#define PG_VERSION ' ./src/postgres/include/pg_config.h | grep -v NUM | grep -v MAJOR )/" pg_query.h
-	sed -i "s/\#define PG_VERSION_NUM .*/$$( grep '\#define PG_VERSION_NUM ' ./src/postgres/include/pg_config.h )/" pg_query.h
+	@sed -i "" "s/^#define PG_MAJORVERSION .*/$$(grep '^#define PG_MAJORVERSION ' ./src/postgres/include/pg_config.h)/" pg_query.h
+	@sed -i "" "s/^#define PG_VERSION \".*\"$$/$$(grep '^#define PG_VERSION ' ./src/postgres/include/pg_config.h | grep -v NUM | grep -v MAJOR)/" pg_query.h
+	@sed -i "" "s/^#define PG_VERSION_NUM .*/$$(grep '^#define PG_VERSION_NUM ' ./src/postgres/include/pg_config.h)/" pg_query.h
 	# Copy regress SQL files so we can use them in tests
 	rm -f ./test/sql/postgres_regress/*.sql
 	cp $(PGDIR)/src/test/regress/sql/*.sql ./test/sql/postgres_regress/

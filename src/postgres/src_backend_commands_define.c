@@ -48,6 +48,9 @@
 #include "parser/scansup.h"
 #include "utils/builtins.h"
 
+/* YB Includes */
+#include "pg_yb_utils.h"
+
 /*
  * Extract a string value (otherwise uninterpreted) from a DefElem.
  */

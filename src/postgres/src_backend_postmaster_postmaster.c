@@ -82,6 +82,7 @@
 #include <sys/param.h>
 #include <netdb.h>
 #include <limits.h>
+#include "yb_query_diagnostics.h"
 
 #ifdef HAVE_SYS_SELECT_H
 #include <sys/select.h>
@@ -101,6 +102,7 @@
 
 #include "access/transam.h"
 #include "access/xlog.h"
+#include "access/xact.h"
 #include "access/xlogrecovery.h"
 #include "catalog/pg_control.h"
 #include "common/file_perm.h"
@@ -124,12 +126,17 @@
 #include "postmaster/postmaster.h"
 #include "postmaster/syslogger.h"
 #include "replication/logicallauncher.h"
+#include "replication/slot.h"
+#include "replication/syncrep.h"
 #include "replication/walsender.h"
 #include "storage/fd.h"
 #include "storage/ipc.h"
 #include "storage/pg_shmem.h"
 #include "storage/pmsignal.h"
 #include "storage/proc.h"
+#include "storage/procarray.h"
+#include "storage/procsignal.h"
+#include "storage/sinvaladt.h"
 #include "tcop/tcopprot.h"
 #include "utils/builtins.h"
 #include "utils/datetime.h"
@@ -141,10 +148,13 @@
 #include "utils/timestamp.h"
 #include "utils/varlena.h"
 
+#include "common/pg_yb_common.h"
+#include "pg_yb_utils.h"
+#include "yb_ash.h"
+
 #ifdef EXEC_BACKEND
 #include "storage/spin.h"
 #endif
-
 
 /*
  * Possible types of a backend. Beyond being the possible bkend_type values in
@@ -284,6 +294,11 @@ typedef enum
 
  /* T if recovering from backend crash */
 
+/* Crashed before fully acquiring a lock, or with unexpected error code.  */
+
+
+
+
 /*
  * We use a simple state machine to control startup, shutdown, and
  * crash recovery (which is rather like shutdown followed by startup).
@@ -407,6 +422,7 @@ static void process_startup_packet_die(SIGNAL_ARGS);
 static void dummy_handler(SIGNAL_ARGS);
 static void StartupPacketTimeoutHandler(void);
 static void CleanupBackend(int pid, int exitstatus);
+static bool CleanupKilledProcess(PGPROC *proc);
 static bool CleanupBackgroundWorker(int pid, int exitstatus);
 static void HandleChildCrash(int pid, int exitstatus, const char *procname);
 static void LogChildExit(int lev, const char *procname,
@@ -575,6 +591,12 @@ HANDLE		PostmasterHandle;
 #endif
 
 /*
+ * Wrap strdup so we can suppress LeakSanitizer (LSAN) warnings here without
+ * suppressing them in all occurrences of strdup.
+ */
+
+
+/*
  * Postmaster main entry point
  */
 #ifdef WIN32
@@ -588,6 +610,8 @@ HANDLE		PostmasterHandle;
 #ifdef SIGXFSZ
 #endif
 #ifdef HAVE_INT_OPTRESET
+#endif
+#ifdef __APPLE__
 #endif
 #ifdef USE_SSL
 #endif
@@ -645,6 +669,12 @@ HANDLE		PostmasterHandle;
  *
  * NB: Needs to be called with signals blocked
  */
+#ifdef __APPLE__
+#endif
+#ifdef __linux__
+#endif
+#ifdef __APPLE__
+#endif
 #ifdef HAVE_PTHREAD_IS_THREADED_NP
 #endif
 
@@ -652,7 +682,8 @@ HANDLE		PostmasterHandle;
  * Initialise the masks for select() for the ports we are listening on.
  * Return the number of sockets to listen on.
  */
-
+#ifdef __APPLE__
+#endif
 
 
 /*
@@ -763,6 +794,9 @@ HANDLE		PostmasterHandle;
  *
  * Called early in the postmaster and every backend.
  */
+#ifdef ADDRESS_SANITIZER
+#else
+#endif
 #ifndef WIN32
 #endif
 
@@ -825,12 +859,22 @@ HANDLE		PostmasterHandle;
 #endif
 
 /*
+ * CleanupKilledProcess - cleanup after an unexpectedly killed process.
+ *
+ * Returns true if the process was succesfully cleaned up, false if the process
+ * cannot be cleaned up.
+ */
+
+
+/*
  * CleanupBackend -- cleanup after terminated backend.
  *
  * Remove all local state associated with backend.
  *
  * If you change this, see also CleanupBackgroundWorker.
  */
+#ifdef YB_TODO
+#endif
 #ifdef WIN32
 #endif
 #ifdef EXEC_BACKEND
@@ -894,6 +938,16 @@ HANDLE		PostmasterHandle;
  * processes, except syslogger and dead_end backends.
  */
 
+
+/*
+ * SetOomScoreAdjForPid - sets /proc/<pid>/oom_score_adj for the given PID
+ *
+ * oom_score_adj varies from -1000 to 1000. The lower the value, the lower the
+ * chance that it's going to be killed. A high value is more likely to be
+ * killed by the OOM killer.
+ */
+#ifdef __linux__
+#endif
 
 /*
  * BackendStartup -- start backend process
@@ -1655,6 +1709,8 @@ SubPostmasterMain(int argc, char *argv[])
 /*
  * Connect background worker to a database using OIDs.
  */
+
+
 
 
 /*

@@ -348,6 +348,9 @@ case T_ConstraintsSetStmt:
 case T_ReindexStmt:
   OUT_NODE(ReindexStmt, ReindexStmt, reindex_stmt, REINDEX_STMT, ReindexStmt, reindex_stmt);
   break;
+case T_BackfillIndexStmt:
+  OUT_NODE(BackfillIndexStmt, BackfillIndexStmt, backfill_index_stmt, BACKFILL_INDEX_STMT, BackfillIndexStmt, backfill_index_stmt);
+  break;
 case T_CheckPointStmt:
   OUT_NODE(CheckPointStmt, CheckPointStmt, check_point_stmt, CHECK_POINT_STMT, CheckPointStmt, check_point_stmt);
   break;
@@ -392,6 +395,9 @@ case T_DeallocateStmt:
   break;
 case T_DeclareCursorStmt:
   OUT_NODE(DeclareCursorStmt, DeclareCursorStmt, declare_cursor_stmt, DECLARE_CURSOR_STMT, DeclareCursorStmt, declare_cursor_stmt);
+  break;
+case T_CreateTableGroupStmt:
+  OUT_NODE(CreateTableGroupStmt, CreateTableGroupStmt, create_table_group_stmt, CREATE_TABLE_GROUP_STMT, CreateTableGroupStmt, create_table_group_stmt);
   break;
 case T_CreateTableSpaceStmt:
   OUT_NODE(CreateTableSpaceStmt, CreateTableSpaceStmt, create_table_space_stmt, CREATE_TABLE_SPACE_STMT, CreateTableSpaceStmt, create_table_space_stmt);
@@ -708,9 +714,24 @@ case T_PublicationObjSpec:
 case T_PublicationTable:
   OUT_NODE(PublicationTable, PublicationTable, publication_table, PUBLICATION_TABLE, PublicationTable, publication_table);
   break;
+case T_OptSplit:
+  OUT_NODE(OptSplit, OptSplit, opt_split, OPT_SPLIT, OptSplit, opt_split);
+  break;
+case T_RowBounds:
+  OUT_NODE(RowBounds, RowBounds, row_bounds, ROW_BOUNDS, RowBounds, row_bounds);
+  break;
 case T_InlineCodeBlock:
   OUT_NODE(InlineCodeBlock, InlineCodeBlock, inline_code_block, INLINE_CODE_BLOCK, InlineCodeBlock, inline_code_block);
   break;
 case T_CallContext:
   OUT_NODE(CallContext, CallContext, call_context, CALL_CONTEXT, CallContext, call_context);
+  break;
+case T_YbBackfillInfo:
+  OUT_NODE(YbBackfillInfo, YbBackfillInfo, yb_backfill_info, YB_BACKFILL_INFO, YbBackfillInfo, yb_backfill_info);
+  break;
+case T_YbCreateProfileStmt:
+  OUT_NODE(YbCreateProfileStmt, YbCreateProfileStmt, yb_create_profile_stmt, YB_CREATE_PROFILE_STMT, YbCreateProfileStmt, yb_create_profile_stmt);
+  break;
+case T_YbDropProfileStmt:
+  OUT_NODE(YbDropProfileStmt, YbDropProfileStmt, yb_drop_profile_stmt, YB_DROP_PROFILE_STMT, YbDropProfileStmt, yb_drop_profile_stmt);
   break;

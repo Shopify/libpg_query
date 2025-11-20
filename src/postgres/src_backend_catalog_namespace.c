@@ -66,6 +66,10 @@
 #include "utils/syscache.h"
 #include "utils/varlena.h"
 
+/* YB includes */
+#include "pg_yb_utils.h"
+#include "utils/uuid.h"
+
 
 /*
  * The namespace search path is a possibly-empty list of namespace OIDs.
@@ -205,6 +209,10 @@ typedef struct
  */
 
 
+typedef struct YbTempNamespaceSuffixBuffer
+{
+	char data[UUID_LEN * 2 + 2];
+} YbTempNamespaceSuffixBuffer;
 
 /* Local functions */
 static void recomputeNamespacePath(void);
@@ -216,6 +224,7 @@ static void NamespaceCallback(Datum arg, int cacheid, uint32 hashvalue);
 static bool MatchNamedCall(HeapTuple proctup, int nargs, List *argnames,
 						   bool include_out_arguments, int pronargs,
 						   int **argnumbers);
+static char *YbBuildTempNameSuffix(YbTempNamespaceSuffixBuffer *buf);
 
 
 /*
@@ -844,15 +853,15 @@ NameListToString(List *names)
  * used by PushOverrideSearchPath.
  *
  * The result structure is allocated in the specified memory context
- * (which might or might not be equal to CurrentMemoryContext); but any
- * junk created by revalidation calculations will be in CurrentMemoryContext.
+ * (which might or might not be equal to GetCurrentMemoryContext()); but any
+ * junk created by revalidation calculations will be in GetCurrentMemoryContext().
  */
 
 
 /*
  * CopyOverrideSearchPath - copy the specified OverrideSearchPath.
  *
- * The result structure is allocated in CurrentMemoryContext.
+ * The result structure is allocated in GetCurrentMemoryContext().
  */
 
 
@@ -868,6 +877,10 @@ NameListToString(List *names)
 
 /*
  * PushOverrideSearchPath - temporarily override the search path
+ *
+ * Do not use this function; almost any usage introduces a security
+ * vulnerability.  It exists for the benefit of legacy code running in
+ * non-security-sensitive environments.
  *
  * We allow nested overrides, hence the push/pop terminology.  The GUC
  * search_path variable is ignored while an override is active.
@@ -1060,4 +1073,13 @@ Oid get_collation_oid(List *name, bool missing_ok) { return -1; }
 
 
 
+
+
+
+
+/*
+ * Used in YB to construct the temporary namespace suffix. This function
+ * returns the local tserver uuid as a regular string (without the hyphens),
+ * and an additional "_" appended at the end.
+ */
 

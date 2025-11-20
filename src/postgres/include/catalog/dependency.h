@@ -66,6 +66,17 @@ typedef enum DependencyType
  * storage don't need this: they are protected by the existence of a physical
  * file in the tablespace.)
  *
+ * (e) a SHARED_DEPENDENCY_TABLESPACE entry means that the referenced
+ * object is a tablespace mentioned in a relation without Postgres storage
+ * (Yugabyte relations and relations with no files).  The referenced object
+ * must be a pg_tablespace entry.  (Relations that have storage don't need
+ * this: they are protected by the existence of a physical file in the
+ * tablespace.)
+ *
+ * (f) a SHARED_DEPENDENCY_PROFILE entry means that the referenced object is
+ * a role that is mentioned in a pg_yb_role_profile row.  The referenced object
+ * must be a pg_authid entry.
+ *
  * SHARED_DEPENDENCY_INVALID is a value used as a parameter in internal
  * routines, and is not valid in the catalog itself.
  */
@@ -75,6 +86,7 @@ typedef enum SharedDependencyType
 	SHARED_DEPENDENCY_ACL = 'a',
 	SHARED_DEPENDENCY_POLICY = 'r',
 	SHARED_DEPENDENCY_TABLESPACE = 't',
+	SHARED_DEPENDENCY_PROFILE = 'f',
 	SHARED_DEPENDENCY_INVALID = 0
 } SharedDependencyType;
 
@@ -113,6 +125,7 @@ typedef enum ObjectClass
 	OCLASS_TSCONFIG,			/* pg_ts_config */
 	OCLASS_ROLE,				/* pg_authid */
 	OCLASS_DATABASE,			/* pg_database */
+	OCLASS_TBLGROUP, 			/* pg_yb_tablegroup */
 	OCLASS_TBLSPACE,			/* pg_tablespace */
 	OCLASS_FDW,					/* pg_foreign_data_wrapper */
 	OCLASS_FOREIGN_SERVER,		/* pg_foreign_server */
@@ -126,10 +139,12 @@ typedef enum ObjectClass
 	OCLASS_PUBLICATION_NAMESPACE,	/* pg_publication_namespace */
 	OCLASS_PUBLICATION_REL,		/* pg_publication_rel */
 	OCLASS_SUBSCRIPTION,		/* pg_subscription */
-	OCLASS_TRANSFORM			/* pg_transform */
+	OCLASS_TRANSFORM,			/* pg_transform */
+	OCLASS_YBPROFILE,			/* pg_yb_profile */
+	OCLASS_YBROLE_PROFILE,		/* pg_yb_role_profile */
 } ObjectClass;
 
-#define LAST_OCLASS		OCLASS_TRANSFORM
+#define LAST_OCLASS		OCLASS_YBROLE_PROFILE
 
 /* flag bits for performDeletion/performMultipleDeletions: */
 #define PERFORM_DELETION_INTERNAL			0x0001	/* internal action */
@@ -140,6 +155,8 @@ typedef enum ObjectClass
 #define PERFORM_DELETION_CONCURRENT_LOCK	0x0020	/* normal drop with
 													 * concurrent lock mode */
 
+/* skip yb drop on a column -- used during ALTER TABLE */
+#define YB_SKIP_YB_DROP_COLUMN				0x8000
 
 /* in dependency.c */
 
@@ -186,6 +203,10 @@ extern void free_object_addresses(ObjectAddresses *addrs);
 extern void recordDependencyOn(const ObjectAddress *depender,
 							   const ObjectAddress *referenced,
 							   DependencyType behavior);
+
+extern bool tablegroupHasDependents(Oid tablegroupId);
+
+extern bool ybIsTablegroupDependent(Oid relOid, Oid tablegroupId);
 
 extern void recordMultipleDependencies(const ObjectAddress *depender,
 									   const ObjectAddress *referenced,
@@ -239,9 +260,10 @@ extern void deleteSharedDependencyRecordsFor(Oid classId, Oid objectId,
 
 extern void recordDependencyOnOwner(Oid classId, Oid objectId, Oid owner);
 
+void shdepFindImplicitTablegroup(Oid tablespaceId, Oid *tablegroupId);
+
 extern void changeDependencyOnOwner(Oid classId, Oid objectId,
 									Oid newOwnerId);
-
 extern void recordDependencyOnTablespace(Oid classId, Oid objectId,
 										 Oid tablespace);
 
@@ -265,5 +287,11 @@ extern void dropDatabaseDependencies(Oid databaseId);
 extern void shdepDropOwned(List *relids, DropBehavior behavior);
 
 extern void shdepReassignOwned(List *relids, Oid newrole);
+
+extern void ybRecordDependencyOnProfile(Oid classId, Oid objectId, Oid profile);
+
+extern void ybChangeDependencyOnProfile(Oid roleId, Oid newProfileId);
+
+extern void ybDropDependencyOnProfile(Oid roleId);
 
 #endif							/* DEPENDENCY_H */

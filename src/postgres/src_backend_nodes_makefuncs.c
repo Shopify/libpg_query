@@ -38,6 +38,8 @@
 #include "nodes/nodeFuncs.h"
 #include "utils/lsyscache.h"
 
+#include "pg_yb_utils.h"
+#include "access/sysattr.h"
 
 /*
  * makeA_Expr -

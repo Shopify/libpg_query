@@ -159,6 +159,25 @@ typedef struct Port
 	HbaLine    *hba;
 
 	/*
+	 * Whether yb-tserver to postgres authentication is used.  This information
+	 * needs to be saved separately from hba because hba gets deallocated after
+	 * the authentication cycle.
+	 */
+	bool		yb_is_tserver_auth_method;
+
+	/*
+	 * To be used during Authentication, identifies whether authentication is
+	 * invoked due to Auth Passthrough Request packet.
+	 */
+	bool 		yb_is_auth_passthrough_req;
+
+	/*
+	 * To be used during Authentication Passthrough (authentication of logical connections),
+	 * it identifies whether the logical connection is encrypted.
+	 */
+	bool 		yb_is_ssl_enabled_in_logical_conn;
+
+	/*
 	 * Authenticated identity.  The meaning of this identifier is dependent on
 	 * hba->auth_method; it is the identity (if any) that the user presented
 	 * during the authentication cycle, before they were assigned a database

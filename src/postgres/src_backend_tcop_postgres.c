@@ -32,6 +32,7 @@
 
 #include "postgres.h"
 
+#include <arpa/inet.h>
 #include <fcntl.h>
 #include <limits.h>
 #include <signal.h>
@@ -57,6 +58,8 @@
 #include "commands/prepare.h"
 #include "common/pg_prng.h"
 #include "jit/jit.h"
+
+#include "libpq/auth.h"
 #include "libpq/libpq.h"
 #include "libpq/pqformat.h"
 #include "libpq/pqsignal.h"
@@ -94,6 +97,21 @@
 #include "utils/snapmgr.h"
 #include "utils/timeout.h"
 #include "utils/timestamp.h"
+
+#include "catalog/yb_catalog_version.h"
+#include "commands/portalcmds.h"
+#include "libpq/yb_pqcomm_extensions.h"
+#include "pg_yb_utils.h"
+#include "utils/builtins.h"
+#include "utils/catcache.h"
+#include "utils/inval.h"
+#include "utils/rel.h"
+#include "utils/relcache.h"
+#include "utils/syscache.h"
+
+/* YB includes */
+#include "replication/walsender_private.h"
+#include "utils/guc_tables.h"
 
 /* ----------------
  *		global variables
@@ -197,6 +215,19 @@ static char *register_stack_base_ptr = NULL;
 /* reused buffer to pass to SendRowDescriptionMessage() */
 
 
+
+/* Flag to mark cache as invalid if discovered within a txn block. */
+
+
+/* whether or not we are executing a multi-statement query received via simple query protocol */
+
+
+/*
+ * String constants used for redacting text after the password token in
+ * CREATE/ALTER ROLE commands.
+ */
+#define TOKEN_PASSWORD "password"
+#define TOKEN_REDACTED "<REDACTED>"
 
 /* ----------------------------------------------------------------
  *		decls for routines only used in this file
@@ -517,7 +548,8 @@ static void disable_statement_timeout(void);
  * Either some backend has bought the farm, or we've been told to shut down
  * "immediately"; so we need to stop what we're doing and exit.
  */
-
+#ifndef THREAD_SANITIZER
+#endif
 
 /*
  * Shutdown signal from postmaster: abort transaction and exit
@@ -607,8 +639,12 @@ ia64_get_bsp(void)
 #if defined(__ia64__) || defined(__ia64)
 #else
 #endif
+#if !defined(__clang__) && defined(__GNUC__) && __GNUC__ >= 12
+#endif
 #ifdef HAVE__BUILTIN_FRAME_ADDRESS
 #else
+#endif
+#if !defined(__clang__) && defined(__GNUC__) && __GNUC__ >= 12
 #endif
 #if defined(__ia64__) || defined(__ia64)
 #endif
@@ -654,6 +690,44 @@ check_stack_depth(void)
 bool
 stack_is_too_deep(void)
 {
+#ifdef ADDRESS_SANITIZER
+	// Postgres analyzes/limits stack depth based on local variables address
+	// offset.
+	// This method works well in case of regular call stack (i.e. when all
+	// stack frames are allocated in stack).
+	// But for the detect_stack_use_after_return ASAN uses fake stack. In case
+	// of using it stack frames are allocated in the heap. As a result it is
+	// not possible to estimate stack depth base on local variables address
+	// offset.
+	// To make stack_is_too_deep return predictable results in case of ASAN it
+	// is reasonable to return false all the time.
+	// Note:
+	// YSQL has some unit tests which checks that Postgres can detect too
+	// deep recursion. These tests change the `max_stack_depth` GUC variable
+	// to lower value. And later restore the original value with the
+	// `RESET max_stack_depth` statement.
+	// To make these tests works under the ASAN the function returns true in
+	// case the `max_stack_depth` GUC contains non default value and number of
+	// call stack frames is huge enough.
+	// The check of call stack frames is required to avoid undesired failure on
+	// attempt to restore original value for the `max_stack_depth` GUC with
+	// the `RESET max_stack_depth` statement.
+	if (get_guc_variables()) {
+		const char* max_stack_depth_GUC = "max_stack_depth";
+		const char* current_value =
+			GetConfigOption(max_stack_depth_GUC, false, false);
+		const char* default_value =
+			GetConfigOptionResetString(max_stack_depth_GUC);
+		if (strcmp(current_value, default_value) != 0) {
+			static const int MAX_STACK_FRAMES = 64;
+			void* frames[MAX_STACK_FRAMES];
+			int frames_count =
+				YBCGetCallStackFrames(frames, MAX_STACK_FRAMES, 0);
+			return frames_count >= MAX_STACK_FRAMES;
+		}
+	}
+	return false;
+#endif
 	char		stack_top_loc;
 	long		stack_depth;
 
@@ -745,6 +819,145 @@ stack_is_too_deep(void)
 #ifdef HAVE_INT_OPTRESET
 #endif
 
+/*
+ * Reload the postgres caches and update the cache version.
+ * Note: if catalog changes sneaked in since getting the
+ * version it is unfortunate but ok. The master version will have
+ * changed too (making our version number obsolete) so we will just end
+ * up needing to do another cache refresh later.
+ * See the comment for yb_catalog_cache_version in 'pg_yb_utils.h' for
+ * more details.
+ */
+
+
+
+
+
+
+/*
+ * Parse query tree via pg_parse_query, suppressing log messages below ERROR level.
+ * This is useful e.g. for avoiding "not supported yet and will be ignored" warnings.
+ */
+
+
+
+
+
+
+/*
+ * Find whether the statement is a SELECT/UPDATE/INSERT/DELETE
+ * with minimum parsing.
+ * Note: This function will always return false if
+ * yb_non_ddl_txn_for_sys_tables_allowed is set to true.
+ */
+
+
+/*
+ * Only retry supported commands.
+ */
+
+
+
+
+/*
+ * Data needed to restart a query (plaintext or portal) after its execution failed.
+ *
+ * Note that in case of a portal query, it refers to values from portal's memory context,
+ * so it's only valid as long as the portal exists.
+ */
+typedef struct YBQueryRetryData
+{
+	const char *portal_name;	/* '\0' for unnamed portal, NULL if not a portal */
+	const char *query_string;
+	CommandTag command_tag;
+} YBQueryRetryData;
+
+
+
+/* Whether we are allowed to restart current query/txn. */
+
+
+/*
+ * Collect data necessary for yb_attempt_to_retry_on_error invocation.
+ */
+
+
+/*
+ * The next two functions yb_clear_portal_before_restart and
+ * yb_restart_portal_after_clear performs portal restart and prepares it for
+ * re-execution.
+ *
+ * This allows us to reuse portal's MemoryContext, which contains,
+ * among other things, bound variables.
+ * Some of them might be pointers to a memory within the same context
+ * (e.g. arrays), so it's important to preserve the context as-is instead of
+ * e.g. copying it into a fresh portal.
+ *
+ * Our goal is to emulate what would PortalDrop + CreatePortal do,
+ * but instead of actually destroying/creating a portal, we're going to
+ * reuse an existing one.
+ *
+ * The yb_clear_portal_before_restart function is a selective copy-paste from
+ * PortalDrop routine.
+ * Original comments are preserved, even though some of the described use cases
+ * are not applicable here.
+ */
+
+
+/*
+ * The yb_restart_portal_after_clear is a selective copy-paste from CreatePortal
+ * routine.
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * Process an error that happened during execution with expected expected
+ * retriable errors. Prepares the re-execution if an error is restartable,
+ * otherwise - rethrows the error.
+ */
+
+
+typedef void(*YBFunctor)(const void*);
+
+
+
+
+
+
+
+/*
+ * Wraps exec_simple_query, attempting to transparently do restarts when possible.
+ * Accepts execution memory context to revert to in case of an error.
+ */
+
+
+typedef struct YBExecuteMessageFunctorContext
+{
+	const char *portal_name;
+	long max_rows;
+} YBExecuteMessageFunctorContext;
+
+
+
+/*
+ * Wraps exec_execute_message, attempting to transparently do restarts when possible.
+ * Accepts execution memory context to revert to in case of an error.
+ */
+
+
+
 
 /*
  * PostgresSingleUserMain
@@ -821,5 +1034,10 @@ stack_is_too_deep(void)
 
 /*
  * Disable statement timeout, if active.
+ */
+
+
+/*
+ * Redact password, if exists in the query text.
  */
 

@@ -420,6 +420,10 @@ case T_ReindexStmt:
   _fingerprintString(ctx, "ReindexStmt");
   _fingerprintReindexStmt(ctx, obj, parent, field_name, depth);
   break;
+case T_BackfillIndexStmt:
+  _fingerprintString(ctx, "BackfillIndexStmt");
+  _fingerprintBackfillIndexStmt(ctx, obj, parent, field_name, depth);
+  break;
 case T_CheckPointStmt:
   _fingerprintString(ctx, "CheckPointStmt");
   _fingerprintCheckPointStmt(ctx, obj, parent, field_name, depth);
@@ -479,6 +483,10 @@ case T_DeallocateStmt:
 case T_DeclareCursorStmt:
   _fingerprintString(ctx, "DeclareCursorStmt");
   _fingerprintDeclareCursorStmt(ctx, obj, parent, field_name, depth);
+  break;
+case T_CreateTableGroupStmt:
+  _fingerprintString(ctx, "CreateTableGroupStmt");
+  _fingerprintCreateTableGroupStmt(ctx, obj, parent, field_name, depth);
   break;
 case T_CreateTableSpaceStmt:
   _fingerprintString(ctx, "CreateTableSpaceStmt");
@@ -902,6 +910,14 @@ case T_PublicationTable:
   _fingerprintString(ctx, "PublicationTable");
   _fingerprintPublicationTable(ctx, obj, parent, field_name, depth);
   break;
+case T_OptSplit:
+  _fingerprintString(ctx, "OptSplit");
+  _fingerprintOptSplit(ctx, obj, parent, field_name, depth);
+  break;
+case T_RowBounds:
+  _fingerprintString(ctx, "RowBounds");
+  _fingerprintRowBounds(ctx, obj, parent, field_name, depth);
+  break;
 case T_InlineCodeBlock:
   _fingerprintString(ctx, "InlineCodeBlock");
   _fingerprintInlineCodeBlock(ctx, obj, parent, field_name, depth);
@@ -909,4 +925,16 @@ case T_InlineCodeBlock:
 case T_CallContext:
   _fingerprintString(ctx, "CallContext");
   _fingerprintCallContext(ctx, obj, parent, field_name, depth);
+  break;
+case T_YbBackfillInfo:
+  _fingerprintString(ctx, "YbBackfillInfo");
+  _fingerprintYbBackfillInfo(ctx, obj, parent, field_name, depth);
+  break;
+case T_YbCreateProfileStmt:
+  _fingerprintString(ctx, "YbCreateProfileStmt");
+  _fingerprintYbCreateProfileStmt(ctx, obj, parent, field_name, depth);
+  break;
+case T_YbDropProfileStmt:
+  _fingerprintString(ctx, "YbDropProfileStmt");
+  _fingerprintYbDropProfileStmt(ctx, obj, parent, field_name, depth);
   break;

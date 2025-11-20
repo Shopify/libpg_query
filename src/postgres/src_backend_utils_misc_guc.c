@@ -5,6 +5,7 @@
  * - backtrace_functions
  * - backtrace_symbol_list
  * - check_function_bodies
+ * - yb_enable_memory_tracking
  *--------------------------------------------------------------------
  */
 
@@ -125,6 +126,16 @@
 #include "utils/varlena.h"
 #include "utils/xml.h"
 
+/* Yugabyte includes */
+#include "access/heaptoast.h"
+#include "access/yb_scan.h"
+#include "commands/copy.h"
+#include "executor/ybcModifyTable.h"
+#include "tcop/pquery.h"
+#include "pg_yb_utils.h"
+#include "yb_ash.h"
+#include "yb_query_diagnostics.h"
+
 #ifndef PG_KRB_SRVTAB
 #define PG_KRB_SRVTAB ""
 #endif
@@ -165,6 +176,10 @@ extern bool optimize_bounded_sort;
 
 
 
+
+
+
+
 /* global variables for check hook support */
 
 
@@ -177,6 +192,8 @@ static void set_config_sourcefile(const char *name, char *sourcefile,
 static bool call_bool_check_hook(struct config_bool *conf, bool *newval,
 								 void **extra, GucSource source, int elevel);
 static bool call_int_check_hook(struct config_int *conf, int *newval,
+								void **extra, GucSource source, int elevel);
+static bool call_oid_check_hook(struct config_oid *conf, Oid *newval,
 								void **extra, GucSource source, int elevel);
 static bool call_real_check_hook(struct config_real *conf, double *newval,
 								 void **extra, GucSource source, int elevel);
@@ -191,6 +208,9 @@ static void assign_log_destination(const char *newval, void *extra);
 static bool check_wal_consistency_checking(char **newval, void **extra,
 										   GucSource source);
 static void assign_wal_consistency_checking(const char *newval, void *extra);
+
+static bool check_default_replica_identity(char **newval, void **extra,
+							   GucSource source);
 
 #ifdef HAVE_SYSLOG
 
@@ -219,7 +239,9 @@ static const char *show_tcp_keepalives_idle(void);
 static const char *show_tcp_keepalives_interval(void);
 static const char *show_tcp_keepalives_count(void);
 static const char *show_tcp_user_timeout(void);
+static bool check_yb_explicit_row_locking_batch_size(int *newval, void **extra, GucSource source);
 static bool check_maxconnections(int *newval, void **extra, GucSource source);
+static const char *yb_show_maxconnections(void);
 static bool check_max_worker_processes(int *newval, void **extra, GucSource source);
 static bool check_autovacuum_max_workers(int *newval, void **extra, GucSource source);
 static bool check_max_wal_senders(int *newval, void **extra, GucSource source);
@@ -252,6 +274,23 @@ static bool check_recovery_target_lsn(char **newval, void **extra, GucSource sou
 static void assign_recovery_target_lsn(const char *newval, void *extra);
 static bool check_primary_slot_name(char **newval, void **extra, GucSource source);
 static bool check_default_with_oids(bool *newval, void **extra, GucSource source);
+
+static bool check_transaction_priority_lower_bound(double *newval, void **extra, GucSource source);
+extern void YBCAssignTransactionPriorityLowerBound(double newval, void* extra);
+static bool check_transaction_priority_upper_bound(double *newval, void **extra, GucSource source);
+extern void YBCAssignTransactionPriorityUpperBound(double newval, void* extra);
+extern double YBCGetTransactionPriority();
+extern TxnPriorityRequirement YBCGetTransactionPriorityType();
+static bool yb_check_no_txn(int* newval, void **extra, GucSource source);
+
+static void assign_yb_pg_batch_detection_mechanism(int new_value, void *extra);
+static void assign_ysql_upgrade_mode(bool newval, void *extra);
+
+static bool check_max_backoff(int *max_backoff_msecs, void **extra, GucSource source);
+static bool check_min_backoff(int *min_backoff_msecs, void **extra, GucSource source);
+static bool check_backoff_multiplier(double *multiplier, void **extra, GucSource source);
+static bool yb_check_toast_catcache_threshold(int *newval, void **extra, GucSource source);
+static void check_reserved_prefixes(const char *varName);
 
 /* Private functions in guc-file.l that need to be called from guc.c */
 static ConfigVariable *ProcessConfigFileInternal(GucContext context,
@@ -375,6 +414,8 @@ StaticAssertDecl(lengthof(ssl_protocol_versions_info) == (PG_TLS1_3_VERSION + 2)
 #ifdef HAVE_SYNCFS
 #endif
 
+
+
 #ifndef WIN32
 #endif
 #ifndef EXEC_BACKEND
@@ -389,6 +430,8 @@ StaticAssertDecl(lengthof(ssl_protocol_versions_info) == (PG_TLS1_3_VERSION + 2)
 #endif
 #ifdef USE_ZSTD
 #endif
+
+
 
 /*
  * Options for enum values stored in other modules
@@ -425,6 +468,8 @@ __thread bool		check_function_bodies = true;
  * details.
  */
 
+
+__thread bool		yb_enable_memory_tracking = true;
 
 
 
@@ -484,6 +529,9 @@ __thread char	   *backtrace_symbol_list;
  * cases provide the value for SHOW to display.  The real state is elsewhere
  * and is kept in sync by assign_hooks.
  */
+
+
+
 
 
 
@@ -669,6 +717,7 @@ typedef struct
 
 
 
+
 #ifdef HAVE_UNIX_SOCKETS
 #else
 #endif
@@ -695,6 +744,13 @@ typedef struct
  * the following mappings to any unrecognized name.  Note that an old name
  * should be mapped to a new one only if the new variable has very similar
  * semantics to the old.
+ */
+
+
+/*
+ * Contains list of GUC variables that both fall under PGC_SUSET context
+ * and can be modified by the yb_db_admin role. This is needed to allow
+ * yb_db_admin to modify PG_SUSET variables without being a superuser itself.
  */
 
 
@@ -840,7 +896,9 @@ static void replace_auto_config_value(ConfigVariable **head_p, ConfigVariable **
  * can only happen when create_placeholders is true, so callers passing
  * false need not think terribly hard about this.)
  */
-
+#ifdef ADDRESS_SANITIZER
+#else
+#endif
 
 
 /*
@@ -1041,6 +1099,19 @@ static void replace_auto_config_value(ConfigVariable **head_p, ConfigVariable **
 
 
 /*
+ * Try to parse value as an Oid, only accepts a decimal format.
+ *
+ * If the string parses okay, return true, else false.
+ * If okay and result is not NULL, return the value in *result.
+ * If not okay and hintmsg is not NULL, *hintmsg is set to a suitable
+ *	HINT message, or NULL if no hint provided.
+ *
+ * YB note: This is adapted from parse_int, with unit input removed.
+ */
+
+
+
+/*
  * Try to parse value as a floating point number in the usual format.
  * Optionally, the value can be followed by a unit name if "flags" indicates
  * a unit is allowed.
@@ -1162,13 +1233,14 @@ static void replace_auto_config_value(ConfigVariable **head_p, ConfigVariable **
 #undef newval
 #define newval (newval_union.intval)
 #undef newval
+#define newval (newval_union.oidval)
+#undef newval
 #define newval (newval_union.realval)
 #undef newval
 #define newval (newval_union.stringval)
 #undef newval
 #define newval (newval_union.enumval)
 #undef newval
-
 
 /*
  * Set the fields for source file and line number the setting came from.
@@ -1301,7 +1373,9 @@ static void replace_auto_config_value(ConfigVariable **head_p, ConfigVariable **
  * Common code for DefineCustomXXXVariable subroutines: insert the new
  * variable into the GUC variable array, replacing any placeholder.
  */
-
+#ifdef ADDRESS_SANITIZER
+#else
+#endif
 
 /*
  * Recursive subroutine for define_custom_variable: reapply non-reset values
@@ -1325,6 +1399,8 @@ static void replace_auto_config_value(ConfigVariable **head_p, ConfigVariable **
 
 
 
+
+
 /*
  * Mark the given GUC prefix as "reserved".
  *
@@ -1334,6 +1410,11 @@ static void replace_auto_config_value(ConfigVariable **head_p, ConfigVariable **
  * GUCs, to help catch misspelled config-file entries.
  */
 
+
+/*
+ * Check a setting name against prefixes previously reserved by
+ * EmitWarningsOnPlaceholders() and throw a warning if matching.
+ */
 
 
 /*
@@ -1468,6 +1549,14 @@ write_one_nondefault_variable(FILE *fp, struct config_generic *gconf)
 				struct config_int *conf = (struct config_int *) gconf;
 
 				fprintf(fp, "%d", *conf->variable);
+			}
+			break;
+
+		case PGC_OID:
+			{
+				struct config_oid *conf = (struct config_oid *) gconf;
+
+				fprintf(fp, "%u", *conf->variable);
 			}
 			break;
 
@@ -1717,6 +1806,8 @@ read_nondefault_variables(void)
 /* Binary read version of read_gucstate(). Copies into dest */
 
 
+
+
 /*
  * Callback used to add a context message when reporting errors that occur
  * while trying to restore GUCs in parallel workers.
@@ -1819,9 +1910,13 @@ read_nondefault_variables(void)
 
 
 
+
+
 /*
  * check_hook, assign_hook and show_hook subroutines
  */
+
+
 
 
 
@@ -1891,6 +1986,16 @@ read_nondefault_variables(void)
 
 
 
+
+
+
+
+/*
+ * For YB-managed (cloud), the cloud user won't be aware of superuser.
+ * When YB shows max_connections, the connections reserved for superusers (and
+ * other backends) are hidden from cloud users.
+ * The reference of the relations can be found in postmaster.c.
+ */
 
 
 
@@ -1987,6 +2092,31 @@ read_nondefault_variables(void)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * YB: yb_check_no_txn
+ *
+ * Do not allow users to set yb_read_after_commit_visibility
+ * from within a txn block.
+ */
 
 
 

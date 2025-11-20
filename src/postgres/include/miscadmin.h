@@ -28,6 +28,12 @@
 #include "datatype/timestamp.h" /* for TimestampTz */
 #include "pgtime.h"				/* for pg_time_t */
 
+#include "postgres.h"			/* for HeapTuple */
+#include "access/htup.h"		/* for HeapTuple */
+
+#ifndef FRONTEND
+#include "storage/proc.h"		/* for MyProc */
+#endif
 
 #define InvalidPid				(-1)
 
@@ -145,6 +151,7 @@ do { \
 	QueryCancelHoldoffCount--; \
 } while(0)
 
+#ifdef FRONTEND
 #define START_CRIT_SECTION()  (CritSectionCount++)
 
 #define END_CRIT_SECTION() \
@@ -152,6 +159,24 @@ do { \
 	Assert(CritSectionCount > 0); \
 	CritSectionCount--; \
 } while(0)
+
+#else /* !FRONTEND */
+
+#define START_CRIT_SECTION()  \
+do { \
+	if (MyProc) \
+		MyProc->ybEnteredCriticalSection = true; \
+	CritSectionCount++; \
+} while(0)
+
+#define END_CRIT_SECTION() \
+do { \
+	Assert(CritSectionCount > 0); \
+	CritSectionCount--; \
+	if (MyProc && CritSectionCount == 0) \
+		MyProc->ybEnteredCriticalSection = false; \
+} while(0)
+#endif /* FRONTEND */
 
 
 /*****************************************************************************
@@ -163,9 +188,11 @@ do { \
  */
 extern PGDLLIMPORT pid_t PostmasterPid;
 extern PGDLLIMPORT bool IsPostmasterEnvironment;
-extern PGDLLIMPORT bool IsUnderPostmaster;
+extern PGDLLIMPORT __thread  bool IsUnderPostmaster;
 extern PGDLLIMPORT bool IsBackgroundWorker;
 extern PGDLLIMPORT bool IsBinaryUpgrade;
+
+extern __thread  bool IsYsqlUpgrade;
 
 extern PGDLLIMPORT __thread  bool ExitOnAnyError;
 
@@ -202,6 +229,16 @@ extern PGDLLIMPORT char postgres_exec_path[];
 extern PGDLLIMPORT Oid MyDatabaseId;
 
 extern PGDLLIMPORT Oid MyDatabaseTableSpace;
+
+extern PGDLLIMPORT bool MyDatabaseColocated;
+
+extern PGDLLIMPORT Oid YbDatabaseIdForNewObjectId;
+
+extern PGDLLIMPORT bool MyColocatedDatabaseLegacy;
+
+extern PGDLLIMPORT bool YbTablegroupCatalogExists;
+
+extern PGDLLIMPORT bool YbLoginProfileCatalogsExist;
 
 /*
  * Date/Time Configuration
@@ -336,6 +373,7 @@ typedef enum BackendType
 	B_WAL_WRITER,
 	B_ARCHIVER,
 	B_LOGGER,
+	YB_YSQL_CONN_MGR,
 } BackendType;
 
 extern PGDLLIMPORT BackendType MyBackendType;
@@ -461,7 +499,8 @@ extern void InitPostgres(const char *in_dbname, Oid dboid,
 						 const char *username, Oid useroid,
 						 bool load_session_libraries,
 						 bool override_allow_connections,
-						 char *out_dbname);
+						 char *out_dbname,
+						 uint64_t *session_id);
 extern void BaseInit(void);
 
 /* in utils/init/miscinit.c */

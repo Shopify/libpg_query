@@ -1090,6 +1090,14 @@
           "name": "relationOid",
           "c_type": "Oid",
           "comment": "/* If table has been looked up, its OID */"
+        },
+        {
+          "comment": ""
+        },
+        {
+          "name": "yb_tablespaceOid",
+          "c_type": "Oid",
+          "comment": "/* Yugabyte also needs info on where it is */"
         }
       ],
       "comment": "/*\n * TableLikeClause - CREATE TABLE ( ... LIKE ... ) clause\n */\n"
@@ -1142,7 +1150,7 @@
           "comment": "/* FIRST/LAST/default */"
         }
       ],
-      "comment": "/*\n * IndexElem - index parameters (used in CREATE INDEX, and in ON CONFLICT)\n *\n * For a plain index attribute, 'name' is the name of the table column to\n * index, and 'expr' is NULL.  For an index expression, 'name' is NULL and\n * 'expr' is the expression tree.\n */\n"
+      "comment": "/*\n * IndexElem - index parameters (used in CREATE INDEX, and in ON CONFLICT)\n *\n * For a plain index attribute, 'name' is the name of the table column to\n * index, and 'expr' is NULL.  For an index expression, 'name' is NULL and\n * 'expr' is the expression tree.\n *\n * When a YugaByte LSM primary key or index declaration contains an attribute\n * group like \"create table (... primary key ((h1, h2, ...) hash, ...))\",\n * the attribute group is first represented as an IndexElem with 'h1', 'h2',\n * ... in 'yb_yname_list'. The attribute group is then flattened as a list of\n * IndexElem's the relevant the grammar rules.\n */\n"
     },
     "DefElem": {
       "fields": [
@@ -1692,7 +1700,7 @@
           "comment": "/* security barrier quals to apply, if any */"
         }
       ],
-      "comment": "/*--------------------\n * RangeTblEntry -\n *\t  A range table is a List of RangeTblEntry nodes.\n *\n *\t  A range table entry may represent a plain relation, a sub-select in\n *\t  FROM, or the result of a JOIN clause.  (Only explicit JOIN syntax\n *\t  produces an RTE, not the implicit join resulting from multiple FROM\n *\t  items.  This is because we only need the RTE to deal with SQL features\n *\t  like outer joins and join-output-column aliasing.)  Other special\n *\t  RTE types also exist, as indicated by RTEKind.\n *\n *\t  Note that we consider RTE_RELATION to cover anything that has a pg_class\n *\t  entry.  relkind distinguishes the sub-cases.\n *\n *\t  alias is an Alias node representing the AS alias-clause attached to the\n *\t  FROM expression, or NULL if no clause.\n *\n *\t  eref is the table reference name and column reference names (either\n *\t  real or aliases).  Note that system columns (OID etc) are not included\n *\t  in the column list.\n *\t  eref->aliasname is required to be present, and should generally be used\n *\t  to identify the RTE for error messages etc.\n *\n *\t  In RELATION RTEs, the colnames in both alias and eref are indexed by\n *\t  physical attribute number; this means there must be colname entries for\n *\t  dropped columns.  When building an RTE we insert empty strings (\"\") for\n *\t  dropped columns.  Note however that a stored rule may have nonempty\n *\t  colnames for columns dropped since the rule was created (and for that\n *\t  matter the colnames might be out of date due to column renamings).\n *\t  The same comments apply to FUNCTION RTEs when a function's return type\n *\t  is a named composite type.\n *\n *\t  In JOIN RTEs, the colnames in both alias and eref are one-to-one with\n *\t  joinaliasvars entries.  A JOIN RTE will omit columns of its inputs when\n *\t  those columns are known to be dropped at parse time.  Again, however,\n *\t  a stored rule might contain entries for columns dropped since the rule\n *\t  was created.  (This is only possible for columns not actually referenced\n *\t  in the rule.)  When loading a stored rule, we replace the joinaliasvars\n *\t  items for any such columns with null pointers.  (We can't simply delete\n *\t  them from the joinaliasvars list, because that would affect the attnums\n *\t  of Vars referencing the rest of the list.)\n *\n *\t  inh is true for relation references that should be expanded to include\n *\t  inheritance children, if the rel has any.  This *must* be false for\n *\t  RTEs other than RTE_RELATION entries.\n *\n *\t  inFromCl marks those range variables that are listed in the FROM clause.\n *\t  It's false for RTEs that are added to a query behind the scenes, such\n *\t  as the NEW and OLD variables for a rule, or the subqueries of a UNION.\n *\t  This flag is not used during parsing (except in transformLockingClause,\n *\t  q.v.); the parser now uses a separate \"namespace\" data structure to\n *\t  control visibility.  But it is needed by ruleutils.c to determine\n *\t  whether RTEs should be shown in decompiled queries.\n *\n *\t  requiredPerms and checkAsUser specify run-time access permissions\n *\t  checks to be performed at query startup.  The user must have *all*\n *\t  of the permissions that are OR'd together in requiredPerms (zero\n *\t  indicates no permissions checking).  If checkAsUser is not zero,\n *\t  then do the permissions checks using the access rights of that user,\n *\t  not the current effective user ID.  (This allows rules to act as\n *\t  setuid gateways.)  Permissions checks only apply to RELATION RTEs.\n *\n *\t  For SELECT/INSERT/UPDATE permissions, if the user doesn't have\n *\t  table-wide permissions then it is sufficient to have the permissions\n *\t  on all columns identified in selectedCols (for SELECT) and/or\n *\t  insertedCols and/or updatedCols (INSERT with ON CONFLICT DO UPDATE may\n *\t  have all 3).  selectedCols, insertedCols and updatedCols are bitmapsets,\n *\t  which cannot have negative integer members, so we subtract\n *\t  FirstLowInvalidHeapAttributeNumber from column numbers before storing\n *\t  them in these fields.  A whole-row Var reference is represented by\n *\t  setting the bit for InvalidAttrNumber.\n *\n *\t  updatedCols is also used in some other places, for example, to determine\n *\t  which triggers to fire and in FDWs to know which changed columns they\n *\t  need to ship off.\n *\n *\t  Generated columns that are caused to be updated by an update to a base\n *\t  column are listed in extraUpdatedCols.  This is not considered for\n *\t  permission checking, but it is useful in those places that want to know\n *\t  the full set of columns being updated as opposed to only the ones the\n *\t  user explicitly mentioned in the query.  (There is currently no need for\n *\t  an extraInsertedCols, but it could exist.)  Note that extraUpdatedCols\n *\t  is populated during query rewrite, NOT in the parser, since generated\n *\t  columns could be added after a rule has been parsed and stored.\n *\n *\t  securityQuals is a list of security barrier quals (boolean expressions),\n *\t  to be tested in the listed order before returning a row from the\n *\t  relation.  It is always NIL in parser output.  Entries are added by the\n *\t  rewriter to implement security-barrier views and/or row-level security.\n *\t  Note that the planner turns each boolean expression into an implicitly\n *\t  AND'ed sublist, as is its usual habit with qualification expressions.\n *--------------------\n */\n"
+      "comment": "/*--------------------\n * RangeTblEntry -\n *\t  A range table is a List of RangeTblEntry nodes.\n *\n *\t  A range table entry may represent a plain relation, a sub-select in\n *\t  FROM, or the result of a JOIN clause.  (Only explicit JOIN syntax\n *\t  produces an RTE, not the implicit join resulting from multiple FROM\n *\t  items.  This is because we only need the RTE to deal with SQL features\n *\t  like outer joins and join-output-column aliasing.)  Other special\n *\t  RTE types also exist, as indicated by RTEKind.\n *\n *\t  Note that we consider RTE_RELATION to cover anything that has a pg_class\n *\t  entry.  relkind distinguishes the sub-cases.\n *\n *\t  alias is an Alias node representing the AS alias-clause attached to the\n *\t  FROM expression, or NULL if no clause.\n *\n *\t  eref is the table reference name and column reference names (either\n *\t  real or aliases).  Note that system columns (OID etc) are not included\n *\t  in the column list.\n *\t  eref->aliasname is required to be present, and should generally be used\n *\t  to identify the RTE for error messages etc.\n *\n *\t  In RELATION RTEs, the colnames in both alias and eref are indexed by\n *\t  physical attribute number; this means there must be colname entries for\n *\t  dropped columns.  When building an RTE we insert empty strings (\"\") for\n *\t  dropped columns.  Note however that a stored rule may have nonempty\n *\t  colnames for columns dropped since the rule was created (and for that\n *\t  matter the colnames might be out of date due to column renamings).\n *\t  The same comments apply to FUNCTION RTEs when a function's return type\n *\t  is a named composite type.\n *\n *\t  In JOIN RTEs, the colnames in both alias and eref are one-to-one with\n *\t  joinaliasvars entries.  A JOIN RTE will omit columns of its inputs when\n *\t  those columns are known to be dropped at parse time.  Again, however,\n *\t  a stored rule might contain entries for columns dropped since the rule\n *\t  was created.  (This is only possible for columns not actually referenced\n *\t  in the rule.)  When loading a stored rule, we replace the joinaliasvars\n *\t  items for any such columns with null pointers.  (We can't simply delete\n *\t  them from the joinaliasvars list, because that would affect the attnums\n *\t  of Vars referencing the rest of the list.)\n *\n *\t  inh is true for relation references that should be expanded to include\n *\t  inheritance children, if the rel has any.  This *must* be false for\n *\t  RTEs other than RTE_RELATION entries.\n *\n *\t  inFromCl marks those range variables that are listed in the FROM clause.\n *\t  It's false for RTEs that are added to a query behind the scenes, such\n *\t  as the NEW and OLD variables for a rule, or the subqueries of a UNION.\n *\t  This flag is not used during parsing (except in transformLockingClause,\n *\t  q.v.); the parser now uses a separate \"namespace\" data structure to\n *\t  control visibility.  But it is needed by ruleutils.c to determine\n *\t  whether RTEs should be shown in decompiled queries.\n *\n *\t  requiredPerms and checkAsUser specify run-time access permissions\n *\t  checks to be performed at query startup.  The user must have *all*\n *\t  of the permissions that are OR'd together in requiredPerms (zero\n *\t  indicates no permissions checking).  If checkAsUser is not zero,\n *\t  then do the permissions checks using the access rights of that user,\n *\t  not the current effective user ID.  (This allows rules to act as\n *\t  setuid gateways.)  Permissions checks only apply to RELATION RTEs.\n *\n *\t  For SELECT/INSERT/UPDATE permissions, if the user doesn't have\n *\t  table-wide permissions then it is sufficient to have the permissions\n *\t  on all columns identified in selectedCols (for SELECT) and/or\n *\t  insertedCols and/or updatedCols (INSERT with ON CONFLICT DO UPDATE may\n *\t  have all 3).  selectedCols, insertedCols and updatedCols are bitmapsets,\n *\t  which cannot have negative integer members, so we subtract\n *\t  FirstLowInvalidHeapAttributeNumber from column numbers before storing\n *\t  them in these fields.  A whole-row Var reference is represented by\n *\t  setting the bit for InvalidAttrNumber.\n *\n *\t  updatedCols is also used in some other places, for example, to determine\n *\t  which triggers to fire and in FDWs to know which changed columns they\n *\t  need to ship off.\n *\n *\t  extraUpdatedCols is no longer used or maintained; it's always empty.\n *\n *\t  securityQuals is a list of security barrier quals (boolean expressions),\n *\t  to be tested in the listed order before returning a row from the\n *\t  relation.  It is always NIL in parser output.  Entries are added by the\n *\t  rewriter to implement security-barrier views and/or row-level security.\n *\t  Note that the planner turns each boolean expression into an implicitly\n *\t  AND'ed sublist, as is its usual habit with qualification expressions.\n *--------------------\n */\n"
     },
     "RangeTblFunction": {
       "fields": [
@@ -2913,6 +2921,19 @@
           "name": "recurse",
           "c_type": "bool",
           "comment": "/* exec-time recursion */"
+        },
+        {
+          "comment": ""
+        },
+        {
+          "name": "yb_is_add_primary_key",
+          "c_type": "bool",
+          "comment": "/* checks if adding primary key */"
+        },
+        {
+          "name": "yb_cascade",
+          "c_type": "bool",
+          "comment": "/* to restrict movement of single table in\n\t\t\t\t\t\t\t\t * colocated tablespace */\n"
         }
       ],
       "comment": "/* ----------------------\n *\tAlter Table\n * ----------------------\n */\n"
@@ -3301,6 +3322,19 @@
           "name": "if_not_exists",
           "c_type": "bool",
           "comment": "/* just do nothing if it already exists? */"
+        },
+        {
+          "comment": ""
+        },
+        {
+          "name": "tablegroupname",
+          "c_type": "char*",
+          "comment": "/* tablegroup to use, or NULL */"
+        },
+        {
+          "name": "split_options",
+          "c_type": "OptSplit*",
+          "comment": "/* SPLIT statement options */"
         }
       ],
       "comment": "/* ----------------------\n *\t\tCreate Table Statement\n *\n * NOTE: in the raw gram.y output, ColumnDef and Constraint nodes are\n * intermixed in tableElts, and constraints is NIL.  After parse analysis,\n * tableElts contains just ColumnDefs, and constraints contains just\n * Constraint nodes (in fact, only CONSTR_CHECK nodes, in the present\n * implementation).\n * ----------------------\n */\n"
@@ -3506,9 +3540,126 @@
           "name": "initially_valid",
           "c_type": "bool",
           "comment": "/* mark the new constraint as valid? */"
+        },
+        {
+          "comment": ""
+        },
+        {
+          "comment": "\t/* For YugaByte LSM primary or unique key defined inline with the table\n\t * definition, we allow the key definition to include the sorting info\n\t * like \"create table (... primary key (h hash, r1 asc, r2 desc))\".\n\t * We save the IndexElem of the attributes in 'yb_index_params' to access\n\t * the full definition of the key attributes.\n\t */\n"
+        },
+        {
+          "name": "yb_index_params",
+          "c_type": "List*",
+          "comment": "/* IndexElem nodes of UNIQUE or PRIMARY KEY\n\t\t\t\t\t\t\t\t\t * constraint */\n"
         }
       ],
       "comment": "/* Foreign key matchtype codes */\n"
+    },
+    "OptSplit": {
+      "fields": [
+        {
+          "name": "type",
+          "c_type": "NodeTag",
+          "comment": null
+        },
+        {
+          "comment": ""
+        },
+        {
+          "name": "split_type",
+          "c_type": "yb_split_type",
+          "comment": null
+        },
+        {
+          "name": "num_tablets",
+          "c_type": "int",
+          "comment": null
+        },
+        {
+          "name": "split_points",
+          "c_type": "List*",
+          "comment": null
+        }
+      ],
+      "comment": null
+    },
+    "YbCreateProfileStmt": {
+      "fields": [
+        {
+          "name": "type",
+          "c_type": "NodeTag",
+          "comment": null
+        },
+        {
+          "name": "prfname",
+          "c_type": "char*",
+          "comment": null
+        },
+        {
+          "name": "prffailedloginattempts",
+          "c_type": "Integer*",
+          "comment": null
+        }
+      ],
+      "comment": "/* ----------------------\n *\t\tCreate/Drop Profile Statements\n * ----------------------\n */\n"
+    },
+    "YbDropProfileStmt": {
+      "fields": [
+        {
+          "name": "type",
+          "c_type": "NodeTag",
+          "comment": null
+        },
+        {
+          "name": "prfname",
+          "c_type": "char*",
+          "comment": null
+        },
+        {
+          "name": "missing_ok",
+          "c_type": "bool",
+          "comment": "/* skip error if missing? */"
+        }
+      ],
+      "comment": null
+    },
+    "CreateTableGroupStmt": {
+      "fields": [
+        {
+          "name": "type",
+          "c_type": "NodeTag",
+          "comment": null
+        },
+        {
+          "name": "tablegroupname",
+          "c_type": "char*",
+          "comment": null
+        },
+        {
+          "name": "owner",
+          "c_type": "RoleSpec*",
+          "comment": null
+        },
+        {
+          "name": "options",
+          "c_type": "List*",
+          "comment": null
+        },
+        {
+          "name": "tablespacename",
+          "c_type": "char*",
+          "comment": null
+        },
+        {
+          "comment": "\t/*\n\t * Whether this tablegroup is created implicitly by YB\n\t * or created explicitly by users.\n\t */\n"
+        },
+        {
+          "name": "implicit",
+          "c_type": "bool",
+          "comment": null
+        }
+      ],
+      "comment": "/* ----------------------\n *\t\tCreate/Drop Tablegroup Statements\n * ----------------------\n */\n"
     },
     "CreateTableSpaceStmt": {
       "fields": [
@@ -3614,6 +3765,16 @@
         },
         {
           "name": "nowait",
+          "c_type": "bool",
+          "comment": null
+        },
+        {
+          "name": "yb_relation",
+          "c_type": "RangeVar*",
+          "comment": null
+        },
+        {
+          "name": "yb_cascade",
           "c_type": "bool",
           "comment": null
         }
@@ -4917,8 +5078,8 @@
         },
         {
           "name": "concurrent",
-          "c_type": "bool",
-          "comment": "/* should this be a concurrent index build? */"
+          "c_type": "YbConcurrencyContext",
+          "comment": "/* is this a concurrent index build? */"
         },
         {
           "name": "if_not_exists",
@@ -4929,6 +5090,11 @@
           "name": "reset_default_tblspc",
           "c_type": "bool",
           "comment": "/* reset default_tablespace prior to\n\t\t\t\t\t\t\t\t\t\t * executing */\n"
+        },
+        {
+          "name": "split_options",
+          "c_type": "OptSplit*",
+          "comment": "/* SPLIT statement options */"
         }
       ],
       "comment": "/* ----------------------\n *\t\tCreate Index Statement\n *\n * This represents creation of an index and/or an associated constraint.\n * If isconstraint is true, we should create a pg_constraint entry along\n * with the index.  But if indexOid isn't InvalidOid, we are not creating an\n * index, just a UNIQUE/PKEY constraint using an existing index.  isconstraint\n * must always be true in this case, and the fields describing the index\n * properties are empty.\n * ----------------------\n */\n"
@@ -6049,6 +6215,76 @@
           "name": "params",
           "c_type": "List*",
           "comment": "/* list of DefElem nodes */"
+        }
+      ],
+      "comment": null
+    },
+    "RowBounds": {
+      "fields": [
+        {
+          "name": "type",
+          "c_type": "NodeTag",
+          "comment": null
+        },
+        {
+          "name": "partition_key",
+          "c_type": "char*",
+          "comment": "/* Partition key of tablet containing bound */"
+        },
+        {
+          "name": "row_key_start",
+          "c_type": "char*",
+          "comment": "/* Starting row of bound (inclusive) */"
+        },
+        {
+          "name": "row_key_end",
+          "c_type": "char*",
+          "comment": "/* Ending row of bound (exclusive) */"
+        }
+      ],
+      "comment": "/*\n * RowBounds - row bounds for BACKFILL INDEX statement\n */\n"
+    },
+    "YbBackfillInfo": {
+      "fields": [
+        {
+          "name": "type",
+          "c_type": "NodeTag",
+          "comment": null
+        },
+        {
+          "name": "bfinstr",
+          "c_type": "char*",
+          "comment": "/* Backfill instruction */"
+        },
+        {
+          "name": "read_time",
+          "c_type": "uint64_t",
+          "comment": "/* Read time for backfill */"
+        },
+        {
+          "name": "row_bounds",
+          "c_type": "RowBounds*",
+          "comment": "/* Rows to backfill */"
+        }
+      ],
+      "comment": null
+    },
+    "BackfillIndexStmt": {
+      "fields": [
+        {
+          "name": "type",
+          "c_type": "NodeTag",
+          "comment": null
+        },
+        {
+          "name": "oid_list",
+          "c_type": "List*",
+          "comment": "/* Oids of indexes to backfill */"
+        },
+        {
+          "name": "bfinfo",
+          "c_type": "YbBackfillInfo*",
+          "comment": null
         }
       ],
       "comment": null
@@ -7998,11 +8234,11 @@
         },
         {
           "name": "rargs",
-          "c_type": "List*",
+          "c_type": "Node*",
           "comment": "/* the right-hand input arguments */"
         }
       ],
-      "comment": "/*\n * RowCompareExpr - row-wise comparison, such as (a, b) <= (1, 2)\n *\n * We support row comparison for any operator that can be determined to\n * act like =, <>, <, <=, >, or >= (we determine this by looking for the\n * operator in btree opfamilies).  Note that the same operator name might\n * map to a different operator for each pair of row elements, since the\n * element datatypes can vary.\n *\n * A RowCompareExpr node is only generated for the < <= > >= cases;\n * the = and <> cases are translated to simple AND or OR combinations\n * of the pairwise comparisons.  However, we include = and <> in the\n * RowCompareType enum for the convenience of parser logic.\n */\n"
+      "comment": "/*\n * RowCompareExpr - row-wise comparison, such as (a, b) <= (1, 2)\n *\n * We support row comparison for any operator that can be determined to\n * act like =, <>, <, <=, >, or >= (we determine this by looking for the\n * operator in btree opfamilies).  Note that the same operator name might\n * map to a different operator for each pair of row elements, since the\n * element datatypes can vary.\n *\n * A RowCompareExpr node is only generated for the < <= > >= cases;\n * the = and <> cases are translated to simple AND or OR combinations\n * of the pairwise comparisons.  However, we include = and <> in the\n * RowCompareType enum for the convenience of parser logic.\n *\n * YB: In the execution layer, YB indexes support the = case for when\n * the RHS is an array of rows much like an IN condition.\n */\n"
     },
     "CoalesceExpr": {
       "fields": [

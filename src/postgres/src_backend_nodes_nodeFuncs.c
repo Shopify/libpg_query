@@ -22,6 +22,7 @@
  */
 #include "postgres.h"
 
+#include "access/sysattr.h"
 #include "catalog/pg_collation.h"
 #include "catalog/pg_type.h"
 #include "miscadmin.h"
@@ -1403,4 +1404,12 @@ raw_expression_tree_walker(Node *node,
  * Walk the constituent plans of a ModifyTable, Append, MergeAppend,
  * BitmapAnd, or BitmapOr node.
  */
+
+
+/*
+ * Given PlanState, return pointer to aggrefs field if it exists, NULL
+ * otherwise.
+ */
+
+
 

@@ -2,9 +2,6 @@
  * Symbols referenced in this file:
  * - plpgsql_scanner_init
  * - plpgsql_IdentifierLookup
- * - yyscanner
- * - core_yy
- * - ReservedPLKeywordTokens
  * - scanorig
  * - plpgsql_yytoken
  * - num_pushbacks
@@ -16,7 +13,9 @@
  * - internal_yylex
  * - pushback_token
  * - pushback_auxdata
+ * - yyscanner
  * - push_back_token
+ * - core_yy
  * - UnreservedPLKeywordTokens
  * - plpgsql_yyleng
  * - plpgsql_location_to_lineno
@@ -29,6 +28,7 @@
  * - plpgsql_peek2
  * - plpgsql_scanner_finish
  * - plpgsql_latest_lineno
+ * - plpgsql_scanner_init
  *--------------------------------------------------------------------
  */
 
@@ -101,6 +101,9 @@ __thread IdentifierLookup plpgsql_IdentifierLookup = IDENTIFIER_LOOKUP_NORMAL;
 static const uint16 ReservedPLKeywordTokens[] = {
 #include "pl_reserved_kwlist.h"
 };
+
+
+
 
 static const uint16 UnreservedPLKeywordTokens[] = {
 #include "pl_unreserved_kwlist.h"

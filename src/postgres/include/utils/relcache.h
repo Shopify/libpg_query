@@ -52,6 +52,7 @@ extern List *RelationGetDummyIndexExpressions(Relation relation);
 extern List *RelationGetIndexPredicate(Relation relation);
 extern Datum *RelationGetIndexRawAttOptions(Relation relation);
 extern bytea **RelationGetIndexAttOptions(Relation relation, bool copy);
+extern List *YbRelationGetFKeyReferencedByList(Relation relation);
 
 typedef enum IndexAttrBitmapKind
 {
@@ -63,6 +64,10 @@ typedef enum IndexAttrBitmapKind
 
 extern Bitmapset *RelationGetIndexAttrBitmap(Relation relation,
 											 IndexAttrBitmapKind attrKind);
+extern void YbComputeIndexExprOrPredicateAttrs(Bitmapset **indexattrs,
+											   Relation indexDesc,
+											   const int Anum_pg_index,
+											   AttrNumber attr_offset);
 
 extern Bitmapset *RelationGetIdentityKeyBitmap(Relation relation);
 
@@ -72,6 +77,13 @@ extern void RelationGetExclusionInfo(Relation indexRelation,
 									 uint16 **strategies);
 
 extern void RelationInitIndexAccessInfo(Relation relation);
+
+extern bool CheckIndexForUpdate(Oid indexoid,
+								const Bitmapset *updated_attrs, AttrNumber attr_offset);
+extern bool CheckUpdateExprOrPred(const Bitmapset *updated_attrs,
+								  Relation indexDesc,
+								  const int Anum_pg_index,
+								  AttrNumber attr_offset);
 
 /* caller must include pg_publication.h */
 struct PublicationDesc;
@@ -96,6 +108,11 @@ extern void RelationCacheInitializePhase2(void);
 extern void RelationCacheInitializePhase3(void);
 
 /*
+ * Preload relations cache
+ */
+extern void YBPreloadRelCache();
+
+/*
  * Routine to create a relcache entry for an about-to-be-created relation
  */
 extern Relation RelationBuildLocalRelation(const char *relname,
@@ -113,7 +130,8 @@ extern Relation RelationBuildLocalRelation(const char *relname,
 /*
  * Routines to manage assignment of new relfilenode to a relation
  */
-extern void RelationSetNewRelfilenode(Relation relation, char persistence);
+extern void RelationSetNewRelfilenode(Relation relation, char persistence,
+						  bool yb_copy_split_options);
 extern void RelationAssumeNewRelfilenode(Relation relation);
 
 /*
@@ -124,6 +142,8 @@ extern void RelationForgetRelation(Oid rid);
 extern void RelationCacheInvalidateEntry(Oid relationId);
 
 extern void RelationCacheInvalidate(bool debug_discard);
+
+extern void YbRelationCacheInvalidate(void);
 
 extern void RelationCloseSmgrByOid(Oid relationId);
 
@@ -143,6 +163,7 @@ extern bool RelationIdIsInInitFile(Oid relationId);
 extern void RelationCacheInitFilePreInvalidate(void);
 extern void RelationCacheInitFilePostInvalidate(void);
 extern void RelationCacheInitFileRemove(void);
+extern bool YbRelationIdIsInInitFileAndNotCached(Oid relationId);
 
 /* should be used only by relcache.c and catcache.c */
 extern PGDLLIMPORT bool criticalRelcachesBuilt;

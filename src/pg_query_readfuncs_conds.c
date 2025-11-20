@@ -107,6 +107,7 @@
   READ_COND(LockStmt, LockStmt, lock_stmt, LOCK_STMT, LockStmt, lock_stmt);
   READ_COND(ConstraintsSetStmt, ConstraintsSetStmt, constraints_set_stmt, CONSTRAINTS_SET_STMT, ConstraintsSetStmt, constraints_set_stmt);
   READ_COND(ReindexStmt, ReindexStmt, reindex_stmt, REINDEX_STMT, ReindexStmt, reindex_stmt);
+  READ_COND(BackfillIndexStmt, BackfillIndexStmt, backfill_index_stmt, BACKFILL_INDEX_STMT, BackfillIndexStmt, backfill_index_stmt);
   READ_COND(CheckPointStmt, CheckPointStmt, check_point_stmt, CHECK_POINT_STMT, CheckPointStmt, check_point_stmt);
   READ_COND(CreateSchemaStmt, CreateSchemaStmt, create_schema_stmt, CREATE_SCHEMA_STMT, CreateSchemaStmt, create_schema_stmt);
   READ_COND(AlterDatabaseStmt, AlterDatabaseStmt, alter_database_stmt, ALTER_DATABASE_STMT, AlterDatabaseStmt, alter_database_stmt);
@@ -122,6 +123,7 @@
   READ_COND(ExecuteStmt, ExecuteStmt, execute_stmt, EXECUTE_STMT, ExecuteStmt, execute_stmt);
   READ_COND(DeallocateStmt, DeallocateStmt, deallocate_stmt, DEALLOCATE_STMT, DeallocateStmt, deallocate_stmt);
   READ_COND(DeclareCursorStmt, DeclareCursorStmt, declare_cursor_stmt, DECLARE_CURSOR_STMT, DeclareCursorStmt, declare_cursor_stmt);
+  READ_COND(CreateTableGroupStmt, CreateTableGroupStmt, create_table_group_stmt, CREATE_TABLE_GROUP_STMT, CreateTableGroupStmt, create_table_group_stmt);
   READ_COND(CreateTableSpaceStmt, CreateTableSpaceStmt, create_table_space_stmt, CREATE_TABLE_SPACE_STMT, CreateTableSpaceStmt, create_table_space_stmt);
   READ_COND(DropTableSpaceStmt, DropTableSpaceStmt, drop_table_space_stmt, DROP_TABLE_SPACE_STMT, DropTableSpaceStmt, drop_table_space_stmt);
   READ_COND(AlterObjectDependsStmt, AlterObjectDependsStmt, alter_object_depends_stmt, ALTER_OBJECT_DEPENDS_STMT, AlterObjectDependsStmt, alter_object_depends_stmt);
@@ -227,5 +229,10 @@
   READ_COND(VacuumRelation, VacuumRelation, vacuum_relation, VACUUM_RELATION, VacuumRelation, vacuum_relation);
   READ_COND(PublicationObjSpec, PublicationObjSpec, publication_obj_spec, PUBLICATION_OBJ_SPEC, PublicationObjSpec, publication_obj_spec);
   READ_COND(PublicationTable, PublicationTable, publication_table, PUBLICATION_TABLE, PublicationTable, publication_table);
+  READ_COND(OptSplit, OptSplit, opt_split, OPT_SPLIT, OptSplit, opt_split);
+  READ_COND(RowBounds, RowBounds, row_bounds, ROW_BOUNDS, RowBounds, row_bounds);
   READ_COND(InlineCodeBlock, InlineCodeBlock, inline_code_block, INLINE_CODE_BLOCK, InlineCodeBlock, inline_code_block);
   READ_COND(CallContext, CallContext, call_context, CALL_CONTEXT, CallContext, call_context);
+  READ_COND(YbBackfillInfo, YbBackfillInfo, yb_backfill_info, YB_BACKFILL_INFO, YbBackfillInfo, yb_backfill_info);
+  READ_COND(YbCreateProfileStmt, YbCreateProfileStmt, yb_create_profile_stmt, YB_CREATE_PROFILE_STMT, YbCreateProfileStmt, yb_create_profile_stmt);
+  READ_COND(YbDropProfileStmt, YbDropProfileStmt, yb_drop_profile_stmt, YB_DROP_PROFILE_STMT, YbDropProfileStmt, yb_drop_profile_stmt);

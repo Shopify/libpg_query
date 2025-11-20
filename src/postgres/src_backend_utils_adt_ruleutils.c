@@ -23,8 +23,9 @@
 #include "postgres.h"
 
 #include <ctype.h>
-#include <unistd.h>
 #include <fcntl.h>
+#include <inttypes.h>
+#include <unistd.h>
 
 #include "access/amapi.h"
 #include "access/htup_details.h"
@@ -63,6 +64,7 @@
 #include "parser/parse_relation.h"
 #include "parser/parser.h"
 #include "parser/parsetree.h"
+#include "pg_yb_utils.h"
 #include "rewrite/rewriteHandler.h"
 #include "rewrite/rewriteManip.h"
 #include "rewrite/rewriteSupport.h"
@@ -81,6 +83,10 @@
 #include "utils/varlena.h"
 #include "utils/xml.h"
 
+/* YB includes. */
+#include "catalog/pg_rewrite.h"
+#include "commands/tablegroup.h"
+
 /* ----------
  * Pretty formatting constants
  * ----------
@@ -97,6 +103,7 @@
 #define PRETTYFLAG_PAREN		0x0001
 #define PRETTYFLAG_INDENT		0x0002
 #define PRETTYFLAG_SCHEMA		0x0004
+#define YB_PRETTYFLAG_ARRAY	0x0008
 
 /* Standard conversion of a "bool pretty" option to detailed flags */
 #define GET_PRETTY_FLAGS(pretty) \
@@ -110,7 +117,10 @@
 #define PRETTY_PAREN(context)	((context)->prettyFlags & PRETTYFLAG_PAREN)
 #define PRETTY_INDENT(context)	((context)->prettyFlags & PRETTYFLAG_INDENT)
 #define PRETTY_SCHEMA(context)	((context)->prettyFlags & PRETTYFLAG_SCHEMA)
+#define YB_PRETTY_ARRAY(context) ((context)->prettyFlags & \
+									YB_PRETTYFLAG_ARRAY)
 
+#define YB_TRUNC_ARRAY_LIMIT 3
 
 /* ----------
  * Local data types
@@ -353,13 +363,17 @@ static char *pg_get_indexdef_worker(Oid indexrelid, int colno,
 									const Oid *excludeOps,
 									bool attrsOnly, bool keysOnly,
 									bool showTblSpc, bool inherits,
-									int prettyFlags, bool missing_ok);
+									int prettyFlags, bool missing_ok,
+									bool useNonconcurrently,
+									bool includeYbMetadata,
+									bool is_yb_alter_table);
 static char *pg_get_statisticsobj_worker(Oid statextid, bool columns_only,
 										 bool missing_ok);
 static char *pg_get_partkeydef_worker(Oid relid, int prettyFlags,
 									  bool attrsOnly, bool missing_ok);
 static char *pg_get_constraintdef_worker(Oid constraintId, bool fullCommand,
-										 int prettyFlags, bool missing_ok);
+										 int prettyFlags, bool missing_ok,
+										 bool is_yb_alter_table);
 static text *pg_get_expr_worker(text *expr, Oid relid, const char *relname,
 								int prettyFlags);
 static int	print_function_arguments(StringInfo buf, HeapTuple proctup,
@@ -439,6 +453,9 @@ static void get_rule_windowspec(WindowClause *wc, List *targetList,
 								deparse_context *context);
 static char *get_variable(Var *var, int levelsup, bool istoplevel,
 						  deparse_context *context);
+static void get_batched_expr(YbBatchedExpr *var,
+							 deparse_context *context,
+							 bool showimplicit);
 static void get_special_variable(Node *node, deparse_context *context,
 								 void *callback_arg);
 static void resolve_special_varno(Node *node, deparse_context *context,
@@ -507,6 +524,8 @@ static char *generate_qualified_type_name(Oid typid);
 static text *string_to_text(char *str);
 static char *flatten_reloptions(Oid relid);
 static void get_reloptions(StringInfo buf, Datum reloptions);
+static int yb_decompile_pk_column_index_array(Datum column_index_array,
+	Oid relId, Oid indexId, StringInfo buf);
 
 #define only_marker(rte)  ((rte)->inh ? "" : "ONLY ")
 
@@ -558,6 +577,12 @@ static void get_reloptions(StringInfo buf, Datum reloptions);
 
 
 
+/*
+ * If an index has options, append " WITH (options)" clause to the buffer.
+ * This includes "hidden" reloptions like colocation_id.
+ */
+
+
 /* ----------
  * pg_get_indexdef			- Get the definition of an index
  *
@@ -577,6 +602,8 @@ static void get_reloptions(StringInfo buf, Datum reloptions);
 /*
  * Internal version for use by ALTER TABLE.
  * Includes a tablespace clause in the result.
+ * TODO - We also currently add NONCONCURRENTLY here, but this can be removed with #6703.
+ *
  * Returns a palloc'd C string; no pretty-printing.
  */
 
@@ -589,6 +616,8 @@ static void get_reloptions(StringInfo buf, Datum reloptions);
  *
  * This is now used for exclusion constraints as well: if excludeOps is not
  * NULL then it points to an array of exclusion operator OIDs.
+ *
+ * TODO, can remove useNonconcurrently when we support #6703.
  */
 
 
@@ -744,8 +773,8 @@ static void get_reloptions(StringInfo buf, Datum reloptions);
  *
  * Note: if you change the output format of this function, be careful not
  * to break psql's rules (in \ef and \sf) for identifying the start of the
- * function body.  To wit: the function body starts on a line that begins
- * with "AS ", and no preceding line will look like that.
+ * function body.  To wit: the function body starts on a line that begins with
+ * "AS ", "BEGIN ", or "RETURN ", and no preceding line will look like that.
  */
 
 
@@ -812,6 +841,8 @@ static void get_reloptions(StringInfo buf, Datum reloptions);
  *
  * calls deparse_expression_pretty with all prettyPrinting disabled
  */
+
+
 
 
 /* ----------
@@ -1241,6 +1272,8 @@ static void get_reloptions(StringInfo buf, Datum reloptions);
  */
 
 
+
+
 /*
  * Deparse a Var which references OUTER_VAR, INNER_VAR, or INDEX_VAR.  This
  * routine is actually a callback for resolve_special_varno, which handles
@@ -1533,7 +1566,7 @@ static void get_reloptions(StringInfo buf, Datum reloptions);
 
 /*
  * generate_opclass_name
- *		Compute the name to display for a opclass specified by OID
+ *		Compute the name to display for an opclass specified by OID
  *
  * The result includes all necessary quoting and schema-prefixing.
  */
@@ -1773,5 +1806,33 @@ quote_identifier(const char *ident)
 /*
  * get_range_partbound_string
  *		A C string representation of one range partition bound
+ */
+
+
+/*
+ * Used in YB to retrieve a relation's dependant views' oids and queries.
+ * We first retrieve the relations' dependent rules' oids using
+ * SELECT objid FROM pg_depend WHERE refclassid = 'pg_class'::regclass
+ * AND refobjid = 16384 AND classid = 'pg_rewrite'::regclass AND deptype = 'n'.
+ * For each of these rules, we retrieve the relation that the rule is defined
+ * for (ev_class) and the rule's underlying query (ev_action) by using
+ * SELECT ev_class, ev_action FROM pg_rewrite WHERE oid = pg_depend.objid.
+ * If the ev_class relation is a view/materialized view, we have found a
+ * dependent view, so we track its oid and underlying query.
+ * Note:
+ * 1. It is possible for a single view to have multiple pg_depend records that
+ * point to the base table. Therefore, we must check for duplicates. Example:
+ * CREATE TABLE test_table (id int PRIMARY KEY, v int);
+ * CREATE VIEW test_view AS SELECT v FROM test_table WHERE id = 1;
+ * 2. We need to check if the dependent rule's ev_class is a view because it
+ * could also be a different type of relation. Example:
+ * CREATE TABLE test_table (id int PRIMARY KEY);
+ * CREATE RULE test_rule AS ON INSERT TO test_table DO NOTHING;
+ */
+
+
+/*
+ * This function is copied from the code in dumpTableSchema() pg_dump.c for
+ * adding primary keys and decompile_pk_column_index_array.
  */
 

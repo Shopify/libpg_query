@@ -107,6 +107,7 @@ static DropRoleStmt * _readDropRoleStmt(OUT_TYPE(DropRoleStmt, DropRoleStmt) msg
 static LockStmt * _readLockStmt(OUT_TYPE(LockStmt, LockStmt) msg);
 static ConstraintsSetStmt * _readConstraintsSetStmt(OUT_TYPE(ConstraintsSetStmt, ConstraintsSetStmt) msg);
 static ReindexStmt * _readReindexStmt(OUT_TYPE(ReindexStmt, ReindexStmt) msg);
+static BackfillIndexStmt * _readBackfillIndexStmt(OUT_TYPE(BackfillIndexStmt, BackfillIndexStmt) msg);
 static CheckPointStmt * _readCheckPointStmt(OUT_TYPE(CheckPointStmt, CheckPointStmt) msg);
 static CreateSchemaStmt * _readCreateSchemaStmt(OUT_TYPE(CreateSchemaStmt, CreateSchemaStmt) msg);
 static AlterDatabaseStmt * _readAlterDatabaseStmt(OUT_TYPE(AlterDatabaseStmt, AlterDatabaseStmt) msg);
@@ -122,6 +123,7 @@ static PrepareStmt * _readPrepareStmt(OUT_TYPE(PrepareStmt, PrepareStmt) msg);
 static ExecuteStmt * _readExecuteStmt(OUT_TYPE(ExecuteStmt, ExecuteStmt) msg);
 static DeallocateStmt * _readDeallocateStmt(OUT_TYPE(DeallocateStmt, DeallocateStmt) msg);
 static DeclareCursorStmt * _readDeclareCursorStmt(OUT_TYPE(DeclareCursorStmt, DeclareCursorStmt) msg);
+static CreateTableGroupStmt * _readCreateTableGroupStmt(OUT_TYPE(CreateTableGroupStmt, CreateTableGroupStmt) msg);
 static CreateTableSpaceStmt * _readCreateTableSpaceStmt(OUT_TYPE(CreateTableSpaceStmt, CreateTableSpaceStmt) msg);
 static DropTableSpaceStmt * _readDropTableSpaceStmt(OUT_TYPE(DropTableSpaceStmt, DropTableSpaceStmt) msg);
 static AlterObjectDependsStmt * _readAlterObjectDependsStmt(OUT_TYPE(AlterObjectDependsStmt, AlterObjectDependsStmt) msg);
@@ -227,8 +229,13 @@ static PartitionCmd * _readPartitionCmd(OUT_TYPE(PartitionCmd, PartitionCmd) msg
 static VacuumRelation * _readVacuumRelation(OUT_TYPE(VacuumRelation, VacuumRelation) msg);
 static PublicationObjSpec * _readPublicationObjSpec(OUT_TYPE(PublicationObjSpec, PublicationObjSpec) msg);
 static PublicationTable * _readPublicationTable(OUT_TYPE(PublicationTable, PublicationTable) msg);
+static OptSplit * _readOptSplit(OUT_TYPE(OptSplit, OptSplit) msg);
+static RowBounds * _readRowBounds(OUT_TYPE(RowBounds, RowBounds) msg);
 static InlineCodeBlock * _readInlineCodeBlock(OUT_TYPE(InlineCodeBlock, InlineCodeBlock) msg);
 static CallContext * _readCallContext(OUT_TYPE(CallContext, CallContext) msg);
+static YbBackfillInfo * _readYbBackfillInfo(OUT_TYPE(YbBackfillInfo, YbBackfillInfo) msg);
+static YbCreateProfileStmt * _readYbCreateProfileStmt(OUT_TYPE(YbCreateProfileStmt, YbCreateProfileStmt) msg);
+static YbDropProfileStmt * _readYbDropProfileStmt(OUT_TYPE(YbDropProfileStmt, YbDropProfileStmt) msg);
 
 
 static Alias *
@@ -665,7 +672,7 @@ _readRowCompareExpr(OUT_TYPE(RowCompareExpr, RowCompareExpr) msg)
   READ_LIST_FIELD(opfamilies, opfamilies, opfamilies);
   READ_LIST_FIELD(inputcollids, inputcollids, inputcollids);
   READ_LIST_FIELD(largs, largs, largs);
-  READ_LIST_FIELD(rargs, rargs, rargs);
+  READ_NODE_PTR_FIELD(rargs, rargs, rargs);
   return node;
 }
 
@@ -1073,6 +1080,8 @@ _readAlterTableCmd(OUT_TYPE(AlterTableCmd, AlterTableCmd) msg)
   READ_ENUM_FIELD(DropBehavior, behavior, behavior, behavior);
   READ_BOOL_FIELD(missing_ok, missing_ok, missing_ok);
   READ_BOOL_FIELD(recurse, recurse, recurse);
+  READ_BOOL_FIELD(yb_is_add_primary_key, yb_is_add_primary_key, yb_is_add_primary_key);
+  READ_BOOL_FIELD(yb_cascade, yb_cascade, yb_cascade);
   return node;
 }
 
@@ -1191,6 +1200,8 @@ _readCreateStmt(OUT_TYPE(CreateStmt, CreateStmt) msg)
   READ_STRING_FIELD(tablespacename, tablespacename, tablespacename);
   READ_STRING_FIELD(access_method, accessMethod, accessMethod);
   READ_BOOL_FIELD(if_not_exists, if_not_exists, if_not_exists);
+  READ_STRING_FIELD(tablegroupname, tablegroupname, tablegroupname);
+  READ_SPECIFIC_NODE_PTR_FIELD(OptSplit, opt_split, split_options, split_options, split_options);
   return node;
 }
 
@@ -1276,9 +1287,10 @@ _readIndexStmt(OUT_TYPE(IndexStmt, IndexStmt) msg)
   READ_BOOL_FIELD(deferrable, deferrable, deferrable);
   READ_BOOL_FIELD(initdeferred, initdeferred, initdeferred);
   READ_BOOL_FIELD(transformed, transformed, transformed);
-  READ_BOOL_FIELD(concurrent, concurrent, concurrent);
+  READ_ENUM_FIELD(YbConcurrencyContext, concurrent, concurrent, concurrent);
   READ_BOOL_FIELD(if_not_exists, if_not_exists, if_not_exists);
   READ_BOOL_FIELD(reset_default_tblspc, reset_default_tblspc, reset_default_tblspc);
+  READ_SPECIFIC_NODE_PTR_FIELD(OptSplit, opt_split, split_options, split_options, split_options);
   return node;
 }
 
@@ -1606,6 +1618,15 @@ _readReindexStmt(OUT_TYPE(ReindexStmt, ReindexStmt) msg)
   return node;
 }
 
+static BackfillIndexStmt *
+_readBackfillIndexStmt(OUT_TYPE(BackfillIndexStmt, BackfillIndexStmt) msg)
+{
+  BackfillIndexStmt *node = makeNode(BackfillIndexStmt);
+  READ_LIST_FIELD(oid_list, oid_list, oid_list);
+  READ_SPECIFIC_NODE_PTR_FIELD(YbBackfillInfo, yb_backfill_info, bfinfo, bfinfo, bfinfo);
+  return node;
+}
+
 static CheckPointStmt *
 _readCheckPointStmt(OUT_TYPE(CheckPointStmt, CheckPointStmt) msg)
 {
@@ -1751,6 +1772,18 @@ _readDeclareCursorStmt(OUT_TYPE(DeclareCursorStmt, DeclareCursorStmt) msg)
   READ_STRING_FIELD(portalname, portalname, portalname);
   READ_INT_FIELD(options, options, options);
   READ_NODE_PTR_FIELD(query, query, query);
+  return node;
+}
+
+static CreateTableGroupStmt *
+_readCreateTableGroupStmt(OUT_TYPE(CreateTableGroupStmt, CreateTableGroupStmt) msg)
+{
+  CreateTableGroupStmt *node = makeNode(CreateTableGroupStmt);
+  READ_STRING_FIELD(tablegroupname, tablegroupname, tablegroupname);
+  READ_SPECIFIC_NODE_PTR_FIELD(RoleSpec, role_spec, owner, owner, owner);
+  READ_LIST_FIELD(options, options, options);
+  READ_STRING_FIELD(tablespacename, tablespacename, tablespacename);
+  READ_BOOL_FIELD(implicit, implicit, implicit);
   return node;
 }
 
@@ -2002,6 +2035,8 @@ _readAlterTableMoveAllStmt(OUT_TYPE(AlterTableMoveAllStmt, AlterTableMoveAllStmt
   READ_LIST_FIELD(roles, roles, roles);
   READ_STRING_FIELD(new_tablespacename, new_tablespacename, new_tablespacename);
   READ_BOOL_FIELD(nowait, nowait, nowait);
+  READ_SPECIFIC_NODE_PTR_FIELD(RangeVar, range_var, yb_relation, yb_relation, yb_relation);
+  READ_BOOL_FIELD(yb_cascade, yb_cascade, yb_cascade);
   return node;
 }
 
@@ -2575,6 +2610,7 @@ _readConstraint(OUT_TYPE(Constraint, Constraint) msg)
   READ_UINT_FIELD(old_pktable_oid, old_pktable_oid, old_pktable_oid);
   READ_BOOL_FIELD(skip_validation, skip_validation, skip_validation);
   READ_BOOL_FIELD(initially_valid, initially_valid, initially_valid);
+  READ_LIST_FIELD(yb_index_params, yb_index_params, yb_index_params);
   return node;
 }
 
@@ -2754,6 +2790,7 @@ _readTableLikeClause(OUT_TYPE(TableLikeClause, TableLikeClause) msg)
   READ_SPECIFIC_NODE_PTR_FIELD(RangeVar, range_var, relation, relation, relation);
   READ_UINT_FIELD(options, options, options);
   READ_UINT_FIELD(relation_oid, relationOid, relationOid);
+  READ_UINT_FIELD(yb_tablespace_oid, yb_tablespaceOid, yb_tablespaceOid);
   return node;
 }
 
@@ -3002,6 +3039,26 @@ _readPublicationTable(OUT_TYPE(PublicationTable, PublicationTable) msg)
   return node;
 }
 
+static OptSplit *
+_readOptSplit(OUT_TYPE(OptSplit, OptSplit) msg)
+{
+  OptSplit *node = makeNode(OptSplit);
+  READ_ENUM_FIELD(yb_split_type, split_type, split_type, split_type);
+  READ_INT_FIELD(num_tablets, num_tablets, num_tablets);
+  READ_LIST_FIELD(split_points, split_points, split_points);
+  return node;
+}
+
+static RowBounds *
+_readRowBounds(OUT_TYPE(RowBounds, RowBounds) msg)
+{
+  RowBounds *node = makeNode(RowBounds);
+  READ_STRING_FIELD(partition_key, partition_key, partition_key);
+  READ_STRING_FIELD(row_key_start, row_key_start, row_key_start);
+  READ_STRING_FIELD(row_key_end, row_key_end, row_key_end);
+  return node;
+}
+
 static InlineCodeBlock *
 _readInlineCodeBlock(OUT_TYPE(InlineCodeBlock, InlineCodeBlock) msg)
 {
@@ -3018,6 +3075,32 @@ _readCallContext(OUT_TYPE(CallContext, CallContext) msg)
 {
   CallContext *node = makeNode(CallContext);
   READ_BOOL_FIELD(atomic, atomic, atomic);
+  return node;
+}
+
+static YbBackfillInfo *
+_readYbBackfillInfo(OUT_TYPE(YbBackfillInfo, YbBackfillInfo) msg)
+{
+  YbBackfillInfo *node = makeNode(YbBackfillInfo);
+  READ_STRING_FIELD(bfinstr, bfinstr, bfinstr);
+  READ_SPECIFIC_NODE_PTR_FIELD(RowBounds, row_bounds, row_bounds, row_bounds, row_bounds);
+  return node;
+}
+
+static YbCreateProfileStmt *
+_readYbCreateProfileStmt(OUT_TYPE(YbCreateProfileStmt, YbCreateProfileStmt) msg)
+{
+  YbCreateProfileStmt *node = makeNode(YbCreateProfileStmt);
+  READ_STRING_FIELD(prfname, prfname, prfname);
+  return node;
+}
+
+static YbDropProfileStmt *
+_readYbDropProfileStmt(OUT_TYPE(YbDropProfileStmt, YbDropProfileStmt) msg)
+{
+  YbDropProfileStmt *node = makeNode(YbDropProfileStmt);
+  READ_STRING_FIELD(prfname, prfname, prfname);
+  READ_BOOL_FIELD(missing_ok, missing_ok, missing_ok);
   return node;
 }
 

@@ -28,6 +28,7 @@
 
 #include <signal.h>
 #include <unistd.h>
+#include <stdatomic.h>
 #include <sys/stat.h>
 
 #include "miscadmin.h"
@@ -38,13 +39,14 @@
 #include "storage/ipc.h"
 #include "tcop/tcopprot.h"
 
+#include "pg_yb_utils.h"
 
 /*
  * This flag is set during proc_exit() to change ereport()'s behavior,
  * so that an ereport() from an on_proc_exit routine cannot get us out
  * of the exit procedure.  We do NOT want to go back to the idle loop...
  */
-__thread bool		proc_exit_inprogress = false;
+__thread atomic_bool		proc_exit_inprogress = false;
 
 
 /*

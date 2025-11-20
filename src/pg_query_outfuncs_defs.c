@@ -107,6 +107,7 @@ static void _outDropRoleStmt(OUT_TYPE(DropRoleStmt, DropRoleStmt) out_node, cons
 static void _outLockStmt(OUT_TYPE(LockStmt, LockStmt) out_node, const LockStmt *node);
 static void _outConstraintsSetStmt(OUT_TYPE(ConstraintsSetStmt, ConstraintsSetStmt) out_node, const ConstraintsSetStmt *node);
 static void _outReindexStmt(OUT_TYPE(ReindexStmt, ReindexStmt) out_node, const ReindexStmt *node);
+static void _outBackfillIndexStmt(OUT_TYPE(BackfillIndexStmt, BackfillIndexStmt) out_node, const BackfillIndexStmt *node);
 static void _outCheckPointStmt(OUT_TYPE(CheckPointStmt, CheckPointStmt) out_node, const CheckPointStmt *node);
 static void _outCreateSchemaStmt(OUT_TYPE(CreateSchemaStmt, CreateSchemaStmt) out_node, const CreateSchemaStmt *node);
 static void _outAlterDatabaseStmt(OUT_TYPE(AlterDatabaseStmt, AlterDatabaseStmt) out_node, const AlterDatabaseStmt *node);
@@ -122,6 +123,7 @@ static void _outPrepareStmt(OUT_TYPE(PrepareStmt, PrepareStmt) out_node, const P
 static void _outExecuteStmt(OUT_TYPE(ExecuteStmt, ExecuteStmt) out_node, const ExecuteStmt *node);
 static void _outDeallocateStmt(OUT_TYPE(DeallocateStmt, DeallocateStmt) out_node, const DeallocateStmt *node);
 static void _outDeclareCursorStmt(OUT_TYPE(DeclareCursorStmt, DeclareCursorStmt) out_node, const DeclareCursorStmt *node);
+static void _outCreateTableGroupStmt(OUT_TYPE(CreateTableGroupStmt, CreateTableGroupStmt) out_node, const CreateTableGroupStmt *node);
 static void _outCreateTableSpaceStmt(OUT_TYPE(CreateTableSpaceStmt, CreateTableSpaceStmt) out_node, const CreateTableSpaceStmt *node);
 static void _outDropTableSpaceStmt(OUT_TYPE(DropTableSpaceStmt, DropTableSpaceStmt) out_node, const DropTableSpaceStmt *node);
 static void _outAlterObjectDependsStmt(OUT_TYPE(AlterObjectDependsStmt, AlterObjectDependsStmt) out_node, const AlterObjectDependsStmt *node);
@@ -227,8 +229,13 @@ static void _outPartitionCmd(OUT_TYPE(PartitionCmd, PartitionCmd) out_node, cons
 static void _outVacuumRelation(OUT_TYPE(VacuumRelation, VacuumRelation) out_node, const VacuumRelation *node);
 static void _outPublicationObjSpec(OUT_TYPE(PublicationObjSpec, PublicationObjSpec) out_node, const PublicationObjSpec *node);
 static void _outPublicationTable(OUT_TYPE(PublicationTable, PublicationTable) out_node, const PublicationTable *node);
+static void _outOptSplit(OUT_TYPE(OptSplit, OptSplit) out_node, const OptSplit *node);
+static void _outRowBounds(OUT_TYPE(RowBounds, RowBounds) out_node, const RowBounds *node);
 static void _outInlineCodeBlock(OUT_TYPE(InlineCodeBlock, InlineCodeBlock) out_node, const InlineCodeBlock *node);
 static void _outCallContext(OUT_TYPE(CallContext, CallContext) out_node, const CallContext *node);
+static void _outYbBackfillInfo(OUT_TYPE(YbBackfillInfo, YbBackfillInfo) out_node, const YbBackfillInfo *node);
+static void _outYbCreateProfileStmt(OUT_TYPE(YbCreateProfileStmt, YbCreateProfileStmt) out_node, const YbCreateProfileStmt *node);
+static void _outYbDropProfileStmt(OUT_TYPE(YbDropProfileStmt, YbDropProfileStmt) out_node, const YbDropProfileStmt *node);
 
 
 static void
@@ -602,7 +609,7 @@ _outRowCompareExpr(OUT_TYPE(RowCompareExpr, RowCompareExpr) out, const RowCompar
   WRITE_LIST_FIELD(opfamilies, opfamilies, opfamilies);
   WRITE_LIST_FIELD(inputcollids, inputcollids, inputcollids);
   WRITE_LIST_FIELD(largs, largs, largs);
-  WRITE_LIST_FIELD(rargs, rargs, rargs);
+  WRITE_NODE_PTR_FIELD(rargs, rargs, rargs);
 }
 
 static void
@@ -950,6 +957,8 @@ _outAlterTableCmd(OUT_TYPE(AlterTableCmd, AlterTableCmd) out, const AlterTableCm
   WRITE_ENUM_FIELD(DropBehavior, behavior, behavior, behavior);
   WRITE_BOOL_FIELD(missing_ok, missing_ok, missing_ok);
   WRITE_BOOL_FIELD(recurse, recurse, recurse);
+  WRITE_BOOL_FIELD(yb_is_add_primary_key, yb_is_add_primary_key, yb_is_add_primary_key);
+  WRITE_BOOL_FIELD(yb_cascade, yb_cascade, yb_cascade);
 }
 
 static void
@@ -1050,6 +1059,8 @@ _outCreateStmt(OUT_TYPE(CreateStmt, CreateStmt) out, const CreateStmt *node)
   WRITE_STRING_FIELD(tablespacename, tablespacename, tablespacename);
   WRITE_STRING_FIELD(access_method, accessMethod, accessMethod);
   WRITE_BOOL_FIELD(if_not_exists, if_not_exists, if_not_exists);
+  WRITE_STRING_FIELD(tablegroupname, tablegroupname, tablegroupname);
+  WRITE_SPECIFIC_NODE_PTR_FIELD(OptSplit, opt_split, split_options, split_options, split_options);
 }
 
 static void
@@ -1123,9 +1134,10 @@ _outIndexStmt(OUT_TYPE(IndexStmt, IndexStmt) out, const IndexStmt *node)
   WRITE_BOOL_FIELD(deferrable, deferrable, deferrable);
   WRITE_BOOL_FIELD(initdeferred, initdeferred, initdeferred);
   WRITE_BOOL_FIELD(transformed, transformed, transformed);
-  WRITE_BOOL_FIELD(concurrent, concurrent, concurrent);
+  WRITE_ENUM_FIELD(YbConcurrencyContext, concurrent, concurrent, concurrent);
   WRITE_BOOL_FIELD(if_not_exists, if_not_exists, if_not_exists);
   WRITE_BOOL_FIELD(reset_default_tblspc, reset_default_tblspc, reset_default_tblspc);
+  WRITE_SPECIFIC_NODE_PTR_FIELD(OptSplit, opt_split, split_options, split_options, split_options);
 }
 
 static void
@@ -1393,6 +1405,13 @@ _outReindexStmt(OUT_TYPE(ReindexStmt, ReindexStmt) out, const ReindexStmt *node)
 }
 
 static void
+_outBackfillIndexStmt(OUT_TYPE(BackfillIndexStmt, BackfillIndexStmt) out, const BackfillIndexStmt *node)
+{
+  WRITE_LIST_FIELD(oid_list, oid_list, oid_list);
+  WRITE_SPECIFIC_NODE_PTR_FIELD(YbBackfillInfo, yb_backfill_info, bfinfo, bfinfo, bfinfo);
+}
+
+static void
 _outCheckPointStmt(OUT_TYPE(CheckPointStmt, CheckPointStmt) out, const CheckPointStmt *node)
 {
 }
@@ -1508,6 +1527,16 @@ _outDeclareCursorStmt(OUT_TYPE(DeclareCursorStmt, DeclareCursorStmt) out, const 
   WRITE_STRING_FIELD(portalname, portalname, portalname);
   WRITE_INT_FIELD(options, options, options);
   WRITE_NODE_PTR_FIELD(query, query, query);
+}
+
+static void
+_outCreateTableGroupStmt(OUT_TYPE(CreateTableGroupStmt, CreateTableGroupStmt) out, const CreateTableGroupStmt *node)
+{
+  WRITE_STRING_FIELD(tablegroupname, tablegroupname, tablegroupname);
+  WRITE_SPECIFIC_NODE_PTR_FIELD(RoleSpec, role_spec, owner, owner, owner);
+  WRITE_LIST_FIELD(options, options, options);
+  WRITE_STRING_FIELD(tablespacename, tablespacename, tablespacename);
+  WRITE_BOOL_FIELD(implicit, implicit, implicit);
 }
 
 static void
@@ -1711,6 +1740,8 @@ _outAlterTableMoveAllStmt(OUT_TYPE(AlterTableMoveAllStmt, AlterTableMoveAllStmt)
   WRITE_LIST_FIELD(roles, roles, roles);
   WRITE_STRING_FIELD(new_tablespacename, new_tablespacename, new_tablespacename);
   WRITE_BOOL_FIELD(nowait, nowait, nowait);
+  WRITE_SPECIFIC_NODE_PTR_FIELD(RangeVar, range_var, yb_relation, yb_relation, yb_relation);
+  WRITE_BOOL_FIELD(yb_cascade, yb_cascade, yb_cascade);
 }
 
 static void
@@ -2187,6 +2218,7 @@ _outConstraint(OUT_TYPE(Constraint, Constraint) out, const Constraint *node)
   WRITE_UINT_FIELD(old_pktable_oid, old_pktable_oid, old_pktable_oid);
   WRITE_BOOL_FIELD(skip_validation, skip_validation, skip_validation);
   WRITE_BOOL_FIELD(initially_valid, initially_valid, initially_valid);
+  WRITE_LIST_FIELD(yb_index_params, yb_index_params, yb_index_params);
 }
 
 static void
@@ -2342,6 +2374,7 @@ _outTableLikeClause(OUT_TYPE(TableLikeClause, TableLikeClause) out, const TableL
   WRITE_SPECIFIC_NODE_PTR_FIELD(RangeVar, range_var, relation, relation, relation);
   WRITE_UINT_FIELD(options, options, options);
   WRITE_UINT_FIELD(relation_oid, relationOid, relationOid);
+  WRITE_UINT_FIELD(yb_tablespace_oid, yb_tablespaceOid, yb_tablespaceOid);
 }
 
 static void
@@ -2548,6 +2581,22 @@ _outPublicationTable(OUT_TYPE(PublicationTable, PublicationTable) out, const Pub
 }
 
 static void
+_outOptSplit(OUT_TYPE(OptSplit, OptSplit) out, const OptSplit *node)
+{
+  WRITE_ENUM_FIELD(yb_split_type, split_type, split_type, split_type);
+  WRITE_INT_FIELD(num_tablets, num_tablets, num_tablets);
+  WRITE_LIST_FIELD(split_points, split_points, split_points);
+}
+
+static void
+_outRowBounds(OUT_TYPE(RowBounds, RowBounds) out, const RowBounds *node)
+{
+  WRITE_STRING_FIELD(partition_key, partition_key, partition_key);
+  WRITE_STRING_FIELD(row_key_start, row_key_start, row_key_start);
+  WRITE_STRING_FIELD(row_key_end, row_key_end, row_key_end);
+}
+
+static void
 _outInlineCodeBlock(OUT_TYPE(InlineCodeBlock, InlineCodeBlock) out, const InlineCodeBlock *node)
 {
   WRITE_STRING_FIELD(source_text, source_text, source_text);
@@ -2560,5 +2609,25 @@ static void
 _outCallContext(OUT_TYPE(CallContext, CallContext) out, const CallContext *node)
 {
   WRITE_BOOL_FIELD(atomic, atomic, atomic);
+}
+
+static void
+_outYbBackfillInfo(OUT_TYPE(YbBackfillInfo, YbBackfillInfo) out, const YbBackfillInfo *node)
+{
+  WRITE_STRING_FIELD(bfinstr, bfinstr, bfinstr);
+  WRITE_SPECIFIC_NODE_PTR_FIELD(RowBounds, row_bounds, row_bounds, row_bounds, row_bounds);
+}
+
+static void
+_outYbCreateProfileStmt(OUT_TYPE(YbCreateProfileStmt, YbCreateProfileStmt) out, const YbCreateProfileStmt *node)
+{
+  WRITE_STRING_FIELD(prfname, prfname, prfname);
+}
+
+static void
+_outYbDropProfileStmt(OUT_TYPE(YbDropProfileStmt, YbDropProfileStmt) out, const YbDropProfileStmt *node)
+{
+  WRITE_STRING_FIELD(prfname, prfname, prfname);
+  WRITE_BOOL_FIELD(missing_ok, missing_ok, missing_ok);
 }
 

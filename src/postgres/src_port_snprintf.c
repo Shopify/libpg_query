@@ -4,7 +4,6 @@
  * - dopr
  * - pg_snprintf
  * - pg_vsnprintf
- * - strchrnul
  * - dostr
  * - find_arguments
  * - fmtint
@@ -136,6 +135,16 @@
 #undef	fprintf
 #undef	vprintf
 #undef	printf
+
+/*
+ * We use the platform's native snprintf() for some machine-dependent cases.
+ * While that's required by C99, Microsoft Visual Studio lacks it before
+ * VS2015.  Fortunately, we don't really need the length check in practice,
+ * so just fall back to native sprintf() on that platform.
+ */
+#if defined(_MSC_VER) && _MSC_VER < 1900	/* pre-VS2015 */
+#define snprintf(str,size,...) sprintf(str,__VA_ARGS__)
+#endif
 
 /*
  * Info about where the formatted output is going.
@@ -489,7 +498,7 @@ nextch2:
 				/* set zero padding if no nonzero digits yet */
 				if (accum == 0 && !pointflag)
 					zpad = '0';
-				/* FALL THRU */
+				switch_fallthrough();
 			case '1':
 			case '2':
 			case '3':

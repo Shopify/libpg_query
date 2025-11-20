@@ -31,6 +31,7 @@ _enumToStringSortByDir(SortByDir value) {
     case SORTBY_ASC: return "SORTBY_ASC";
     case SORTBY_DESC: return "SORTBY_DESC";
     case SORTBY_USING: return "SORTBY_USING";
+    case SORTBY_HASH: return "SORTBY_HASH";
   }
   Assert(false);
   return NULL;
@@ -246,6 +247,7 @@ _enumToStringObjectType(ObjectType value) {
     case OBJECT_STATISTIC_EXT: return "OBJECT_STATISTIC_EXT";
     case OBJECT_TABCONSTRAINT: return "OBJECT_TABCONSTRAINT";
     case OBJECT_TABLE: return "OBJECT_TABLE";
+    case OBJECT_YBTABLEGROUP: return "OBJECT_YBTABLEGROUP";
     case OBJECT_TABLESPACE: return "OBJECT_TABLESPACE";
     case OBJECT_TRANSFORM: return "OBJECT_TRANSFORM";
     case OBJECT_TRIGGER: return "OBJECT_TRIGGER";
@@ -256,6 +258,7 @@ _enumToStringObjectType(ObjectType value) {
     case OBJECT_TYPE: return "OBJECT_TYPE";
     case OBJECT_USER_MAPPING: return "OBJECT_USER_MAPPING";
     case OBJECT_VIEW: return "OBJECT_VIEW";
+    case OBJECT_YBPROFILE: return "OBJECT_YBPROFILE";
   }
   Assert(false);
   return NULL;
@@ -392,6 +395,16 @@ _enumToStringConstrType(ConstrType value) {
     case CONSTR_ATTR_NOT_DEFERRABLE: return "CONSTR_ATTR_NOT_DEFERRABLE";
     case CONSTR_ATTR_DEFERRED: return "CONSTR_ATTR_DEFERRED";
     case CONSTR_ATTR_IMMEDIATE: return "CONSTR_ATTR_IMMEDIATE";
+  }
+  Assert(false);
+  return NULL;
+}
+
+static const char*
+_enumToStringyb_split_type(yb_split_type value) {
+  switch(value) {
+    case NUM_TABLETS: return "NUM_TABLETS";
+    case SPLIT_POINTS: return "SPLIT_POINTS";
   }
   Assert(false);
   return NULL;
@@ -594,6 +607,17 @@ _enumToStringCoercionForm(CoercionForm value) {
     case COERCE_EXPLICIT_CAST: return "COERCE_EXPLICIT_CAST";
     case COERCE_IMPLICIT_CAST: return "COERCE_IMPLICIT_CAST";
     case COERCE_SQL_SYNTAX: return "COERCE_SQL_SYNTAX";
+  }
+  Assert(false);
+  return NULL;
+}
+
+static const char*
+_enumToStringYbConcurrencyContext(YbConcurrencyContext value) {
+  switch(value) {
+    case YB_CONCURRENCY_DISABLED: return "YB_CONCURRENCY_DISABLED";
+    case YB_CONCURRENCY_IMPLICIT_ENABLED: return "YB_CONCURRENCY_IMPLICIT_ENABLED";
+    case YB_CONCURRENCY_EXPLICIT_ENABLED: return "YB_CONCURRENCY_EXPLICIT_ENABLED";
   }
   Assert(false);
   return NULL;
@@ -806,6 +830,7 @@ _enumToStringOnConflictAction(OnConflictAction value) {
     case ONCONFLICT_NONE: return "ONCONFLICT_NONE";
     case ONCONFLICT_NOTHING: return "ONCONFLICT_NOTHING";
     case ONCONFLICT_UPDATE: return "ONCONFLICT_UPDATE";
+    case ONCONFLICT_YB_REPLACE: return "ONCONFLICT_YB_REPLACE";
   }
   Assert(false);
   return NULL;
@@ -887,6 +912,7 @@ _enumToIntSortByDir(SortByDir value) {
     case SORTBY_ASC: return 2;
     case SORTBY_DESC: return 3;
     case SORTBY_USING: return 4;
+    case SORTBY_HASH: return 5;
   }
   Assert(false);
   return -1;
@@ -1102,16 +1128,18 @@ _enumToIntObjectType(ObjectType value) {
     case OBJECT_STATISTIC_EXT: return 40;
     case OBJECT_TABCONSTRAINT: return 41;
     case OBJECT_TABLE: return 42;
-    case OBJECT_TABLESPACE: return 43;
-    case OBJECT_TRANSFORM: return 44;
-    case OBJECT_TRIGGER: return 45;
-    case OBJECT_TSCONFIGURATION: return 46;
-    case OBJECT_TSDICTIONARY: return 47;
-    case OBJECT_TSPARSER: return 48;
-    case OBJECT_TSTEMPLATE: return 49;
-    case OBJECT_TYPE: return 50;
-    case OBJECT_USER_MAPPING: return 51;
-    case OBJECT_VIEW: return 52;
+    case OBJECT_YBTABLEGROUP: return 43;
+    case OBJECT_TABLESPACE: return 44;
+    case OBJECT_TRANSFORM: return 45;
+    case OBJECT_TRIGGER: return 46;
+    case OBJECT_TSCONFIGURATION: return 47;
+    case OBJECT_TSDICTIONARY: return 48;
+    case OBJECT_TSPARSER: return 49;
+    case OBJECT_TSTEMPLATE: return 50;
+    case OBJECT_TYPE: return 51;
+    case OBJECT_USER_MAPPING: return 52;
+    case OBJECT_VIEW: return 53;
+    case OBJECT_YBPROFILE: return 54;
   }
   Assert(false);
   return -1;
@@ -1248,6 +1276,16 @@ _enumToIntConstrType(ConstrType value) {
     case CONSTR_ATTR_NOT_DEFERRABLE: return 12;
     case CONSTR_ATTR_DEFERRED: return 13;
     case CONSTR_ATTR_IMMEDIATE: return 14;
+  }
+  Assert(false);
+  return -1;
+}
+
+static int
+_enumToIntyb_split_type(yb_split_type value) {
+  switch(value) {
+    case NUM_TABLETS: return 1;
+    case SPLIT_POINTS: return 2;
   }
   Assert(false);
   return -1;
@@ -1450,6 +1488,17 @@ _enumToIntCoercionForm(CoercionForm value) {
     case COERCE_EXPLICIT_CAST: return 2;
     case COERCE_IMPLICIT_CAST: return 3;
     case COERCE_SQL_SYNTAX: return 4;
+  }
+  Assert(false);
+  return -1;
+}
+
+static int
+_enumToIntYbConcurrencyContext(YbConcurrencyContext value) {
+  switch(value) {
+    case YB_CONCURRENCY_DISABLED: return 1;
+    case YB_CONCURRENCY_IMPLICIT_ENABLED: return 2;
+    case YB_CONCURRENCY_EXPLICIT_ENABLED: return 3;
   }
   Assert(false);
   return -1;
@@ -1662,6 +1711,7 @@ _enumToIntOnConflictAction(OnConflictAction value) {
     case ONCONFLICT_NONE: return 1;
     case ONCONFLICT_NOTHING: return 2;
     case ONCONFLICT_UPDATE: return 3;
+    case ONCONFLICT_YB_REPLACE: return 4;
   }
   Assert(false);
   return -1;
@@ -1743,6 +1793,7 @@ _intToEnumSortByDir(int value) {
     case 2: return SORTBY_ASC;
     case 3: return SORTBY_DESC;
     case 4: return SORTBY_USING;
+    case 5: return SORTBY_HASH;
   }
   Assert(false);
   return SORTBY_DEFAULT;
@@ -1958,16 +2009,18 @@ _intToEnumObjectType(int value) {
     case 40: return OBJECT_STATISTIC_EXT;
     case 41: return OBJECT_TABCONSTRAINT;
     case 42: return OBJECT_TABLE;
-    case 43: return OBJECT_TABLESPACE;
-    case 44: return OBJECT_TRANSFORM;
-    case 45: return OBJECT_TRIGGER;
-    case 46: return OBJECT_TSCONFIGURATION;
-    case 47: return OBJECT_TSDICTIONARY;
-    case 48: return OBJECT_TSPARSER;
-    case 49: return OBJECT_TSTEMPLATE;
-    case 50: return OBJECT_TYPE;
-    case 51: return OBJECT_USER_MAPPING;
-    case 52: return OBJECT_VIEW;
+    case 43: return OBJECT_YBTABLEGROUP;
+    case 44: return OBJECT_TABLESPACE;
+    case 45: return OBJECT_TRANSFORM;
+    case 46: return OBJECT_TRIGGER;
+    case 47: return OBJECT_TSCONFIGURATION;
+    case 48: return OBJECT_TSDICTIONARY;
+    case 49: return OBJECT_TSPARSER;
+    case 50: return OBJECT_TSTEMPLATE;
+    case 51: return OBJECT_TYPE;
+    case 52: return OBJECT_USER_MAPPING;
+    case 53: return OBJECT_VIEW;
+    case 54: return OBJECT_YBPROFILE;
   }
   Assert(false);
   return OBJECT_ACCESS_METHOD;
@@ -2107,6 +2160,16 @@ _intToEnumConstrType(int value) {
   }
   Assert(false);
   return CONSTR_NULL;
+}
+
+static yb_split_type
+_intToEnumyb_split_type(int value) {
+  switch(value) {
+    case 1: return NUM_TABLETS;
+    case 2: return SPLIT_POINTS;
+  }
+  Assert(false);
+  return NUM_TABLETS;
 }
 
 static ImportForeignSchemaType
@@ -2309,6 +2372,17 @@ _intToEnumCoercionForm(int value) {
   }
   Assert(false);
   return COERCE_EXPLICIT_CALL;
+}
+
+static YbConcurrencyContext
+_intToEnumYbConcurrencyContext(int value) {
+  switch(value) {
+    case 1: return YB_CONCURRENCY_DISABLED;
+    case 2: return YB_CONCURRENCY_IMPLICIT_ENABLED;
+    case 3: return YB_CONCURRENCY_EXPLICIT_ENABLED;
+  }
+  Assert(false);
+  return YB_CONCURRENCY_DISABLED;
 }
 
 static BoolExprType
@@ -2518,6 +2592,7 @@ _intToEnumOnConflictAction(int value) {
     case 1: return ONCONFLICT_NONE;
     case 2: return ONCONFLICT_NOTHING;
     case 3: return ONCONFLICT_UPDATE;
+    case 4: return ONCONFLICT_YB_REPLACE;
   }
   Assert(false);
   return ONCONFLICT_NONE;

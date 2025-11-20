@@ -27,6 +27,7 @@
 #include "catalog/pg_type.h"
 #include "executor/functions.h"
 #include "lib/stringinfo.h"
+#include "libpq/pqformat.h"
 #include "miscadmin.h"
 #include "nodes/makefuncs.h"
 #include "nodes/nodeFuncs.h"
@@ -37,6 +38,9 @@
 #include "utils/guc.h"
 #include "utils/lsyscache.h"
 #include "utils/syscache.h"
+
+#include "pg_yb_utils.h"
+#include <pthread.h>
 
 /*
  * Hooks for function calls
@@ -57,6 +61,7 @@ typedef struct
 	ItemPointerData fn_tid;
 	PGFunction	user_fn;		/* the function's address */
 	const Pg_finfo_record *inforec; /* address of its info record */
+	uint64 yb_catalog_version; /* catalog version at function load time */
 } CFuncHashTabEntry;
 
 
@@ -73,6 +78,24 @@ static void record_C_func(HeapTuple procedureTuple,
 /* extern so it's callable via JIT */
 extern Datum fmgr_security_definer(PG_FUNCTION_ARGS);
 
+extern void int2send_direct(StringInfo buf, Datum value);
+extern void int4send_direct(StringInfo buf, Datum value);
+extern void int8send_direct(StringInfo buf, Datum value);
+
+typedef void (*SendDirectFn)(StringInfo, Datum);
+
+/*
+ * Initialize direct send function with specified oid with specified func.
+ */
+
+
+/*
+ * Initialize all direct send functions.
+ */
+#define PG_PROC_INT2SEND_OID 2405
+#define PG_PROC_INT4SEND_OID 2407
+#define PG_PROC_INT8SEND_OID 2409
+
 
 /*
  * Lookup routines for builtin-function table.  We can search by either Oid
@@ -88,11 +111,13 @@ extern Datum fmgr_security_definer(PG_FUNCTION_ARGS);
  */
 
 
+
+
 /*
  * This routine fills a FmgrInfo struct, given the OID
  * of the function to be called.
  *
- * The caller's CurrentMemoryContext is used as the fn_mcxt of the info
+ * The caller's GetCurrentMemoryContext() is used as the fn_mcxt of the info
  * struct; this means that any subsidiary data attached to the info struct
  * (either by fmgr_info itself, or later on by a function call handler)
  * will be allocated in that context.  The caller must ensure that this
@@ -393,6 +418,13 @@ FunctionCall6Coll(FmgrInfo *flinfo, Oid collation, Datum arg1, Datum arg2,
  * This is little more than window dressing for FunctionCall1, but it does
  * guarantee a non-toasted result, which strictly speaking the underlying
  * function doesn't.
+ */
+
+
+/*
+ * Call a previously-looked-up datatype binary-output function.
+ *
+ * Putting output to specified StringInfo buffer.
  */
 
 

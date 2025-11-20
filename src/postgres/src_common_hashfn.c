@@ -184,13 +184,13 @@ hash_bytes(const unsigned char *k, int keylen)
 		{
 			case 11:
 				c += ((uint32) k[10] << 8);
-				/* fall through */
+				switch_fallthrough();
 			case 10:
 				c += ((uint32) k[9] << 16);
-				/* fall through */
+				switch_fallthrough();
 			case 9:
 				c += ((uint32) k[8] << 24);
-				/* fall through */
+				switch_fallthrough();
 			case 8:
 				/* the lowest byte of c is reserved for the length */
 				b += ka[1];
@@ -198,22 +198,22 @@ hash_bytes(const unsigned char *k, int keylen)
 				break;
 			case 7:
 				b += ((uint32) k[6] << 8);
-				/* fall through */
+				switch_fallthrough();
 			case 6:
 				b += ((uint32) k[5] << 16);
-				/* fall through */
+				switch_fallthrough();
 			case 5:
 				b += ((uint32) k[4] << 24);
-				/* fall through */
+				switch_fallthrough();
 			case 4:
 				a += ka[0];
 				break;
 			case 3:
 				a += ((uint32) k[2] << 8);
-				/* fall through */
+				switch_fallthrough();
 			case 2:
 				a += ((uint32) k[1] << 16);
-				/* fall through */
+				switch_fallthrough();
 			case 1:
 				a += ((uint32) k[0] << 24);
 				/* case 0: nothing left to add */
@@ -223,13 +223,13 @@ hash_bytes(const unsigned char *k, int keylen)
 		{
 			case 11:
 				c += ((uint32) k[10] << 24);
-				/* fall through */
+				switch_fallthrough();
 			case 10:
 				c += ((uint32) k[9] << 16);
-				/* fall through */
+				switch_fallthrough();
 			case 9:
 				c += ((uint32) k[8] << 8);
-				/* fall through */
+				switch_fallthrough();
 			case 8:
 				/* the lowest byte of c is reserved for the length */
 				b += ka[1];
@@ -237,22 +237,22 @@ hash_bytes(const unsigned char *k, int keylen)
 				break;
 			case 7:
 				b += ((uint32) k[6] << 16);
-				/* fall through */
+				switch_fallthrough();
 			case 6:
 				b += ((uint32) k[5] << 8);
-				/* fall through */
+				switch_fallthrough();
 			case 5:
 				b += k[4];
-				/* fall through */
+				switch_fallthrough();
 			case 4:
 				a += ka[0];
 				break;
 			case 3:
 				a += ((uint32) k[2] << 16);
-				/* fall through */
+				switch_fallthrough();
 			case 2:
 				a += ((uint32) k[1] << 8);
-				/* fall through */
+				switch_fallthrough();
 			case 1:
 				a += k[0];
 				/* case 0: nothing left to add */
@@ -286,35 +286,35 @@ hash_bytes(const unsigned char *k, int keylen)
 		{
 			case 11:
 				c += ((uint32) k[10] << 8);
-				/* fall through */
+				switch_fallthrough();
 			case 10:
 				c += ((uint32) k[9] << 16);
-				/* fall through */
+				switch_fallthrough();
 			case 9:
 				c += ((uint32) k[8] << 24);
-				/* fall through */
+				switch_fallthrough();
 			case 8:
 				/* the lowest byte of c is reserved for the length */
 				b += k[7];
-				/* fall through */
+				switch_fallthrough();
 			case 7:
 				b += ((uint32) k[6] << 8);
-				/* fall through */
+				switch_fallthrough();
 			case 6:
 				b += ((uint32) k[5] << 16);
-				/* fall through */
+				switch_fallthrough();
 			case 5:
 				b += ((uint32) k[4] << 24);
-				/* fall through */
+				switch_fallthrough();
 			case 4:
 				a += k[3];
-				/* fall through */
+				switch_fallthrough();
 			case 3:
 				a += ((uint32) k[2] << 8);
-				/* fall through */
+				switch_fallthrough();
 			case 2:
 				a += ((uint32) k[1] << 16);
-				/* fall through */
+				switch_fallthrough();
 			case 1:
 				a += ((uint32) k[0] << 24);
 				/* case 0: nothing left to add */
@@ -324,35 +324,35 @@ hash_bytes(const unsigned char *k, int keylen)
 		{
 			case 11:
 				c += ((uint32) k[10] << 24);
-				/* fall through */
+				switch_fallthrough();
 			case 10:
 				c += ((uint32) k[9] << 16);
-				/* fall through */
+				switch_fallthrough();
 			case 9:
 				c += ((uint32) k[8] << 8);
-				/* fall through */
+				switch_fallthrough();
 			case 8:
 				/* the lowest byte of c is reserved for the length */
 				b += ((uint32) k[7] << 24);
-				/* fall through */
+				switch_fallthrough();
 			case 7:
 				b += ((uint32) k[6] << 16);
-				/* fall through */
+				switch_fallthrough();
 			case 6:
 				b += ((uint32) k[5] << 8);
-				/* fall through */
+				switch_fallthrough();
 			case 5:
 				b += k[4];
-				/* fall through */
+				switch_fallthrough();
 			case 4:
 				a += ((uint32) k[3] << 24);
-				/* fall through */
+				switch_fallthrough();
 			case 3:
 				a += ((uint32) k[2] << 16);
-				/* fall through */
+				switch_fallthrough();
 			case 2:
 				a += ((uint32) k[1] << 8);
-				/* fall through */
+				switch_fallthrough();
 			case 1:
 				a += k[0];
 				/* case 0: nothing left to add */

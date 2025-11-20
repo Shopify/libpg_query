@@ -43,5 +43,7 @@
 #define GIN_AM_OID 2742
 #define SPGIST_AM_OID 4000
 #define BRIN_AM_OID 3580
+#define LSM_AM_OID 9900
+#define YBGIN_AM_OID 8021
 
 #endif							/* PG_AM_D_H */

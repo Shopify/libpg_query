@@ -10,6 +10,8 @@
 #ifndef WAIT_EVENT_H
 #define WAIT_EVENT_H
 
+#include "yb_ash.h"
+
 
 /* ----------
  * Wait Classes
@@ -46,7 +48,9 @@ typedef enum
 	WAIT_EVENT_SYSLOGGER_MAIN,
 	WAIT_EVENT_WAL_RECEIVER_MAIN,
 	WAIT_EVENT_WAL_SENDER_MAIN,
-	WAIT_EVENT_WAL_WRITER_MAIN
+	WAIT_EVENT_WAL_WRITER_MAIN,
+	YB_WAIT_EVENT_QUERY_DIAGNOSTICS_MAIN,
+	WAIT_EVENT_YB_ASH_MAIN
 } WaitEventActivity;
 
 /* ----------
@@ -128,7 +132,8 @@ typedef enum
 	WAIT_EVENT_SYNC_REP,
 	WAIT_EVENT_WAL_RECEIVER_EXIT,
 	WAIT_EVENT_WAL_RECEIVER_WAIT_START,
-	WAIT_EVENT_XACT_GROUP_UPDATE
+	WAIT_EVENT_XACT_GROUP_UPDATE,
+	WAIT_EVENT_YB_PARALLEL_SCAN_EMPTY,
 } WaitEventIPC;
 
 /* ----------
@@ -146,7 +151,8 @@ typedef enum
 	WAIT_EVENT_RECOVERY_RETRIEVE_RETRY_INTERVAL,
 	WAIT_EVENT_REGISTER_SYNC_REQUEST,
 	WAIT_EVENT_VACUUM_DELAY,
-	WAIT_EVENT_VACUUM_TRUNCATE
+	WAIT_EVENT_VACUUM_TRUNCATE,
+	WAIT_EVENT_YB_TXN_CONFLICT_BACKOFF
 } WaitEventTimeout;
 
 /* ----------
@@ -229,7 +235,9 @@ typedef enum
 	WAIT_EVENT_WAL_READ,
 	WAIT_EVENT_WAL_SYNC,
 	WAIT_EVENT_WAL_SYNC_METHOD_ASSIGN,
-	WAIT_EVENT_WAL_WRITE
+	WAIT_EVENT_WAL_WRITE,
+	WAIT_EVENT_YB_COPY_COMMAND_STREAM_READ,
+	WAIT_EVENT_YB_COPY_COMMAND_STREAM_WRITE,
 } WaitEventIO;
 
 
@@ -283,6 +291,34 @@ pgstat_report_wait_end(void)
 {
 	/* see pgstat_report_wait_start() */
 	*(volatile uint32 *) my_wait_event_info = 0;
+}
+
+/* ----------
+ * yb_pgstat_report_wait_start() -
+ *
+ *	Called to get the current wait event info and set a new wait
+ *  event info.
+ *
+ * NB: this *must* be able to survive being called before MyProc has been
+ * initialized.
+ * ----------
+ */
+static inline uint32
+yb_pgstat_report_wait_start(uint32 wait_event_info)
+{
+	/* If ASH is disabled, do nothing */
+	if (!yb_enable_ash)
+		return wait_event_info;
+
+	uint32 prev_wait_event_info = 0;
+
+	/*
+	 * Since this is a four-byte field which is always read and written as
+	 * four-bytes, updates are atomic.
+	 */
+	prev_wait_event_info = *my_wait_event_info;
+	*(volatile uint32 *) my_wait_event_info = wait_event_info;
+	return prev_wait_event_info;
 }
 
 

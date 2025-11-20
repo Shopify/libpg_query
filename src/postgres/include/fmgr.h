@@ -64,6 +64,8 @@ typedef struct FmgrInfo
 	void	   *fn_extra;		/* extra space for use by handler */
 	MemoryContext fn_mcxt;		/* memory context to store fn_extra in */
 	fmNodePtr	fn_expr;		/* expression parse tree for call, or NULL */
+	void       *fn_alt;         /* alternative function implementation for
+                                 * special cases */
 } FmgrInfo;
 
 /*
@@ -125,7 +127,7 @@ extern void fmgr_info(Oid functionId, FmgrInfo *finfo);
 
 /*
  * Same, when the FmgrInfo struct is in a memory context longer-lived than
- * CurrentMemoryContext.  The specified context will be set as fn_mcxt
+ * GetCurrentMemoryContext.  The specified context will be set as fn_mcxt
  * and used to hold all subsidiary data of finfo.
  */
 extern void fmgr_info_cxt(Oid functionId, FmgrInfo *finfo,
@@ -698,6 +700,8 @@ extern Datum ReceiveFunctionCall(FmgrInfo *flinfo, fmStringInfo buf,
 extern Datum OidReceiveFunctionCall(Oid functionId, fmStringInfo buf,
 									Oid typioparam, int32 typmod);
 extern bytea *SendFunctionCall(FmgrInfo *flinfo, Datum val);
+extern void StringInfoSendFunctionCall(fmStringInfo buf, FmgrInfo *flinfo,
+					   Datum val);
 extern bytea *OidSendFunctionCall(Oid functionId, Datum val);
 
 
@@ -777,5 +781,8 @@ extern PGDLLIMPORT fmgr_hook_type fmgr_hook;
 
 #define FmgrHookIsNeeded(fn_oid)							\
 	(!needs_fmgr_hook ? false : (*needs_fmgr_hook)(fn_oid))
+
+/* Yugabyte support */
+extern bool is_builtin_func(Oid id);
 
 #endif							/* FMGR_H */

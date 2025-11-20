@@ -55,5 +55,8 @@
 #define INDOPTION_DESC			0x0001	/* values are in reverse order */
 #define INDOPTION_NULLS_FIRST	0x0002	/* NULLs are first instead of last */
 
+/* Options for YugaByte-based index */
+#define INDOPTION_HASH			0x0004	/* values are hash-indexed */
+
 
 #endif							/* PG_INDEX_D_H */

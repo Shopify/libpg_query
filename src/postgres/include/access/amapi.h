@@ -25,6 +25,12 @@ struct IndexPath;
 /* Likewise, this file shouldn't depend on execnodes.h. */
 struct IndexInfo;
 
+/*
+ * BACKFILL input and output nodes.
+ * As above, avoiding dependencies on execnodes.h and parsenodes.h.
+ */
+struct YbBackfillInfo;
+struct YbPgExecOutParam;
 
 /*
  * Properties for amproperty API.  This list covers properties known to the
@@ -113,6 +119,47 @@ typedef bool (*aminsert_function) (Relation indexRelation,
 								   bool indexUnchanged,
 								   struct IndexInfo *indexInfo);
 
+/* alternate insert callback for YugaByte-based index that passs ybctid instead of ctid */
+typedef bool (*yb_aminsert_function) (Relation indexRelation,
+									  Datum *values,
+									  bool *isnull,
+									  Datum ybctid,
+									  Relation heapRelation,
+									  IndexUniqueCheck checkUnique,
+									  struct IndexInfo *indexInfo,
+									  bool shared_insert);
+
+/* delete this tuple for YugaByte-based index */
+typedef void (*yb_amdelete_function) (Relation indexRelation,
+									  Datum *values,
+									  bool *isnull,
+									  Datum ybctid,
+									  Relation heapRelation,
+									  struct IndexInfo *indexInfo);
+
+/* update the tuple identified by 'oldYbctid' for a Yugabyte-based index */
+typedef void (*yb_amupdate_function) (Relation indexRelation,
+									  Datum *values,
+									  bool *isnull,
+									  Datum oldYbctid,
+									  Datum newYbctid,
+									  Relation heapRelation,
+									  struct IndexInfo *indexInfo);
+
+/* backfill this Yugabyte-based index */
+typedef IndexBuildResult *(*yb_ambackfill_function) (Relation heapRelation,
+													 Relation indexRelation,
+													 struct IndexInfo *indexInfo,
+													 struct YbBackfillInfo *bfinfo,
+													 struct YbPgExecOutParam *bfresult);
+
+/* return whether this Yugabyte-based index might recheck indexquals */
+typedef bool (*yb_ammightrecheck_function) (Relation heap,
+											Relation index,
+											bool xs_want_itup,
+											ScanKey keys,
+											int nkeys);
+
 /* bulk delete */
 typedef IndexBulkDeleteResult *(*ambulkdelete_function) (IndexVacuumInfo *info,
 														 IndexBulkDeleteResult *stats,
@@ -176,6 +223,15 @@ typedef bool (*amgettuple_function) (IndexScanDesc scan,
 /* fetch all valid tuples */
 typedef int64 (*amgetbitmap_function) (IndexScanDesc scan,
 									   TIDBitmap *tbm);
+
+/* YB: fetch all valid tuples */
+typedef int64 (*yb_amgetbitmap_function) (IndexScanDesc scan,
+										  YbTIDBitmap *ybtbm);
+
+typedef void (*yb_ambindschema_function) (YBCPgStatement handle,
+										  struct IndexInfo *indexInfo,
+										  TupleDesc indexTupleDesc,
+										  int16 *coloptions);
 
 /* end index scan */
 typedef void (*amendscan_function) (IndexScanDesc scan);
@@ -246,6 +302,8 @@ typedef struct IndexAmRoutine
 	bool		amusemaintenanceworkmem;
 	/* OR of parallel vacuum flags.  See vacuum.h for flags. */
 	uint8		amparallelvacuumoptions;
+	/* does AM support in-place update of non-key columns? */
+	bool		ybamcanupdatetupleinplace;
 	/* type of data stored in index, or InvalidOid if variable */
 	Oid			amkeytype;
 
@@ -280,6 +338,27 @@ typedef struct IndexAmRoutine
 	amestimateparallelscan_function amestimateparallelscan; /* can be NULL */
 	aminitparallelscan_function aminitparallelscan; /* can be NULL */
 	amparallelrescan_function amparallelrescan; /* can be NULL */
+
+	/* YB properties */
+	/* Whether this AM is for YB relations. */
+	bool		yb_amisforybrelation;
+	bool 		yb_amiscoveredbymaintable;
+
+	/* YB functions */
+	yb_aminsert_function yb_aminsert;
+	yb_amdelete_function yb_amdelete;
+	yb_amupdate_function yb_amupdate;
+	yb_ambackfill_function yb_ambackfill;
+	yb_ammightrecheck_function yb_ammightrecheck;
+	yb_amgetbitmap_function yb_amgetbitmap;
+
+	/*
+	 * Allows YB AM's to specify how they want to lay out their
+	 * DocDB schema and also gives them a chance to pass along any
+	 * additional metadata to the index creation statement.
+	 */
+	yb_ambindschema_function yb_ambindschema;
+
 } IndexAmRoutine;
 
 

@@ -5,6 +5,8 @@
  * - InterruptHoldoffCount
  * - QueryCancelHoldoffCount
  * - InterruptPending
+ * - IsUnderPostmaster
+ * - IsYsqlUpgrade
  *--------------------------------------------------------------------
  */
 
@@ -104,6 +106,25 @@ char		postgres_exec_path[MAXPGPATH];	/* full path to backend */
 
 
 
+
+
+/*
+ * The OID of the database used as a namespace to allocate a new object
+ * identifier.
+ */
+
+
+/*
+ * Before we fully deprecate legacy colocated databases, we need this extra
+ * variable to tell whether a colocated database is a legacy colocated
+ * database or a colocated database based on new Colocation GA implementation.
+ */
+
+
+
+
+
+
 /*
  * DatabasePath is the path (relative to DataDir) of my database's
  * primary directory, ie, its directory in the default tablespace.
@@ -124,8 +145,12 @@ char		postgres_exec_path[MAXPGPATH];	/* full path to backend */
  * These are initialized for the bootstrap/standalone case.
  */
 
+__thread bool		IsUnderPostmaster = false;
 
 
+
+
+__thread bool		IsYsqlUpgrade = false;
 
 
 __thread bool		ExitOnAnyError = false;

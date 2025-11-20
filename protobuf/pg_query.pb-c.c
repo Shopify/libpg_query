@@ -5362,6 +5362,51 @@ void   pg_query__reindex_stmt__free_unpacked
   assert(message->base.descriptor == &pg_query__reindex_stmt__descriptor);
   protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
 }
+void   pg_query__backfill_index_stmt__init
+                     (PgQuery__BackfillIndexStmt         *message)
+{
+  static const PgQuery__BackfillIndexStmt init_value = PG_QUERY__BACKFILL_INDEX_STMT__INIT;
+  *message = init_value;
+}
+size_t pg_query__backfill_index_stmt__get_packed_size
+                     (const PgQuery__BackfillIndexStmt *message)
+{
+  assert(message->base.descriptor == &pg_query__backfill_index_stmt__descriptor);
+  return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
+}
+size_t pg_query__backfill_index_stmt__pack
+                     (const PgQuery__BackfillIndexStmt *message,
+                      uint8_t       *out)
+{
+  assert(message->base.descriptor == &pg_query__backfill_index_stmt__descriptor);
+  return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
+}
+size_t pg_query__backfill_index_stmt__pack_to_buffer
+                     (const PgQuery__BackfillIndexStmt *message,
+                      ProtobufCBuffer *buffer)
+{
+  assert(message->base.descriptor == &pg_query__backfill_index_stmt__descriptor);
+  return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
+}
+PgQuery__BackfillIndexStmt *
+       pg_query__backfill_index_stmt__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data)
+{
+  return (PgQuery__BackfillIndexStmt *)
+     protobuf_c_message_unpack (&pg_query__backfill_index_stmt__descriptor,
+                                allocator, len, data);
+}
+void   pg_query__backfill_index_stmt__free_unpacked
+                     (PgQuery__BackfillIndexStmt *message,
+                      ProtobufCAllocator *allocator)
+{
+  if(!message)
+    return;
+  assert(message->base.descriptor == &pg_query__backfill_index_stmt__descriptor);
+  protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
+}
 void   pg_query__check_point_stmt__init
                      (PgQuery__CheckPointStmt         *message)
 {
@@ -6035,6 +6080,51 @@ void   pg_query__declare_cursor_stmt__free_unpacked
   if(!message)
     return;
   assert(message->base.descriptor == &pg_query__declare_cursor_stmt__descriptor);
+  protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
+}
+void   pg_query__create_table_group_stmt__init
+                     (PgQuery__CreateTableGroupStmt         *message)
+{
+  static const PgQuery__CreateTableGroupStmt init_value = PG_QUERY__CREATE_TABLE_GROUP_STMT__INIT;
+  *message = init_value;
+}
+size_t pg_query__create_table_group_stmt__get_packed_size
+                     (const PgQuery__CreateTableGroupStmt *message)
+{
+  assert(message->base.descriptor == &pg_query__create_table_group_stmt__descriptor);
+  return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
+}
+size_t pg_query__create_table_group_stmt__pack
+                     (const PgQuery__CreateTableGroupStmt *message,
+                      uint8_t       *out)
+{
+  assert(message->base.descriptor == &pg_query__create_table_group_stmt__descriptor);
+  return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
+}
+size_t pg_query__create_table_group_stmt__pack_to_buffer
+                     (const PgQuery__CreateTableGroupStmt *message,
+                      ProtobufCBuffer *buffer)
+{
+  assert(message->base.descriptor == &pg_query__create_table_group_stmt__descriptor);
+  return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
+}
+PgQuery__CreateTableGroupStmt *
+       pg_query__create_table_group_stmt__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data)
+{
+  return (PgQuery__CreateTableGroupStmt *)
+     protobuf_c_message_unpack (&pg_query__create_table_group_stmt__descriptor,
+                                allocator, len, data);
+}
+void   pg_query__create_table_group_stmt__free_unpacked
+                     (PgQuery__CreateTableGroupStmt *message,
+                      ProtobufCAllocator *allocator)
+{
+  if(!message)
+    return;
+  assert(message->base.descriptor == &pg_query__create_table_group_stmt__descriptor);
   protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
 }
 void   pg_query__create_table_space_stmt__init
@@ -10762,6 +10852,96 @@ void   pg_query__publication_table__free_unpacked
   assert(message->base.descriptor == &pg_query__publication_table__descriptor);
   protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
 }
+void   pg_query__opt_split__init
+                     (PgQuery__OptSplit         *message)
+{
+  static const PgQuery__OptSplit init_value = PG_QUERY__OPT_SPLIT__INIT;
+  *message = init_value;
+}
+size_t pg_query__opt_split__get_packed_size
+                     (const PgQuery__OptSplit *message)
+{
+  assert(message->base.descriptor == &pg_query__opt_split__descriptor);
+  return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
+}
+size_t pg_query__opt_split__pack
+                     (const PgQuery__OptSplit *message,
+                      uint8_t       *out)
+{
+  assert(message->base.descriptor == &pg_query__opt_split__descriptor);
+  return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
+}
+size_t pg_query__opt_split__pack_to_buffer
+                     (const PgQuery__OptSplit *message,
+                      ProtobufCBuffer *buffer)
+{
+  assert(message->base.descriptor == &pg_query__opt_split__descriptor);
+  return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
+}
+PgQuery__OptSplit *
+       pg_query__opt_split__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data)
+{
+  return (PgQuery__OptSplit *)
+     protobuf_c_message_unpack (&pg_query__opt_split__descriptor,
+                                allocator, len, data);
+}
+void   pg_query__opt_split__free_unpacked
+                     (PgQuery__OptSplit *message,
+                      ProtobufCAllocator *allocator)
+{
+  if(!message)
+    return;
+  assert(message->base.descriptor == &pg_query__opt_split__descriptor);
+  protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
+}
+void   pg_query__row_bounds__init
+                     (PgQuery__RowBounds         *message)
+{
+  static const PgQuery__RowBounds init_value = PG_QUERY__ROW_BOUNDS__INIT;
+  *message = init_value;
+}
+size_t pg_query__row_bounds__get_packed_size
+                     (const PgQuery__RowBounds *message)
+{
+  assert(message->base.descriptor == &pg_query__row_bounds__descriptor);
+  return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
+}
+size_t pg_query__row_bounds__pack
+                     (const PgQuery__RowBounds *message,
+                      uint8_t       *out)
+{
+  assert(message->base.descriptor == &pg_query__row_bounds__descriptor);
+  return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
+}
+size_t pg_query__row_bounds__pack_to_buffer
+                     (const PgQuery__RowBounds *message,
+                      ProtobufCBuffer *buffer)
+{
+  assert(message->base.descriptor == &pg_query__row_bounds__descriptor);
+  return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
+}
+PgQuery__RowBounds *
+       pg_query__row_bounds__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data)
+{
+  return (PgQuery__RowBounds *)
+     protobuf_c_message_unpack (&pg_query__row_bounds__descriptor,
+                                allocator, len, data);
+}
+void   pg_query__row_bounds__free_unpacked
+                     (PgQuery__RowBounds *message,
+                      ProtobufCAllocator *allocator)
+{
+  if(!message)
+    return;
+  assert(message->base.descriptor == &pg_query__row_bounds__descriptor);
+  protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
+}
 void   pg_query__inline_code_block__init
                      (PgQuery__InlineCodeBlock         *message)
 {
@@ -10850,6 +11030,141 @@ void   pg_query__call_context__free_unpacked
   if(!message)
     return;
   assert(message->base.descriptor == &pg_query__call_context__descriptor);
+  protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
+}
+void   pg_query__yb_backfill_info__init
+                     (PgQuery__YbBackfillInfo         *message)
+{
+  static const PgQuery__YbBackfillInfo init_value = PG_QUERY__YB_BACKFILL_INFO__INIT;
+  *message = init_value;
+}
+size_t pg_query__yb_backfill_info__get_packed_size
+                     (const PgQuery__YbBackfillInfo *message)
+{
+  assert(message->base.descriptor == &pg_query__yb_backfill_info__descriptor);
+  return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
+}
+size_t pg_query__yb_backfill_info__pack
+                     (const PgQuery__YbBackfillInfo *message,
+                      uint8_t       *out)
+{
+  assert(message->base.descriptor == &pg_query__yb_backfill_info__descriptor);
+  return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
+}
+size_t pg_query__yb_backfill_info__pack_to_buffer
+                     (const PgQuery__YbBackfillInfo *message,
+                      ProtobufCBuffer *buffer)
+{
+  assert(message->base.descriptor == &pg_query__yb_backfill_info__descriptor);
+  return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
+}
+PgQuery__YbBackfillInfo *
+       pg_query__yb_backfill_info__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data)
+{
+  return (PgQuery__YbBackfillInfo *)
+     protobuf_c_message_unpack (&pg_query__yb_backfill_info__descriptor,
+                                allocator, len, data);
+}
+void   pg_query__yb_backfill_info__free_unpacked
+                     (PgQuery__YbBackfillInfo *message,
+                      ProtobufCAllocator *allocator)
+{
+  if(!message)
+    return;
+  assert(message->base.descriptor == &pg_query__yb_backfill_info__descriptor);
+  protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
+}
+void   pg_query__yb_create_profile_stmt__init
+                     (PgQuery__YbCreateProfileStmt         *message)
+{
+  static const PgQuery__YbCreateProfileStmt init_value = PG_QUERY__YB_CREATE_PROFILE_STMT__INIT;
+  *message = init_value;
+}
+size_t pg_query__yb_create_profile_stmt__get_packed_size
+                     (const PgQuery__YbCreateProfileStmt *message)
+{
+  assert(message->base.descriptor == &pg_query__yb_create_profile_stmt__descriptor);
+  return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
+}
+size_t pg_query__yb_create_profile_stmt__pack
+                     (const PgQuery__YbCreateProfileStmt *message,
+                      uint8_t       *out)
+{
+  assert(message->base.descriptor == &pg_query__yb_create_profile_stmt__descriptor);
+  return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
+}
+size_t pg_query__yb_create_profile_stmt__pack_to_buffer
+                     (const PgQuery__YbCreateProfileStmt *message,
+                      ProtobufCBuffer *buffer)
+{
+  assert(message->base.descriptor == &pg_query__yb_create_profile_stmt__descriptor);
+  return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
+}
+PgQuery__YbCreateProfileStmt *
+       pg_query__yb_create_profile_stmt__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data)
+{
+  return (PgQuery__YbCreateProfileStmt *)
+     protobuf_c_message_unpack (&pg_query__yb_create_profile_stmt__descriptor,
+                                allocator, len, data);
+}
+void   pg_query__yb_create_profile_stmt__free_unpacked
+                     (PgQuery__YbCreateProfileStmt *message,
+                      ProtobufCAllocator *allocator)
+{
+  if(!message)
+    return;
+  assert(message->base.descriptor == &pg_query__yb_create_profile_stmt__descriptor);
+  protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
+}
+void   pg_query__yb_drop_profile_stmt__init
+                     (PgQuery__YbDropProfileStmt         *message)
+{
+  static const PgQuery__YbDropProfileStmt init_value = PG_QUERY__YB_DROP_PROFILE_STMT__INIT;
+  *message = init_value;
+}
+size_t pg_query__yb_drop_profile_stmt__get_packed_size
+                     (const PgQuery__YbDropProfileStmt *message)
+{
+  assert(message->base.descriptor == &pg_query__yb_drop_profile_stmt__descriptor);
+  return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
+}
+size_t pg_query__yb_drop_profile_stmt__pack
+                     (const PgQuery__YbDropProfileStmt *message,
+                      uint8_t       *out)
+{
+  assert(message->base.descriptor == &pg_query__yb_drop_profile_stmt__descriptor);
+  return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
+}
+size_t pg_query__yb_drop_profile_stmt__pack_to_buffer
+                     (const PgQuery__YbDropProfileStmt *message,
+                      ProtobufCBuffer *buffer)
+{
+  assert(message->base.descriptor == &pg_query__yb_drop_profile_stmt__descriptor);
+  return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
+}
+PgQuery__YbDropProfileStmt *
+       pg_query__yb_drop_profile_stmt__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data)
+{
+  return (PgQuery__YbDropProfileStmt *)
+     protobuf_c_message_unpack (&pg_query__yb_drop_profile_stmt__descriptor,
+                                allocator, len, data);
+}
+void   pg_query__yb_drop_profile_stmt__free_unpacked
+                     (PgQuery__YbDropProfileStmt *message,
+                      ProtobufCAllocator *allocator)
+{
+  if(!message)
+    return;
+  assert(message->base.descriptor == &pg_query__yb_drop_profile_stmt__descriptor);
   protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
 }
 void   pg_query__scan_token__init
@@ -10999,7 +11314,7 @@ const ProtobufCMessageDescriptor pg_query__scan_result__descriptor =
   (ProtobufCMessageInit) pg_query__scan_result__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
-static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
+static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[245] =
 {
   {
     "alias",
@@ -11010,7 +11325,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, alias),
     &pg_query__alias__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11022,7 +11337,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, range_var),
     &pg_query__range_var__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11034,7 +11349,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, table_func),
     &pg_query__table_func__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11046,7 +11361,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, var),
     &pg_query__var__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11058,7 +11373,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, param),
     &pg_query__param__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11070,7 +11385,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, aggref),
     &pg_query__aggref__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11082,7 +11397,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, grouping_func),
     &pg_query__grouping_func__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11094,7 +11409,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, window_func),
     &pg_query__window_func__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11106,7 +11421,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, subscripting_ref),
     &pg_query__subscripting_ref__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11118,7 +11433,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, func_expr),
     &pg_query__func_expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11130,7 +11445,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, named_arg_expr),
     &pg_query__named_arg_expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11142,7 +11457,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, op_expr),
     &pg_query__op_expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11154,7 +11469,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, distinct_expr),
     &pg_query__distinct_expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11166,7 +11481,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, null_if_expr),
     &pg_query__null_if_expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11178,7 +11493,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, scalar_array_op_expr),
     &pg_query__scalar_array_op_expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11190,7 +11505,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, bool_expr),
     &pg_query__bool_expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11202,7 +11517,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, sub_link),
     &pg_query__sub_link__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11214,7 +11529,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, sub_plan),
     &pg_query__sub_plan__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11226,7 +11541,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, alternative_sub_plan),
     &pg_query__alternative_sub_plan__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11238,7 +11553,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, field_select),
     &pg_query__field_select__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11250,7 +11565,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, field_store),
     &pg_query__field_store__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11262,7 +11577,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, relabel_type),
     &pg_query__relabel_type__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11274,7 +11589,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, coerce_via_io),
     &pg_query__coerce_via_io__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11286,7 +11601,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, array_coerce_expr),
     &pg_query__array_coerce_expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11298,7 +11613,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, convert_rowtype_expr),
     &pg_query__convert_rowtype_expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11310,7 +11625,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, collate_expr),
     &pg_query__collate_expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11322,7 +11637,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, case_expr),
     &pg_query__case_expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11334,7 +11649,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, case_when),
     &pg_query__case_when__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11346,7 +11661,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, case_test_expr),
     &pg_query__case_test_expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11358,7 +11673,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, array_expr),
     &pg_query__array_expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11370,7 +11685,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, row_expr),
     &pg_query__row_expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11382,7 +11697,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, row_compare_expr),
     &pg_query__row_compare_expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11394,7 +11709,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, coalesce_expr),
     &pg_query__coalesce_expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11406,7 +11721,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, min_max_expr),
     &pg_query__min_max_expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11418,7 +11733,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, sqlvalue_function),
     &pg_query__sqlvalue_function__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11430,7 +11745,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, xml_expr),
     &pg_query__xml_expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11442,7 +11757,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, null_test),
     &pg_query__null_test__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11454,7 +11769,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, boolean_test),
     &pg_query__boolean_test__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11466,7 +11781,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, coerce_to_domain),
     &pg_query__coerce_to_domain__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11478,7 +11793,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, coerce_to_domain_value),
     &pg_query__coerce_to_domain_value__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11490,7 +11805,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, set_to_default),
     &pg_query__set_to_default__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11502,7 +11817,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, current_of_expr),
     &pg_query__current_of_expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11514,7 +11829,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, next_value_expr),
     &pg_query__next_value_expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11526,7 +11841,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, inference_elem),
     &pg_query__inference_elem__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11538,7 +11853,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, target_entry),
     &pg_query__target_entry__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11550,7 +11865,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, range_tbl_ref),
     &pg_query__range_tbl_ref__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11562,7 +11877,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, join_expr),
     &pg_query__join_expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11574,7 +11889,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, from_expr),
     &pg_query__from_expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11586,7 +11901,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, on_conflict_expr),
     &pg_query__on_conflict_expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11598,7 +11913,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, into_clause),
     &pg_query__into_clause__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11610,7 +11925,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, merge_action),
     &pg_query__merge_action__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11622,7 +11937,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, raw_stmt),
     &pg_query__raw_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11634,7 +11949,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, query),
     &pg_query__query__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11646,7 +11961,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, insert_stmt),
     &pg_query__insert_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11658,7 +11973,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, delete_stmt),
     &pg_query__delete_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11670,7 +11985,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, update_stmt),
     &pg_query__update_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11682,7 +11997,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, merge_stmt),
     &pg_query__merge_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11694,7 +12009,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, select_stmt),
     &pg_query__select_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11706,7 +12021,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, return_stmt),
     &pg_query__return_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11718,7 +12033,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, plassign_stmt),
     &pg_query__plassign_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11730,7 +12045,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, alter_table_stmt),
     &pg_query__alter_table_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11742,7 +12057,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, alter_table_cmd),
     &pg_query__alter_table_cmd__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11754,7 +12069,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, alter_domain_stmt),
     &pg_query__alter_domain_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11766,7 +12081,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, set_operation_stmt),
     &pg_query__set_operation_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11778,7 +12093,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, grant_stmt),
     &pg_query__grant_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11790,7 +12105,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, grant_role_stmt),
     &pg_query__grant_role_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11802,7 +12117,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, alter_default_privileges_stmt),
     &pg_query__alter_default_privileges_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11814,7 +12129,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, close_portal_stmt),
     &pg_query__close_portal_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11826,7 +12141,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, cluster_stmt),
     &pg_query__cluster_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11838,7 +12153,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, copy_stmt),
     &pg_query__copy_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11850,7 +12165,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, create_stmt),
     &pg_query__create_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11862,7 +12177,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, define_stmt),
     &pg_query__define_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11874,7 +12189,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, drop_stmt),
     &pg_query__drop_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11886,7 +12201,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, truncate_stmt),
     &pg_query__truncate_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11898,7 +12213,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, comment_stmt),
     &pg_query__comment_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11910,7 +12225,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, fetch_stmt),
     &pg_query__fetch_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11922,7 +12237,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, index_stmt),
     &pg_query__index_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11934,7 +12249,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, create_function_stmt),
     &pg_query__create_function_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11946,7 +12261,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, alter_function_stmt),
     &pg_query__alter_function_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11958,7 +12273,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, do_stmt),
     &pg_query__do_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11970,7 +12285,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, rename_stmt),
     &pg_query__rename_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11982,7 +12297,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, rule_stmt),
     &pg_query__rule_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -11994,7 +12309,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, notify_stmt),
     &pg_query__notify_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -12006,7 +12321,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, listen_stmt),
     &pg_query__listen_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -12018,7 +12333,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, unlisten_stmt),
     &pg_query__unlisten_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -12030,7 +12345,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, transaction_stmt),
     &pg_query__transaction_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -12042,7 +12357,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, view_stmt),
     &pg_query__view_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -12054,7 +12369,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, load_stmt),
     &pg_query__load_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -12066,7 +12381,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, create_domain_stmt),
     &pg_query__create_domain_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -12078,7 +12393,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, createdb_stmt),
     &pg_query__createdb_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -12090,7 +12405,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, dropdb_stmt),
     &pg_query__dropdb_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -12102,7 +12417,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, vacuum_stmt),
     &pg_query__vacuum_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -12114,7 +12429,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, explain_stmt),
     &pg_query__explain_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -12126,7 +12441,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, create_table_as_stmt),
     &pg_query__create_table_as_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -12138,7 +12453,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, create_seq_stmt),
     &pg_query__create_seq_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -12150,7 +12465,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, alter_seq_stmt),
     &pg_query__alter_seq_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -12162,7 +12477,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, variable_set_stmt),
     &pg_query__variable_set_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -12174,7 +12489,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, variable_show_stmt),
     &pg_query__variable_show_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -12186,7 +12501,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, discard_stmt),
     &pg_query__discard_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -12198,7 +12513,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, create_trig_stmt),
     &pg_query__create_trig_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -12210,7 +12525,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, create_plang_stmt),
     &pg_query__create_plang_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -12222,7 +12537,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, create_role_stmt),
     &pg_query__create_role_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -12234,7 +12549,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, alter_role_stmt),
     &pg_query__alter_role_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -12246,7 +12561,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, drop_role_stmt),
     &pg_query__drop_role_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -12258,7 +12573,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, lock_stmt),
     &pg_query__lock_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -12270,7 +12585,7 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, constraints_set_stmt),
     &pg_query__constraints_set_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -12282,1826 +12597,1917 @@ static const ProtobufCFieldDescriptor pg_query__node__field_descriptors[238] =
     offsetof(PgQuery__Node, reindex_stmt),
     &pg_query__reindex_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "backfill_index_stmt",
+    108,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_MESSAGE,
+    offsetof(PgQuery__Node, node_case),
+    offsetof(PgQuery__Node, backfill_index_stmt),
+    &pg_query__backfill_index_stmt__descriptor,
+    NULL,
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "check_point_stmt",
-    108,
+    109,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, check_point_stmt),
     &pg_query__check_point_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "create_schema_stmt",
-    109,
+    110,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, create_schema_stmt),
     &pg_query__create_schema_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_database_stmt",
-    110,
+    111,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_database_stmt),
     &pg_query__alter_database_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_database_refresh_coll_stmt",
-    111,
+    112,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_database_refresh_coll_stmt),
     &pg_query__alter_database_refresh_coll_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_database_set_stmt",
-    112,
+    113,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_database_set_stmt),
     &pg_query__alter_database_set_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_role_set_stmt",
-    113,
+    114,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_role_set_stmt),
     &pg_query__alter_role_set_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "create_conversion_stmt",
-    114,
+    115,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, create_conversion_stmt),
     &pg_query__create_conversion_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "create_cast_stmt",
-    115,
+    116,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, create_cast_stmt),
     &pg_query__create_cast_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "create_op_class_stmt",
-    116,
+    117,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, create_op_class_stmt),
     &pg_query__create_op_class_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "create_op_family_stmt",
-    117,
+    118,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, create_op_family_stmt),
     &pg_query__create_op_family_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_op_family_stmt",
-    118,
+    119,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_op_family_stmt),
     &pg_query__alter_op_family_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "prepare_stmt",
-    119,
+    120,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, prepare_stmt),
     &pg_query__prepare_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "execute_stmt",
-    120,
+    121,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, execute_stmt),
     &pg_query__execute_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "deallocate_stmt",
-    121,
+    122,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, deallocate_stmt),
     &pg_query__deallocate_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "declare_cursor_stmt",
-    122,
+    123,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, declare_cursor_stmt),
     &pg_query__declare_cursor_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "create_table_group_stmt",
+    124,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_MESSAGE,
+    offsetof(PgQuery__Node, node_case),
+    offsetof(PgQuery__Node, create_table_group_stmt),
+    &pg_query__create_table_group_stmt__descriptor,
+    NULL,
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "create_table_space_stmt",
-    123,
+    125,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, create_table_space_stmt),
     &pg_query__create_table_space_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "drop_table_space_stmt",
-    124,
+    126,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, drop_table_space_stmt),
     &pg_query__drop_table_space_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_object_depends_stmt",
-    125,
+    127,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_object_depends_stmt),
     &pg_query__alter_object_depends_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_object_schema_stmt",
-    126,
+    128,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_object_schema_stmt),
     &pg_query__alter_object_schema_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_owner_stmt",
-    127,
+    129,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_owner_stmt),
     &pg_query__alter_owner_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_operator_stmt",
-    128,
+    130,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_operator_stmt),
     &pg_query__alter_operator_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_type_stmt",
-    129,
+    131,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_type_stmt),
     &pg_query__alter_type_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "drop_owned_stmt",
-    130,
+    132,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, drop_owned_stmt),
     &pg_query__drop_owned_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "reassign_owned_stmt",
-    131,
+    133,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, reassign_owned_stmt),
     &pg_query__reassign_owned_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "composite_type_stmt",
-    132,
+    134,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, composite_type_stmt),
     &pg_query__composite_type_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "create_enum_stmt",
-    133,
+    135,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, create_enum_stmt),
     &pg_query__create_enum_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "create_range_stmt",
-    134,
+    136,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, create_range_stmt),
     &pg_query__create_range_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_enum_stmt",
-    135,
+    137,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_enum_stmt),
     &pg_query__alter_enum_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_tsdictionary_stmt",
-    136,
+    138,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_tsdictionary_stmt),
     &pg_query__alter_tsdictionary_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_tsconfiguration_stmt",
-    137,
+    139,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_tsconfiguration_stmt),
     &pg_query__alter_tsconfiguration_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "create_fdw_stmt",
-    138,
+    140,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, create_fdw_stmt),
     &pg_query__create_fdw_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_fdw_stmt",
-    139,
+    141,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_fdw_stmt),
     &pg_query__alter_fdw_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "create_foreign_server_stmt",
-    140,
+    142,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, create_foreign_server_stmt),
     &pg_query__create_foreign_server_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_foreign_server_stmt",
-    141,
+    143,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_foreign_server_stmt),
     &pg_query__alter_foreign_server_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "create_user_mapping_stmt",
-    142,
+    144,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, create_user_mapping_stmt),
     &pg_query__create_user_mapping_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_user_mapping_stmt",
-    143,
+    145,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_user_mapping_stmt),
     &pg_query__alter_user_mapping_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "drop_user_mapping_stmt",
-    144,
+    146,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, drop_user_mapping_stmt),
     &pg_query__drop_user_mapping_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_table_space_options_stmt",
-    145,
+    147,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_table_space_options_stmt),
     &pg_query__alter_table_space_options_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_table_move_all_stmt",
-    146,
+    148,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_table_move_all_stmt),
     &pg_query__alter_table_move_all_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "sec_label_stmt",
-    147,
+    149,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, sec_label_stmt),
     &pg_query__sec_label_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "create_foreign_table_stmt",
-    148,
+    150,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, create_foreign_table_stmt),
     &pg_query__create_foreign_table_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "import_foreign_schema_stmt",
-    149,
+    151,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, import_foreign_schema_stmt),
     &pg_query__import_foreign_schema_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "create_extension_stmt",
-    150,
+    152,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, create_extension_stmt),
     &pg_query__create_extension_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_extension_stmt",
-    151,
+    153,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_extension_stmt),
     &pg_query__alter_extension_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_extension_contents_stmt",
-    152,
+    154,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_extension_contents_stmt),
     &pg_query__alter_extension_contents_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "create_event_trig_stmt",
-    153,
+    155,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, create_event_trig_stmt),
     &pg_query__create_event_trig_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_event_trig_stmt",
-    154,
+    156,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_event_trig_stmt),
     &pg_query__alter_event_trig_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "refresh_mat_view_stmt",
-    155,
+    157,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, refresh_mat_view_stmt),
     &pg_query__refresh_mat_view_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "replica_identity_stmt",
-    156,
+    158,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, replica_identity_stmt),
     &pg_query__replica_identity_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_system_stmt",
-    157,
+    159,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_system_stmt),
     &pg_query__alter_system_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "create_policy_stmt",
-    158,
+    160,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, create_policy_stmt),
     &pg_query__create_policy_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_policy_stmt",
-    159,
+    161,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_policy_stmt),
     &pg_query__alter_policy_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "create_transform_stmt",
-    160,
+    162,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, create_transform_stmt),
     &pg_query__create_transform_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "create_am_stmt",
-    161,
+    163,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, create_am_stmt),
     &pg_query__create_am_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "create_publication_stmt",
-    162,
+    164,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, create_publication_stmt),
     &pg_query__create_publication_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_publication_stmt",
-    163,
+    165,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_publication_stmt),
     &pg_query__alter_publication_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "create_subscription_stmt",
-    164,
+    166,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, create_subscription_stmt),
     &pg_query__create_subscription_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_subscription_stmt",
-    165,
+    167,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_subscription_stmt),
     &pg_query__alter_subscription_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "drop_subscription_stmt",
-    166,
+    168,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, drop_subscription_stmt),
     &pg_query__drop_subscription_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "create_stats_stmt",
-    167,
+    169,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, create_stats_stmt),
     &pg_query__create_stats_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_collation_stmt",
-    168,
+    170,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_collation_stmt),
     &pg_query__alter_collation_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "call_stmt",
-    169,
+    171,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, call_stmt),
     &pg_query__call_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "alter_stats_stmt",
-    170,
+    172,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, alter_stats_stmt),
     &pg_query__alter_stats_stmt__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "a_expr",
-    171,
+    173,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, a_expr),
     &pg_query__a__expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "column_ref",
-    172,
+    174,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, column_ref),
     &pg_query__column_ref__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "param_ref",
-    173,
+    175,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, param_ref),
     &pg_query__param_ref__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "func_call",
-    174,
+    176,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, func_call),
     &pg_query__func_call__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "a_star",
-    175,
+    177,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, a_star),
     &pg_query__a__star__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "a_indices",
-    176,
+    178,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, a_indices),
     &pg_query__a__indices__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "a_indirection",
-    177,
+    179,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, a_indirection),
     &pg_query__a__indirection__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "a_array_expr",
-    178,
+    180,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, a_array_expr),
     &pg_query__a__array_expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "res_target",
-    179,
+    181,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, res_target),
     &pg_query__res_target__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "multi_assign_ref",
-    180,
+    182,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, multi_assign_ref),
     &pg_query__multi_assign_ref__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "type_cast",
-    181,
+    183,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, type_cast),
     &pg_query__type_cast__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "collate_clause",
-    182,
+    184,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, collate_clause),
     &pg_query__collate_clause__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "sort_by",
-    183,
+    185,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, sort_by),
     &pg_query__sort_by__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "window_def",
-    184,
+    186,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, window_def),
     &pg_query__window_def__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "range_subselect",
-    185,
+    187,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, range_subselect),
     &pg_query__range_subselect__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "range_function",
-    186,
+    188,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, range_function),
     &pg_query__range_function__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "range_table_sample",
-    187,
+    189,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, range_table_sample),
     &pg_query__range_table_sample__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "range_table_func",
-    188,
+    190,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, range_table_func),
     &pg_query__range_table_func__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "range_table_func_col",
-    189,
+    191,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, range_table_func_col),
     &pg_query__range_table_func_col__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "type_name",
-    190,
+    192,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, type_name),
     &pg_query__type_name__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "column_def",
-    191,
+    193,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, column_def),
     &pg_query__column_def__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "index_elem",
-    192,
+    194,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, index_elem),
     &pg_query__index_elem__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "stats_elem",
-    193,
+    195,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, stats_elem),
     &pg_query__stats_elem__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "constraint",
-    194,
+    196,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, constraint),
     &pg_query__constraint__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "def_elem",
-    195,
+    197,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, def_elem),
     &pg_query__def_elem__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "range_tbl_entry",
-    196,
+    198,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, range_tbl_entry),
     &pg_query__range_tbl_entry__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "range_tbl_function",
-    197,
+    199,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, range_tbl_function),
     &pg_query__range_tbl_function__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "table_sample_clause",
-    198,
+    200,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, table_sample_clause),
     &pg_query__table_sample_clause__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "with_check_option",
-    199,
+    201,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, with_check_option),
     &pg_query__with_check_option__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "sort_group_clause",
-    200,
+    202,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, sort_group_clause),
     &pg_query__sort_group_clause__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "grouping_set",
-    201,
+    203,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, grouping_set),
     &pg_query__grouping_set__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "window_clause",
-    202,
+    204,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, window_clause),
     &pg_query__window_clause__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "object_with_args",
-    203,
+    205,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, object_with_args),
     &pg_query__object_with_args__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "access_priv",
-    204,
+    206,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, access_priv),
     &pg_query__access_priv__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "create_op_class_item",
-    205,
+    207,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, create_op_class_item),
     &pg_query__create_op_class_item__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "table_like_clause",
-    206,
+    208,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, table_like_clause),
     &pg_query__table_like_clause__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "function_parameter",
-    207,
+    209,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, function_parameter),
     &pg_query__function_parameter__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "locking_clause",
-    208,
+    210,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, locking_clause),
     &pg_query__locking_clause__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "row_mark_clause",
-    209,
+    211,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, row_mark_clause),
     &pg_query__row_mark_clause__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "xml_serialize",
-    210,
+    212,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, xml_serialize),
     &pg_query__xml_serialize__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "with_clause",
-    211,
+    213,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, with_clause),
     &pg_query__with_clause__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "infer_clause",
-    212,
+    214,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, infer_clause),
     &pg_query__infer_clause__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "on_conflict_clause",
-    213,
+    215,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, on_conflict_clause),
     &pg_query__on_conflict_clause__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "ctesearch_clause",
-    214,
+    216,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, ctesearch_clause),
     &pg_query__ctesearch_clause__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "ctecycle_clause",
-    215,
+    217,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, ctecycle_clause),
     &pg_query__ctecycle_clause__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "common_table_expr",
-    216,
+    218,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, common_table_expr),
     &pg_query__common_table_expr__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "merge_when_clause",
-    217,
+    219,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, merge_when_clause),
     &pg_query__merge_when_clause__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "role_spec",
-    218,
+    220,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, role_spec),
     &pg_query__role_spec__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "trigger_transition",
-    219,
+    221,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, trigger_transition),
     &pg_query__trigger_transition__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "partition_elem",
-    220,
+    222,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, partition_elem),
     &pg_query__partition_elem__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "partition_spec",
-    221,
+    223,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, partition_spec),
     &pg_query__partition_spec__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "partition_bound_spec",
-    222,
+    224,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, partition_bound_spec),
     &pg_query__partition_bound_spec__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "partition_range_datum",
-    223,
+    225,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, partition_range_datum),
     &pg_query__partition_range_datum__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "partition_cmd",
-    224,
+    226,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, partition_cmd),
     &pg_query__partition_cmd__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "vacuum_relation",
-    225,
+    227,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, vacuum_relation),
     &pg_query__vacuum_relation__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "publication_obj_spec",
-    226,
+    228,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, publication_obj_spec),
     &pg_query__publication_obj_spec__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "publication_table",
-    227,
+    229,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, publication_table),
     &pg_query__publication_table__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "opt_split",
+    230,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_MESSAGE,
+    offsetof(PgQuery__Node, node_case),
+    offsetof(PgQuery__Node, opt_split),
+    &pg_query__opt_split__descriptor,
+    NULL,
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "row_bounds",
+    231,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_MESSAGE,
+    offsetof(PgQuery__Node, node_case),
+    offsetof(PgQuery__Node, row_bounds),
+    &pg_query__row_bounds__descriptor,
+    NULL,
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "inline_code_block",
-    228,
+    232,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, inline_code_block),
     &pg_query__inline_code_block__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "call_context",
-    229,
+    233,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, call_context),
     &pg_query__call_context__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "yb_backfill_info",
+    234,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_MESSAGE,
+    offsetof(PgQuery__Node, node_case),
+    offsetof(PgQuery__Node, yb_backfill_info),
+    &pg_query__yb_backfill_info__descriptor,
+    NULL,
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "yb_create_profile_stmt",
+    235,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_MESSAGE,
+    offsetof(PgQuery__Node, node_case),
+    offsetof(PgQuery__Node, yb_create_profile_stmt),
+    &pg_query__yb_create_profile_stmt__descriptor,
+    NULL,
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "yb_drop_profile_stmt",
+    236,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_MESSAGE,
+    offsetof(PgQuery__Node, node_case),
+    offsetof(PgQuery__Node, yb_drop_profile_stmt),
+    &pg_query__yb_drop_profile_stmt__descriptor,
+    NULL,
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "integer",
-    230,
+    237,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, integer),
     &pg_query__integer__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "float",
-    231,
+    238,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, float_),
     &pg_query__float__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "boolean",
-    232,
+    239,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, boolean),
     &pg_query__boolean__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "string",
-    233,
+    240,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, string),
     &pg_query__string__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "bit_string",
-    234,
+    241,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, bit_string),
     &pg_query__bit_string__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "list",
-    235,
+    242,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, list),
     &pg_query__list__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "int_list",
-    236,
+    243,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, int_list),
     &pg_query__int_list__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "oid_list",
-    237,
+    244,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, oid_list),
     &pg_query__oid_list__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
     "a_const",
-    238,
+    245,
     PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
     offsetof(PgQuery__Node, node_case),
     offsetof(PgQuery__Node, a_const),
     &pg_query__a__const__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
 };
 static const unsigned pg_query__node__field_indices_by_name[] = {
-  177,   /* field[177] = a_array_expr */
-  237,   /* field[237] = a_const */
-  170,   /* field[170] = a_expr */
-  175,   /* field[175] = a_indices */
-  176,   /* field[176] = a_indirection */
-  174,   /* field[174] = a_star */
-  203,   /* field[203] = access_priv */
+  179,   /* field[179] = a_array_expr */
+  244,   /* field[244] = a_const */
+  172,   /* field[172] = a_expr */
+  177,   /* field[177] = a_indices */
+  178,   /* field[178] = a_indirection */
+  176,   /* field[176] = a_star */
+  205,   /* field[205] = access_priv */
   5,   /* field[5] = aggref */
   0,   /* field[0] = alias */
-  167,   /* field[167] = alter_collation_stmt */
-  110,   /* field[110] = alter_database_refresh_coll_stmt */
-  111,   /* field[111] = alter_database_set_stmt */
-  109,   /* field[109] = alter_database_stmt */
+  169,   /* field[169] = alter_collation_stmt */
+  111,   /* field[111] = alter_database_refresh_coll_stmt */
+  112,   /* field[112] = alter_database_set_stmt */
+  110,   /* field[110] = alter_database_stmt */
   66,   /* field[66] = alter_default_privileges_stmt */
   62,   /* field[62] = alter_domain_stmt */
-  134,   /* field[134] = alter_enum_stmt */
-  153,   /* field[153] = alter_event_trig_stmt */
-  151,   /* field[151] = alter_extension_contents_stmt */
-  150,   /* field[150] = alter_extension_stmt */
-  138,   /* field[138] = alter_fdw_stmt */
-  140,   /* field[140] = alter_foreign_server_stmt */
+  136,   /* field[136] = alter_enum_stmt */
+  155,   /* field[155] = alter_event_trig_stmt */
+  153,   /* field[153] = alter_extension_contents_stmt */
+  152,   /* field[152] = alter_extension_stmt */
+  140,   /* field[140] = alter_fdw_stmt */
+  142,   /* field[142] = alter_foreign_server_stmt */
   78,   /* field[78] = alter_function_stmt */
-  124,   /* field[124] = alter_object_depends_stmt */
-  125,   /* field[125] = alter_object_schema_stmt */
-  117,   /* field[117] = alter_op_family_stmt */
-  127,   /* field[127] = alter_operator_stmt */
-  126,   /* field[126] = alter_owner_stmt */
-  158,   /* field[158] = alter_policy_stmt */
-  162,   /* field[162] = alter_publication_stmt */
-  112,   /* field[112] = alter_role_set_stmt */
+  126,   /* field[126] = alter_object_depends_stmt */
+  127,   /* field[127] = alter_object_schema_stmt */
+  118,   /* field[118] = alter_op_family_stmt */
+  129,   /* field[129] = alter_operator_stmt */
+  128,   /* field[128] = alter_owner_stmt */
+  160,   /* field[160] = alter_policy_stmt */
+  164,   /* field[164] = alter_publication_stmt */
+  113,   /* field[113] = alter_role_set_stmt */
   102,   /* field[102] = alter_role_stmt */
   95,   /* field[95] = alter_seq_stmt */
-  169,   /* field[169] = alter_stats_stmt */
-  164,   /* field[164] = alter_subscription_stmt */
-  156,   /* field[156] = alter_system_stmt */
+  171,   /* field[171] = alter_stats_stmt */
+  166,   /* field[166] = alter_subscription_stmt */
+  158,   /* field[158] = alter_system_stmt */
   61,   /* field[61] = alter_table_cmd */
-  145,   /* field[145] = alter_table_move_all_stmt */
-  144,   /* field[144] = alter_table_space_options_stmt */
+  147,   /* field[147] = alter_table_move_all_stmt */
+  146,   /* field[146] = alter_table_space_options_stmt */
   60,   /* field[60] = alter_table_stmt */
-  136,   /* field[136] = alter_tsconfiguration_stmt */
-  135,   /* field[135] = alter_tsdictionary_stmt */
-  128,   /* field[128] = alter_type_stmt */
-  142,   /* field[142] = alter_user_mapping_stmt */
+  138,   /* field[138] = alter_tsconfiguration_stmt */
+  137,   /* field[137] = alter_tsdictionary_stmt */
+  130,   /* field[130] = alter_type_stmt */
+  144,   /* field[144] = alter_user_mapping_stmt */
   18,   /* field[18] = alternative_sub_plan */
   23,   /* field[23] = array_coerce_expr */
   29,   /* field[29] = array_expr */
-  233,   /* field[233] = bit_string */
+  107,   /* field[107] = backfill_index_stmt */
+  240,   /* field[240] = bit_string */
   15,   /* field[15] = bool_expr */
-  231,   /* field[231] = boolean */
+  238,   /* field[238] = boolean */
   37,   /* field[37] = boolean_test */
-  228,   /* field[228] = call_context */
-  168,   /* field[168] = call_stmt */
+  232,   /* field[232] = call_context */
+  170,   /* field[170] = call_stmt */
   26,   /* field[26] = case_expr */
   28,   /* field[28] = case_test_expr */
   27,   /* field[27] = case_when */
-  107,   /* field[107] = check_point_stmt */
+  108,   /* field[108] = check_point_stmt */
   67,   /* field[67] = close_portal_stmt */
   68,   /* field[68] = cluster_stmt */
   32,   /* field[32] = coalesce_expr */
   38,   /* field[38] = coerce_to_domain */
   39,   /* field[39] = coerce_to_domain_value */
   22,   /* field[22] = coerce_via_io */
-  181,   /* field[181] = collate_clause */
+  183,   /* field[183] = collate_clause */
   25,   /* field[25] = collate_expr */
-  190,   /* field[190] = column_def */
-  171,   /* field[171] = column_ref */
+  192,   /* field[192] = column_def */
+  173,   /* field[173] = column_ref */
   74,   /* field[74] = comment_stmt */
-  215,   /* field[215] = common_table_expr */
-  131,   /* field[131] = composite_type_stmt */
-  193,   /* field[193] = constraint */
+  217,   /* field[217] = common_table_expr */
+  133,   /* field[133] = composite_type_stmt */
+  195,   /* field[195] = constraint */
   105,   /* field[105] = constraints_set_stmt */
   24,   /* field[24] = convert_rowtype_expr */
   69,   /* field[69] = copy_stmt */
-  160,   /* field[160] = create_am_stmt */
-  114,   /* field[114] = create_cast_stmt */
-  113,   /* field[113] = create_conversion_stmt */
+  162,   /* field[162] = create_am_stmt */
+  115,   /* field[115] = create_cast_stmt */
+  114,   /* field[114] = create_conversion_stmt */
   88,   /* field[88] = create_domain_stmt */
-  132,   /* field[132] = create_enum_stmt */
-  152,   /* field[152] = create_event_trig_stmt */
-  149,   /* field[149] = create_extension_stmt */
-  137,   /* field[137] = create_fdw_stmt */
-  139,   /* field[139] = create_foreign_server_stmt */
-  147,   /* field[147] = create_foreign_table_stmt */
+  134,   /* field[134] = create_enum_stmt */
+  154,   /* field[154] = create_event_trig_stmt */
+  151,   /* field[151] = create_extension_stmt */
+  139,   /* field[139] = create_fdw_stmt */
+  141,   /* field[141] = create_foreign_server_stmt */
+  149,   /* field[149] = create_foreign_table_stmt */
   77,   /* field[77] = create_function_stmt */
-  204,   /* field[204] = create_op_class_item */
-  115,   /* field[115] = create_op_class_stmt */
-  116,   /* field[116] = create_op_family_stmt */
+  206,   /* field[206] = create_op_class_item */
+  116,   /* field[116] = create_op_class_stmt */
+  117,   /* field[117] = create_op_family_stmt */
   100,   /* field[100] = create_plang_stmt */
-  157,   /* field[157] = create_policy_stmt */
-  161,   /* field[161] = create_publication_stmt */
-  133,   /* field[133] = create_range_stmt */
+  159,   /* field[159] = create_policy_stmt */
+  163,   /* field[163] = create_publication_stmt */
+  135,   /* field[135] = create_range_stmt */
   101,   /* field[101] = create_role_stmt */
-  108,   /* field[108] = create_schema_stmt */
+  109,   /* field[109] = create_schema_stmt */
   94,   /* field[94] = create_seq_stmt */
-  166,   /* field[166] = create_stats_stmt */
+  168,   /* field[168] = create_stats_stmt */
   70,   /* field[70] = create_stmt */
-  163,   /* field[163] = create_subscription_stmt */
+  165,   /* field[165] = create_subscription_stmt */
   93,   /* field[93] = create_table_as_stmt */
-  122,   /* field[122] = create_table_space_stmt */
-  159,   /* field[159] = create_transform_stmt */
+  123,   /* field[123] = create_table_group_stmt */
+  124,   /* field[124] = create_table_space_stmt */
+  161,   /* field[161] = create_transform_stmt */
   99,   /* field[99] = create_trig_stmt */
-  141,   /* field[141] = create_user_mapping_stmt */
+  143,   /* field[143] = create_user_mapping_stmt */
   89,   /* field[89] = createdb_stmt */
-  214,   /* field[214] = ctecycle_clause */
-  213,   /* field[213] = ctesearch_clause */
+  216,   /* field[216] = ctecycle_clause */
+  215,   /* field[215] = ctesearch_clause */
   41,   /* field[41] = current_of_expr */
-  120,   /* field[120] = deallocate_stmt */
-  121,   /* field[121] = declare_cursor_stmt */
-  194,   /* field[194] = def_elem */
+  121,   /* field[121] = deallocate_stmt */
+  122,   /* field[122] = declare_cursor_stmt */
+  196,   /* field[196] = def_elem */
   71,   /* field[71] = define_stmt */
   54,   /* field[54] = delete_stmt */
   98,   /* field[98] = discard_stmt */
   12,   /* field[12] = distinct_expr */
   79,   /* field[79] = do_stmt */
-  129,   /* field[129] = drop_owned_stmt */
+  131,   /* field[131] = drop_owned_stmt */
   103,   /* field[103] = drop_role_stmt */
   72,   /* field[72] = drop_stmt */
-  165,   /* field[165] = drop_subscription_stmt */
-  123,   /* field[123] = drop_table_space_stmt */
-  143,   /* field[143] = drop_user_mapping_stmt */
+  167,   /* field[167] = drop_subscription_stmt */
+  125,   /* field[125] = drop_table_space_stmt */
+  145,   /* field[145] = drop_user_mapping_stmt */
   90,   /* field[90] = dropdb_stmt */
-  119,   /* field[119] = execute_stmt */
+  120,   /* field[120] = execute_stmt */
   92,   /* field[92] = explain_stmt */
   75,   /* field[75] = fetch_stmt */
   19,   /* field[19] = field_select */
   20,   /* field[20] = field_store */
-  230,   /* field[230] = float */
+  237,   /* field[237] = float */
   47,   /* field[47] = from_expr */
-  173,   /* field[173] = func_call */
+  175,   /* field[175] = func_call */
   9,   /* field[9] = func_expr */
-  206,   /* field[206] = function_parameter */
+  208,   /* field[208] = function_parameter */
   65,   /* field[65] = grant_role_stmt */
   64,   /* field[64] = grant_stmt */
   6,   /* field[6] = grouping_func */
-  200,   /* field[200] = grouping_set */
-  148,   /* field[148] = import_foreign_schema_stmt */
-  191,   /* field[191] = index_elem */
+  202,   /* field[202] = grouping_set */
+  150,   /* field[150] = import_foreign_schema_stmt */
+  193,   /* field[193] = index_elem */
   76,   /* field[76] = index_stmt */
-  211,   /* field[211] = infer_clause */
+  213,   /* field[213] = infer_clause */
   43,   /* field[43] = inference_elem */
-  227,   /* field[227] = inline_code_block */
+  231,   /* field[231] = inline_code_block */
   53,   /* field[53] = insert_stmt */
-  235,   /* field[235] = int_list */
-  229,   /* field[229] = integer */
+  242,   /* field[242] = int_list */
+  236,   /* field[236] = integer */
   49,   /* field[49] = into_clause */
   46,   /* field[46] = join_expr */
-  234,   /* field[234] = list */
+  241,   /* field[241] = list */
   83,   /* field[83] = listen_stmt */
   87,   /* field[87] = load_stmt */
   104,   /* field[104] = lock_stmt */
-  207,   /* field[207] = locking_clause */
+  209,   /* field[209] = locking_clause */
   50,   /* field[50] = merge_action */
   56,   /* field[56] = merge_stmt */
-  216,   /* field[216] = merge_when_clause */
+  218,   /* field[218] = merge_when_clause */
   33,   /* field[33] = min_max_expr */
-  179,   /* field[179] = multi_assign_ref */
+  181,   /* field[181] = multi_assign_ref */
   10,   /* field[10] = named_arg_expr */
   42,   /* field[42] = next_value_expr */
   82,   /* field[82] = notify_stmt */
   13,   /* field[13] = null_if_expr */
   36,   /* field[36] = null_test */
-  202,   /* field[202] = object_with_args */
-  236,   /* field[236] = oid_list */
-  212,   /* field[212] = on_conflict_clause */
+  204,   /* field[204] = object_with_args */
+  243,   /* field[243] = oid_list */
+  214,   /* field[214] = on_conflict_clause */
   48,   /* field[48] = on_conflict_expr */
   11,   /* field[11] = op_expr */
+  229,   /* field[229] = opt_split */
   4,   /* field[4] = param */
-  172,   /* field[172] = param_ref */
-  221,   /* field[221] = partition_bound_spec */
-  223,   /* field[223] = partition_cmd */
-  219,   /* field[219] = partition_elem */
-  222,   /* field[222] = partition_range_datum */
-  220,   /* field[220] = partition_spec */
+  174,   /* field[174] = param_ref */
+  223,   /* field[223] = partition_bound_spec */
+  225,   /* field[225] = partition_cmd */
+  221,   /* field[221] = partition_elem */
+  224,   /* field[224] = partition_range_datum */
+  222,   /* field[222] = partition_spec */
   59,   /* field[59] = plassign_stmt */
-  118,   /* field[118] = prepare_stmt */
-  225,   /* field[225] = publication_obj_spec */
-  226,   /* field[226] = publication_table */
+  119,   /* field[119] = prepare_stmt */
+  227,   /* field[227] = publication_obj_spec */
+  228,   /* field[228] = publication_table */
   52,   /* field[52] = query */
-  185,   /* field[185] = range_function */
-  184,   /* field[184] = range_subselect */
-  187,   /* field[187] = range_table_func */
-  188,   /* field[188] = range_table_func_col */
-  186,   /* field[186] = range_table_sample */
-  195,   /* field[195] = range_tbl_entry */
-  196,   /* field[196] = range_tbl_function */
+  187,   /* field[187] = range_function */
+  186,   /* field[186] = range_subselect */
+  189,   /* field[189] = range_table_func */
+  190,   /* field[190] = range_table_func_col */
+  188,   /* field[188] = range_table_sample */
+  197,   /* field[197] = range_tbl_entry */
+  198,   /* field[198] = range_tbl_function */
   45,   /* field[45] = range_tbl_ref */
   1,   /* field[1] = range_var */
   51,   /* field[51] = raw_stmt */
-  130,   /* field[130] = reassign_owned_stmt */
-  154,   /* field[154] = refresh_mat_view_stmt */
+  132,   /* field[132] = reassign_owned_stmt */
+  156,   /* field[156] = refresh_mat_view_stmt */
   106,   /* field[106] = reindex_stmt */
   21,   /* field[21] = relabel_type */
   80,   /* field[80] = rename_stmt */
-  155,   /* field[155] = replica_identity_stmt */
-  178,   /* field[178] = res_target */
+  157,   /* field[157] = replica_identity_stmt */
+  180,   /* field[180] = res_target */
   58,   /* field[58] = return_stmt */
-  217,   /* field[217] = role_spec */
+  219,   /* field[219] = role_spec */
+  230,   /* field[230] = row_bounds */
   31,   /* field[31] = row_compare_expr */
   30,   /* field[30] = row_expr */
-  208,   /* field[208] = row_mark_clause */
+  210,   /* field[210] = row_mark_clause */
   81,   /* field[81] = rule_stmt */
   14,   /* field[14] = scalar_array_op_expr */
-  146,   /* field[146] = sec_label_stmt */
+  148,   /* field[148] = sec_label_stmt */
   57,   /* field[57] = select_stmt */
   63,   /* field[63] = set_operation_stmt */
   40,   /* field[40] = set_to_default */
-  182,   /* field[182] = sort_by */
-  199,   /* field[199] = sort_group_clause */
+  184,   /* field[184] = sort_by */
+  201,   /* field[201] = sort_group_clause */
   34,   /* field[34] = sqlvalue_function */
-  192,   /* field[192] = stats_elem */
-  232,   /* field[232] = string */
+  194,   /* field[194] = stats_elem */
+  239,   /* field[239] = string */
   16,   /* field[16] = sub_link */
   17,   /* field[17] = sub_plan */
   8,   /* field[8] = subscripting_ref */
   2,   /* field[2] = table_func */
-  205,   /* field[205] = table_like_clause */
-  197,   /* field[197] = table_sample_clause */
+  207,   /* field[207] = table_like_clause */
+  199,   /* field[199] = table_sample_clause */
   44,   /* field[44] = target_entry */
   85,   /* field[85] = transaction_stmt */
-  218,   /* field[218] = trigger_transition */
+  220,   /* field[220] = trigger_transition */
   73,   /* field[73] = truncate_stmt */
-  180,   /* field[180] = type_cast */
-  189,   /* field[189] = type_name */
+  182,   /* field[182] = type_cast */
+  191,   /* field[191] = type_name */
   84,   /* field[84] = unlisten_stmt */
   55,   /* field[55] = update_stmt */
-  224,   /* field[224] = vacuum_relation */
+  226,   /* field[226] = vacuum_relation */
   91,   /* field[91] = vacuum_stmt */
   3,   /* field[3] = var */
   96,   /* field[96] = variable_set_stmt */
   97,   /* field[97] = variable_show_stmt */
   86,   /* field[86] = view_stmt */
-  201,   /* field[201] = window_clause */
-  183,   /* field[183] = window_def */
+  203,   /* field[203] = window_clause */
+  185,   /* field[185] = window_def */
   7,   /* field[7] = window_func */
-  198,   /* field[198] = with_check_option */
-  210,   /* field[210] = with_clause */
+  200,   /* field[200] = with_check_option */
+  212,   /* field[212] = with_clause */
   35,   /* field[35] = xml_expr */
-  209,   /* field[209] = xml_serialize */
+  211,   /* field[211] = xml_serialize */
+  233,   /* field[233] = yb_backfill_info */
+  234,   /* field[234] = yb_create_profile_stmt */
+  235,   /* field[235] = yb_drop_profile_stmt */
 };
 static const ProtobufCIntRange pg_query__node__number_ranges[1 + 1] =
 {
   { 1, 0 },
-  { 0, 238 }
+  { 0, 245 }
 };
 const ProtobufCMessageDescriptor pg_query__node__descriptor =
 {
@@ -14111,7 +14517,7 @@ const ProtobufCMessageDescriptor pg_query__node__descriptor =
   "PgQuery__Node",
   "pg_query",
   sizeof(PgQuery__Node),
-  238,
+  245,
   pg_query__node__field_descriptors,
   pg_query__node__field_indices_by_name,
   1,  pg_query__node__number_ranges,
@@ -14433,7 +14839,7 @@ static const ProtobufCFieldDescriptor pg_query__a__const__field_descriptors[7] =
     offsetof(PgQuery__AConst, ival),
     &pg_query__integer__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -14445,7 +14851,7 @@ static const ProtobufCFieldDescriptor pg_query__a__const__field_descriptors[7] =
     offsetof(PgQuery__AConst, fval),
     &pg_query__float__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -14457,7 +14863,7 @@ static const ProtobufCFieldDescriptor pg_query__a__const__field_descriptors[7] =
     offsetof(PgQuery__AConst, boolval),
     &pg_query__boolean__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -14469,7 +14875,7 @@ static const ProtobufCFieldDescriptor pg_query__a__const__field_descriptors[7] =
     offsetof(PgQuery__AConst, sval),
     &pg_query__string__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -14481,7 +14887,7 @@ static const ProtobufCFieldDescriptor pg_query__a__const__field_descriptors[7] =
     offsetof(PgQuery__AConst, bsval),
     &pg_query__bit_string__descriptor,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_ONEOF,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -14837,7 +15243,7 @@ static const ProtobufCFieldDescriptor pg_query__table_func__field_descriptors[13
     offsetof(PgQuery__TableFunc, notnulls),
     NULL,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_PACKED,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_PACKED,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -18459,9 +18865,9 @@ static const ProtobufCFieldDescriptor pg_query__row_compare_expr__field_descript
   {
     "rargs",
     7,
-    PROTOBUF_C_LABEL_REPEATED,
+    PROTOBUF_C_LABEL_NONE,
     PROTOBUF_C_TYPE_MESSAGE,
-    offsetof(PgQuery__RowCompareExpr, n_rargs),
+    0,   /* quantifier_offset */
     offsetof(PgQuery__RowCompareExpr, rargs),
     &pg_query__node__descriptor,
     NULL,
@@ -21849,7 +22255,7 @@ const ProtobufCMessageDescriptor pg_query__alter_table_stmt__descriptor =
   (ProtobufCMessageInit) pg_query__alter_table_stmt__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
-static const ProtobufCFieldDescriptor pg_query__alter_table_cmd__field_descriptors[8] =
+static const ProtobufCFieldDescriptor pg_query__alter_table_cmd__field_descriptors[10] =
 {
   {
     "subtype",
@@ -21947,6 +22353,30 @@ static const ProtobufCFieldDescriptor pg_query__alter_table_cmd__field_descripto
     0,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
+  {
+    "yb_is_add_primary_key",
+    9,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_BOOL,
+    0,   /* quantifier_offset */
+    offsetof(PgQuery__AlterTableCmd, yb_is_add_primary_key),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "yb_cascade",
+    10,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_BOOL,
+    0,   /* quantifier_offset */
+    offsetof(PgQuery__AlterTableCmd, yb_cascade),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
 };
 static const unsigned pg_query__alter_table_cmd__field_indices_by_name[] = {
   5,   /* field[5] = behavior */
@@ -21957,11 +22387,13 @@ static const unsigned pg_query__alter_table_cmd__field_indices_by_name[] = {
   2,   /* field[2] = num */
   7,   /* field[7] = recurse */
   0,   /* field[0] = subtype */
+  9,   /* field[9] = yb_cascade */
+  8,   /* field[8] = yb_is_add_primary_key */
 };
 static const ProtobufCIntRange pg_query__alter_table_cmd__number_ranges[1 + 1] =
 {
   { 1, 0 },
-  { 0, 8 }
+  { 0, 10 }
 };
 const ProtobufCMessageDescriptor pg_query__alter_table_cmd__descriptor =
 {
@@ -21971,7 +22403,7 @@ const ProtobufCMessageDescriptor pg_query__alter_table_cmd__descriptor =
   "PgQuery__AlterTableCmd",
   "pg_query",
   sizeof(PgQuery__AlterTableCmd),
-  8,
+  10,
   pg_query__alter_table_cmd__field_descriptors,
   pg_query__alter_table_cmd__field_indices_by_name,
   1,  pg_query__alter_table_cmd__number_ranges,
@@ -22737,7 +23169,7 @@ const ProtobufCMessageDescriptor pg_query__copy_stmt__descriptor =
   (ProtobufCMessageInit) pg_query__copy_stmt__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
-static const ProtobufCFieldDescriptor pg_query__create_stmt__field_descriptors[12] =
+static const ProtobufCFieldDescriptor pg_query__create_stmt__field_descriptors[14] =
 {
   {
     "relation",
@@ -22883,6 +23315,30 @@ static const ProtobufCFieldDescriptor pg_query__create_stmt__field_descriptors[1
     0,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
+  {
+    "tablegroupname",
+    13,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(PgQuery__CreateStmt, tablegroupname),
+    NULL,
+    &protobuf_c_empty_string,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "split_options",
+    14,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(PgQuery__CreateStmt, split_options),
+    &pg_query__opt_split__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
 };
 static const unsigned pg_query__create_stmt__field_indices_by_name[] = {
   10,   /* field[10] = access_method */
@@ -22895,13 +23351,15 @@ static const unsigned pg_query__create_stmt__field_indices_by_name[] = {
   3,   /* field[3] = partbound */
   4,   /* field[4] = partspec */
   0,   /* field[0] = relation */
+  13,   /* field[13] = split_options */
   1,   /* field[1] = table_elts */
+  12,   /* field[12] = tablegroupname */
   9,   /* field[9] = tablespacename */
 };
 static const ProtobufCIntRange pg_query__create_stmt__number_ranges[1 + 1] =
 {
   { 1, 0 },
-  { 0, 12 }
+  { 0, 14 }
 };
 const ProtobufCMessageDescriptor pg_query__create_stmt__descriptor =
 {
@@ -22911,7 +23369,7 @@ const ProtobufCMessageDescriptor pg_query__create_stmt__descriptor =
   "PgQuery__CreateStmt",
   "pg_query",
   sizeof(PgQuery__CreateStmt),
-  12,
+  14,
   pg_query__create_stmt__field_descriptors,
   pg_query__create_stmt__field_indices_by_name,
   1,  pg_query__create_stmt__number_ranges,
@@ -23329,7 +23787,7 @@ const ProtobufCMessageDescriptor pg_query__fetch_stmt__descriptor =
   (ProtobufCMessageInit) pg_query__fetch_stmt__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
-static const ProtobufCFieldDescriptor pg_query__index_stmt__field_descriptors[24] =
+static const ProtobufCFieldDescriptor pg_query__index_stmt__field_descriptors[25] =
 {
   {
     "idxname",
@@ -23587,10 +24045,10 @@ static const ProtobufCFieldDescriptor pg_query__index_stmt__field_descriptors[24
     "concurrent",
     22,
     PROTOBUF_C_LABEL_NONE,
-    PROTOBUF_C_TYPE_BOOL,
+    PROTOBUF_C_TYPE_ENUM,
     0,   /* quantifier_offset */
     offsetof(PgQuery__IndexStmt, concurrent),
-    NULL,
+    &pg_query__yb_concurrency_context__descriptor,
     NULL,
     0,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
@@ -23619,6 +24077,18 @@ static const ProtobufCFieldDescriptor pg_query__index_stmt__field_descriptors[24
     0,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
+  {
+    "split_options",
+    25,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(PgQuery__IndexStmt, split_options),
+    &pg_query__opt_split__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
 };
 static const unsigned pg_query__index_stmt__field_indices_by_name[] = {
   2,   /* field[2] = access_method */
@@ -23641,6 +24111,7 @@ static const unsigned pg_query__index_stmt__field_indices_by_name[] = {
   16,   /* field[16] = primary */
   1,   /* field[1] = relation */
   23,   /* field[23] = reset_default_tblspc */
+  24,   /* field[24] = split_options */
   3,   /* field[3] = table_space */
   20,   /* field[20] = transformed */
   14,   /* field[14] = unique */
@@ -23649,7 +24120,7 @@ static const unsigned pg_query__index_stmt__field_indices_by_name[] = {
 static const ProtobufCIntRange pg_query__index_stmt__number_ranges[1 + 1] =
 {
   { 1, 0 },
-  { 0, 24 }
+  { 0, 25 }
 };
 const ProtobufCMessageDescriptor pg_query__index_stmt__descriptor =
 {
@@ -23659,7 +24130,7 @@ const ProtobufCMessageDescriptor pg_query__index_stmt__descriptor =
   "PgQuery__IndexStmt",
   "pg_query",
   sizeof(PgQuery__IndexStmt),
-  24,
+  25,
   pg_query__index_stmt__field_descriptors,
   pg_query__index_stmt__field_indices_by_name,
   1,  pg_query__index_stmt__number_ranges,
@@ -25898,6 +26369,57 @@ const ProtobufCMessageDescriptor pg_query__reindex_stmt__descriptor =
   (ProtobufCMessageInit) pg_query__reindex_stmt__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
+static const ProtobufCFieldDescriptor pg_query__backfill_index_stmt__field_descriptors[2] =
+{
+  {
+    "oid_list",
+    1,
+    PROTOBUF_C_LABEL_REPEATED,
+    PROTOBUF_C_TYPE_MESSAGE,
+    offsetof(PgQuery__BackfillIndexStmt, n_oid_list),
+    offsetof(PgQuery__BackfillIndexStmt, oid_list),
+    &pg_query__node__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "bfinfo",
+    2,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(PgQuery__BackfillIndexStmt, bfinfo),
+    &pg_query__yb_backfill_info__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+};
+static const unsigned pg_query__backfill_index_stmt__field_indices_by_name[] = {
+  1,   /* field[1] = bfinfo */
+  0,   /* field[0] = oid_list */
+};
+static const ProtobufCIntRange pg_query__backfill_index_stmt__number_ranges[1 + 1] =
+{
+  { 1, 0 },
+  { 0, 2 }
+};
+const ProtobufCMessageDescriptor pg_query__backfill_index_stmt__descriptor =
+{
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
+  "pg_query.BackfillIndexStmt",
+  "BackfillIndexStmt",
+  "PgQuery__BackfillIndexStmt",
+  "pg_query",
+  sizeof(PgQuery__BackfillIndexStmt),
+  2,
+  pg_query__backfill_index_stmt__field_descriptors,
+  pg_query__backfill_index_stmt__field_indices_by_name,
+  1,  pg_query__backfill_index_stmt__number_ranges,
+  (ProtobufCMessageInit) pg_query__backfill_index_stmt__init,
+  NULL,NULL,NULL    /* reserved[123] */
+};
 #define pg_query__check_point_stmt__field_descriptors NULL
 #define pg_query__check_point_stmt__field_indices_by_name NULL
 #define pg_query__check_point_stmt__number_ranges NULL
@@ -26823,6 +27345,96 @@ const ProtobufCMessageDescriptor pg_query__declare_cursor_stmt__descriptor =
   pg_query__declare_cursor_stmt__field_indices_by_name,
   1,  pg_query__declare_cursor_stmt__number_ranges,
   (ProtobufCMessageInit) pg_query__declare_cursor_stmt__init,
+  NULL,NULL,NULL    /* reserved[123] */
+};
+static const ProtobufCFieldDescriptor pg_query__create_table_group_stmt__field_descriptors[5] =
+{
+  {
+    "tablegroupname",
+    1,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(PgQuery__CreateTableGroupStmt, tablegroupname),
+    NULL,
+    &protobuf_c_empty_string,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "owner",
+    2,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(PgQuery__CreateTableGroupStmt, owner),
+    &pg_query__role_spec__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "options",
+    3,
+    PROTOBUF_C_LABEL_REPEATED,
+    PROTOBUF_C_TYPE_MESSAGE,
+    offsetof(PgQuery__CreateTableGroupStmt, n_options),
+    offsetof(PgQuery__CreateTableGroupStmt, options),
+    &pg_query__node__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "tablespacename",
+    4,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(PgQuery__CreateTableGroupStmt, tablespacename),
+    NULL,
+    &protobuf_c_empty_string,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "implicit",
+    5,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_BOOL,
+    0,   /* quantifier_offset */
+    offsetof(PgQuery__CreateTableGroupStmt, implicit),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+};
+static const unsigned pg_query__create_table_group_stmt__field_indices_by_name[] = {
+  4,   /* field[4] = implicit */
+  2,   /* field[2] = options */
+  1,   /* field[1] = owner */
+  0,   /* field[0] = tablegroupname */
+  3,   /* field[3] = tablespacename */
+};
+static const ProtobufCIntRange pg_query__create_table_group_stmt__number_ranges[1 + 1] =
+{
+  { 1, 0 },
+  { 0, 5 }
+};
+const ProtobufCMessageDescriptor pg_query__create_table_group_stmt__descriptor =
+{
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
+  "pg_query.CreateTableGroupStmt",
+  "CreateTableGroupStmt",
+  "PgQuery__CreateTableGroupStmt",
+  "pg_query",
+  sizeof(PgQuery__CreateTableGroupStmt),
+  5,
+  pg_query__create_table_group_stmt__field_descriptors,
+  pg_query__create_table_group_stmt__field_indices_by_name,
+  1,  pg_query__create_table_group_stmt__number_ranges,
+  (ProtobufCMessageInit) pg_query__create_table_group_stmt__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
 static const ProtobufCFieldDescriptor pg_query__create_table_space_stmt__field_descriptors[4] =
@@ -28414,7 +29026,7 @@ const ProtobufCMessageDescriptor pg_query__alter_table_space_options_stmt__descr
   (ProtobufCMessageInit) pg_query__alter_table_space_options_stmt__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
-static const ProtobufCFieldDescriptor pg_query__alter_table_move_all_stmt__field_descriptors[5] =
+static const ProtobufCFieldDescriptor pg_query__alter_table_move_all_stmt__field_descriptors[7] =
 {
   {
     "orig_tablespacename",
@@ -28476,6 +29088,30 @@ static const ProtobufCFieldDescriptor pg_query__alter_table_move_all_stmt__field
     0,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
+  {
+    "yb_relation",
+    6,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(PgQuery__AlterTableMoveAllStmt, yb_relation),
+    &pg_query__range_var__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "yb_cascade",
+    7,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_BOOL,
+    0,   /* quantifier_offset */
+    offsetof(PgQuery__AlterTableMoveAllStmt, yb_cascade),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
 };
 static const unsigned pg_query__alter_table_move_all_stmt__field_indices_by_name[] = {
   3,   /* field[3] = new_tablespacename */
@@ -28483,11 +29119,13 @@ static const unsigned pg_query__alter_table_move_all_stmt__field_indices_by_name
   1,   /* field[1] = objtype */
   0,   /* field[0] = orig_tablespacename */
   2,   /* field[2] = roles */
+  6,   /* field[6] = yb_cascade */
+  5,   /* field[5] = yb_relation */
 };
 static const ProtobufCIntRange pg_query__alter_table_move_all_stmt__number_ranges[1 + 1] =
 {
   { 1, 0 },
-  { 0, 5 }
+  { 0, 7 }
 };
 const ProtobufCMessageDescriptor pg_query__alter_table_move_all_stmt__descriptor =
 {
@@ -28497,7 +29135,7 @@ const ProtobufCMessageDescriptor pg_query__alter_table_move_all_stmt__descriptor
   "PgQuery__AlterTableMoveAllStmt",
   "pg_query",
   sizeof(PgQuery__AlterTableMoveAllStmt),
-  5,
+  7,
   pg_query__alter_table_move_all_stmt__field_descriptors,
   pg_query__alter_table_move_all_stmt__field_indices_by_name,
   1,  pg_query__alter_table_move_all_stmt__number_ranges,
@@ -32350,7 +32988,7 @@ const ProtobufCMessageDescriptor pg_query__stats_elem__descriptor =
   (ProtobufCMessageInit) pg_query__stats_elem__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
-static const ProtobufCFieldDescriptor pg_query__constraint__field_descriptors[30] =
+static const ProtobufCFieldDescriptor pg_query__constraint__field_descriptors[31] =
 {
   {
     "contype",
@@ -32712,6 +33350,18 @@ static const ProtobufCFieldDescriptor pg_query__constraint__field_descriptors[30
     0,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
+  {
+    "yb_index_params",
+    31,
+    PROTOBUF_C_LABEL_REPEATED,
+    PROTOBUF_C_TYPE_MESSAGE,
+    offsetof(PgQuery__Constraint, n_yb_index_params),
+    offsetof(PgQuery__Constraint, yb_index_params),
+    &pg_query__node__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
 };
 static const unsigned pg_query__constraint__field_indices_by_name[] = {
   17,   /* field[17] = access_method */
@@ -32744,11 +33394,12 @@ static const unsigned pg_query__constraint__field_indices_by_name[] = {
   16,   /* field[16] = reset_default_tblspc */
   28,   /* field[28] = skip_validation */
   18,   /* field[18] = where_clause */
+  30,   /* field[30] = yb_index_params */
 };
 static const ProtobufCIntRange pg_query__constraint__number_ranges[1 + 1] =
 {
   { 1, 0 },
-  { 0, 30 }
+  { 0, 31 }
 };
 const ProtobufCMessageDescriptor pg_query__constraint__descriptor =
 {
@@ -32758,7 +33409,7 @@ const ProtobufCMessageDescriptor pg_query__constraint__descriptor =
   "PgQuery__Constraint",
   "pg_query",
   sizeof(PgQuery__Constraint),
-  30,
+  31,
   pg_query__constraint__field_descriptors,
   pg_query__constraint__field_indices_by_name,
   1,  pg_query__constraint__number_ranges,
@@ -33250,7 +33901,7 @@ static const ProtobufCFieldDescriptor pg_query__range_tbl_entry__field_descripto
     offsetof(PgQuery__RangeTblEntry, selected_cols),
     NULL,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_PACKED,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_PACKED,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -33262,7 +33913,7 @@ static const ProtobufCFieldDescriptor pg_query__range_tbl_entry__field_descripto
     offsetof(PgQuery__RangeTblEntry, inserted_cols),
     NULL,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_PACKED,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_PACKED,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -33274,7 +33925,7 @@ static const ProtobufCFieldDescriptor pg_query__range_tbl_entry__field_descripto
     offsetof(PgQuery__RangeTblEntry, updated_cols),
     NULL,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_PACKED,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_PACKED,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -33286,7 +33937,7 @@ static const ProtobufCFieldDescriptor pg_query__range_tbl_entry__field_descripto
     offsetof(PgQuery__RangeTblEntry, extra_updated_cols),
     NULL,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_PACKED,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_PACKED,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
@@ -33444,7 +34095,7 @@ static const ProtobufCFieldDescriptor pg_query__range_tbl_function__field_descri
     offsetof(PgQuery__RangeTblFunction, funcparams),
     NULL,
     NULL,
-    0 | PROTOBUF_C_FIELD_FLAG_PACKED,             /* flags */
+    PROTOBUF_C_FIELD_FLAG_PACKED,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
 };
@@ -34236,7 +34887,7 @@ const ProtobufCMessageDescriptor pg_query__create_op_class_item__descriptor =
   (ProtobufCMessageInit) pg_query__create_op_class_item__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
-static const ProtobufCFieldDescriptor pg_query__table_like_clause__field_descriptors[3] =
+static const ProtobufCFieldDescriptor pg_query__table_like_clause__field_descriptors[4] =
 {
   {
     "relation",
@@ -34274,16 +34925,29 @@ static const ProtobufCFieldDescriptor pg_query__table_like_clause__field_descrip
     0,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
+  {
+    "yb_tablespace_oid",
+    4,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_UINT32,
+    0,   /* quantifier_offset */
+    offsetof(PgQuery__TableLikeClause, yb_tablespace_oid),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
 };
 static const unsigned pg_query__table_like_clause__field_indices_by_name[] = {
   1,   /* field[1] = options */
   0,   /* field[0] = relation */
   2,   /* field[2] = relation_oid */
+  3,   /* field[3] = yb_tablespace_oid */
 };
 static const ProtobufCIntRange pg_query__table_like_clause__number_ranges[1 + 1] =
 {
   { 1, 0 },
-  { 0, 3 }
+  { 0, 4 }
 };
 const ProtobufCMessageDescriptor pg_query__table_like_clause__descriptor =
 {
@@ -34293,7 +34957,7 @@ const ProtobufCMessageDescriptor pg_query__table_like_clause__descriptor =
   "PgQuery__TableLikeClause",
   "pg_query",
   sizeof(PgQuery__TableLikeClause),
-  3,
+  4,
   pg_query__table_like_clause__field_descriptors,
   pg_query__table_like_clause__field_indices_by_name,
   1,  pg_query__table_like_clause__number_ranges,
@@ -36099,6 +36763,134 @@ const ProtobufCMessageDescriptor pg_query__publication_table__descriptor =
   (ProtobufCMessageInit) pg_query__publication_table__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
+static const ProtobufCFieldDescriptor pg_query__opt_split__field_descriptors[3] =
+{
+  {
+    "split_type",
+    1,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_ENUM,
+    0,   /* quantifier_offset */
+    offsetof(PgQuery__OptSplit, split_type),
+    &pg_query__yb_split_type__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "num_tablets",
+    2,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_INT32,
+    0,   /* quantifier_offset */
+    offsetof(PgQuery__OptSplit, num_tablets),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "split_points",
+    3,
+    PROTOBUF_C_LABEL_REPEATED,
+    PROTOBUF_C_TYPE_MESSAGE,
+    offsetof(PgQuery__OptSplit, n_split_points),
+    offsetof(PgQuery__OptSplit, split_points),
+    &pg_query__node__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+};
+static const unsigned pg_query__opt_split__field_indices_by_name[] = {
+  1,   /* field[1] = num_tablets */
+  2,   /* field[2] = split_points */
+  0,   /* field[0] = split_type */
+};
+static const ProtobufCIntRange pg_query__opt_split__number_ranges[1 + 1] =
+{
+  { 1, 0 },
+  { 0, 3 }
+};
+const ProtobufCMessageDescriptor pg_query__opt_split__descriptor =
+{
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
+  "pg_query.OptSplit",
+  "OptSplit",
+  "PgQuery__OptSplit",
+  "pg_query",
+  sizeof(PgQuery__OptSplit),
+  3,
+  pg_query__opt_split__field_descriptors,
+  pg_query__opt_split__field_indices_by_name,
+  1,  pg_query__opt_split__number_ranges,
+  (ProtobufCMessageInit) pg_query__opt_split__init,
+  NULL,NULL,NULL    /* reserved[123] */
+};
+static const ProtobufCFieldDescriptor pg_query__row_bounds__field_descriptors[3] =
+{
+  {
+    "partition_key",
+    1,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(PgQuery__RowBounds, partition_key),
+    NULL,
+    &protobuf_c_empty_string,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "row_key_start",
+    2,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(PgQuery__RowBounds, row_key_start),
+    NULL,
+    &protobuf_c_empty_string,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "row_key_end",
+    3,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(PgQuery__RowBounds, row_key_end),
+    NULL,
+    &protobuf_c_empty_string,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+};
+static const unsigned pg_query__row_bounds__field_indices_by_name[] = {
+  0,   /* field[0] = partition_key */
+  2,   /* field[2] = row_key_end */
+  1,   /* field[1] = row_key_start */
+};
+static const ProtobufCIntRange pg_query__row_bounds__number_ranges[1 + 1] =
+{
+  { 1, 0 },
+  { 0, 3 }
+};
+const ProtobufCMessageDescriptor pg_query__row_bounds__descriptor =
+{
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
+  "pg_query.RowBounds",
+  "RowBounds",
+  "PgQuery__RowBounds",
+  "pg_query",
+  sizeof(PgQuery__RowBounds),
+  3,
+  pg_query__row_bounds__field_descriptors,
+  pg_query__row_bounds__field_indices_by_name,
+  1,  pg_query__row_bounds__number_ranges,
+  (ProtobufCMessageInit) pg_query__row_bounds__init,
+  NULL,NULL,NULL    /* reserved[123] */
+};
 static const ProtobufCFieldDescriptor pg_query__inline_code_block__field_descriptors[4] =
 {
   {
@@ -36212,6 +37004,146 @@ const ProtobufCMessageDescriptor pg_query__call_context__descriptor =
   pg_query__call_context__field_indices_by_name,
   1,  pg_query__call_context__number_ranges,
   (ProtobufCMessageInit) pg_query__call_context__init,
+  NULL,NULL,NULL    /* reserved[123] */
+};
+static const ProtobufCFieldDescriptor pg_query__yb_backfill_info__field_descriptors[2] =
+{
+  {
+    "bfinstr",
+    1,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(PgQuery__YbBackfillInfo, bfinstr),
+    NULL,
+    &protobuf_c_empty_string,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "row_bounds",
+    2,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(PgQuery__YbBackfillInfo, row_bounds),
+    &pg_query__row_bounds__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+};
+static const unsigned pg_query__yb_backfill_info__field_indices_by_name[] = {
+  0,   /* field[0] = bfinstr */
+  1,   /* field[1] = row_bounds */
+};
+static const ProtobufCIntRange pg_query__yb_backfill_info__number_ranges[1 + 1] =
+{
+  { 1, 0 },
+  { 0, 2 }
+};
+const ProtobufCMessageDescriptor pg_query__yb_backfill_info__descriptor =
+{
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
+  "pg_query.YbBackfillInfo",
+  "YbBackfillInfo",
+  "PgQuery__YbBackfillInfo",
+  "pg_query",
+  sizeof(PgQuery__YbBackfillInfo),
+  2,
+  pg_query__yb_backfill_info__field_descriptors,
+  pg_query__yb_backfill_info__field_indices_by_name,
+  1,  pg_query__yb_backfill_info__number_ranges,
+  (ProtobufCMessageInit) pg_query__yb_backfill_info__init,
+  NULL,NULL,NULL    /* reserved[123] */
+};
+static const ProtobufCFieldDescriptor pg_query__yb_create_profile_stmt__field_descriptors[1] =
+{
+  {
+    "prfname",
+    1,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(PgQuery__YbCreateProfileStmt, prfname),
+    NULL,
+    &protobuf_c_empty_string,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+};
+static const unsigned pg_query__yb_create_profile_stmt__field_indices_by_name[] = {
+  0,   /* field[0] = prfname */
+};
+static const ProtobufCIntRange pg_query__yb_create_profile_stmt__number_ranges[1 + 1] =
+{
+  { 1, 0 },
+  { 0, 1 }
+};
+const ProtobufCMessageDescriptor pg_query__yb_create_profile_stmt__descriptor =
+{
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
+  "pg_query.YbCreateProfileStmt",
+  "YbCreateProfileStmt",
+  "PgQuery__YbCreateProfileStmt",
+  "pg_query",
+  sizeof(PgQuery__YbCreateProfileStmt),
+  1,
+  pg_query__yb_create_profile_stmt__field_descriptors,
+  pg_query__yb_create_profile_stmt__field_indices_by_name,
+  1,  pg_query__yb_create_profile_stmt__number_ranges,
+  (ProtobufCMessageInit) pg_query__yb_create_profile_stmt__init,
+  NULL,NULL,NULL    /* reserved[123] */
+};
+static const ProtobufCFieldDescriptor pg_query__yb_drop_profile_stmt__field_descriptors[2] =
+{
+  {
+    "prfname",
+    1,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(PgQuery__YbDropProfileStmt, prfname),
+    NULL,
+    &protobuf_c_empty_string,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "missing_ok",
+    2,
+    PROTOBUF_C_LABEL_NONE,
+    PROTOBUF_C_TYPE_BOOL,
+    0,   /* quantifier_offset */
+    offsetof(PgQuery__YbDropProfileStmt, missing_ok),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+};
+static const unsigned pg_query__yb_drop_profile_stmt__field_indices_by_name[] = {
+  1,   /* field[1] = missing_ok */
+  0,   /* field[0] = prfname */
+};
+static const ProtobufCIntRange pg_query__yb_drop_profile_stmt__number_ranges[1 + 1] =
+{
+  { 1, 0 },
+  { 0, 2 }
+};
+const ProtobufCMessageDescriptor pg_query__yb_drop_profile_stmt__descriptor =
+{
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
+  "pg_query.YbDropProfileStmt",
+  "YbDropProfileStmt",
+  "PgQuery__YbDropProfileStmt",
+  "pg_query",
+  sizeof(PgQuery__YbDropProfileStmt),
+  2,
+  pg_query__yb_drop_profile_stmt__field_descriptors,
+  pg_query__yb_drop_profile_stmt__field_indices_by_name,
+  1,  pg_query__yb_drop_profile_stmt__number_ranges,
+  (ProtobufCMessageInit) pg_query__yb_drop_profile_stmt__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
 static const ProtobufCFieldDescriptor pg_query__scan_token__field_descriptors[4] =
@@ -36360,22 +37292,24 @@ const ProtobufCEnumDescriptor pg_query__query_source__descriptor =
   pg_query__query_source__value_ranges,
   NULL,NULL,NULL,NULL   /* reserved[1234] */
 };
-static const ProtobufCEnumValue pg_query__sort_by_dir__enum_values_by_number[5] =
+static const ProtobufCEnumValue pg_query__sort_by_dir__enum_values_by_number[6] =
 {
   { "SORT_BY_DIR_UNDEFINED", "PG_QUERY__SORT_BY_DIR__SORT_BY_DIR_UNDEFINED", 0 },
   { "SORTBY_DEFAULT", "PG_QUERY__SORT_BY_DIR__SORTBY_DEFAULT", 1 },
   { "SORTBY_ASC", "PG_QUERY__SORT_BY_DIR__SORTBY_ASC", 2 },
   { "SORTBY_DESC", "PG_QUERY__SORT_BY_DIR__SORTBY_DESC", 3 },
   { "SORTBY_USING", "PG_QUERY__SORT_BY_DIR__SORTBY_USING", 4 },
+  { "SORTBY_HASH", "PG_QUERY__SORT_BY_DIR__SORTBY_HASH", 5 },
 };
 static const ProtobufCIntRange pg_query__sort_by_dir__value_ranges[] = {
-{0, 0},{0, 5}
+{0, 0},{0, 6}
 };
-static const ProtobufCEnumValueIndex pg_query__sort_by_dir__enum_values_by_name[5] =
+static const ProtobufCEnumValueIndex pg_query__sort_by_dir__enum_values_by_name[6] =
 {
   { "SORTBY_ASC", 2 },
   { "SORTBY_DEFAULT", 1 },
   { "SORTBY_DESC", 3 },
+  { "SORTBY_HASH", 5 },
   { "SORTBY_USING", 4 },
   { "SORT_BY_DIR_UNDEFINED", 0 },
 };
@@ -36386,9 +37320,9 @@ const ProtobufCEnumDescriptor pg_query__sort_by_dir__descriptor =
   "SortByDir",
   "PgQuery__SortByDir",
   "pg_query",
-  5,
+  6,
   pg_query__sort_by_dir__enum_values_by_number,
-  5,
+  6,
   pg_query__sort_by_dir__enum_values_by_name,
   1,
   pg_query__sort_by_dir__value_ranges,
@@ -36844,7 +37778,7 @@ const ProtobufCEnumDescriptor pg_query__set_operation__descriptor =
   pg_query__set_operation__value_ranges,
   NULL,NULL,NULL,NULL   /* reserved[1234] */
 };
-static const ProtobufCEnumValue pg_query__object_type__enum_values_by_number[53] =
+static const ProtobufCEnumValue pg_query__object_type__enum_values_by_number[55] =
 {
   { "OBJECT_TYPE_UNDEFINED", "PG_QUERY__OBJECT_TYPE__OBJECT_TYPE_UNDEFINED", 0 },
   { "OBJECT_ACCESS_METHOD", "PG_QUERY__OBJECT_TYPE__OBJECT_ACCESS_METHOD", 1 },
@@ -36889,21 +37823,23 @@ static const ProtobufCEnumValue pg_query__object_type__enum_values_by_number[53]
   { "OBJECT_STATISTIC_EXT", "PG_QUERY__OBJECT_TYPE__OBJECT_STATISTIC_EXT", 40 },
   { "OBJECT_TABCONSTRAINT", "PG_QUERY__OBJECT_TYPE__OBJECT_TABCONSTRAINT", 41 },
   { "OBJECT_TABLE", "PG_QUERY__OBJECT_TYPE__OBJECT_TABLE", 42 },
-  { "OBJECT_TABLESPACE", "PG_QUERY__OBJECT_TYPE__OBJECT_TABLESPACE", 43 },
-  { "OBJECT_TRANSFORM", "PG_QUERY__OBJECT_TYPE__OBJECT_TRANSFORM", 44 },
-  { "OBJECT_TRIGGER", "PG_QUERY__OBJECT_TYPE__OBJECT_TRIGGER", 45 },
-  { "OBJECT_TSCONFIGURATION", "PG_QUERY__OBJECT_TYPE__OBJECT_TSCONFIGURATION", 46 },
-  { "OBJECT_TSDICTIONARY", "PG_QUERY__OBJECT_TYPE__OBJECT_TSDICTIONARY", 47 },
-  { "OBJECT_TSPARSER", "PG_QUERY__OBJECT_TYPE__OBJECT_TSPARSER", 48 },
-  { "OBJECT_TSTEMPLATE", "PG_QUERY__OBJECT_TYPE__OBJECT_TSTEMPLATE", 49 },
-  { "OBJECT_TYPE", "PG_QUERY__OBJECT_TYPE__OBJECT_TYPE", 50 },
-  { "OBJECT_USER_MAPPING", "PG_QUERY__OBJECT_TYPE__OBJECT_USER_MAPPING", 51 },
-  { "OBJECT_VIEW", "PG_QUERY__OBJECT_TYPE__OBJECT_VIEW", 52 },
+  { "OBJECT_YBTABLEGROUP", "PG_QUERY__OBJECT_TYPE__OBJECT_YBTABLEGROUP", 43 },
+  { "OBJECT_TABLESPACE", "PG_QUERY__OBJECT_TYPE__OBJECT_TABLESPACE", 44 },
+  { "OBJECT_TRANSFORM", "PG_QUERY__OBJECT_TYPE__OBJECT_TRANSFORM", 45 },
+  { "OBJECT_TRIGGER", "PG_QUERY__OBJECT_TYPE__OBJECT_TRIGGER", 46 },
+  { "OBJECT_TSCONFIGURATION", "PG_QUERY__OBJECT_TYPE__OBJECT_TSCONFIGURATION", 47 },
+  { "OBJECT_TSDICTIONARY", "PG_QUERY__OBJECT_TYPE__OBJECT_TSDICTIONARY", 48 },
+  { "OBJECT_TSPARSER", "PG_QUERY__OBJECT_TYPE__OBJECT_TSPARSER", 49 },
+  { "OBJECT_TSTEMPLATE", "PG_QUERY__OBJECT_TYPE__OBJECT_TSTEMPLATE", 50 },
+  { "OBJECT_TYPE", "PG_QUERY__OBJECT_TYPE__OBJECT_TYPE", 51 },
+  { "OBJECT_USER_MAPPING", "PG_QUERY__OBJECT_TYPE__OBJECT_USER_MAPPING", 52 },
+  { "OBJECT_VIEW", "PG_QUERY__OBJECT_TYPE__OBJECT_VIEW", 53 },
+  { "OBJECT_YBPROFILE", "PG_QUERY__OBJECT_TYPE__OBJECT_YBPROFILE", 54 },
 };
 static const ProtobufCIntRange pg_query__object_type__value_ranges[] = {
-{0, 0},{0, 53}
+{0, 0},{0, 55}
 };
-static const ProtobufCEnumValueIndex pg_query__object_type__enum_values_by_name[53] =
+static const ProtobufCEnumValueIndex pg_query__object_type__enum_values_by_name[55] =
 {
   { "OBJECT_ACCESS_METHOD", 1 },
   { "OBJECT_AGGREGATE", 2 },
@@ -36947,17 +37883,19 @@ static const ProtobufCEnumValueIndex pg_query__object_type__enum_values_by_name[
   { "OBJECT_SUBSCRIPTION", 39 },
   { "OBJECT_TABCONSTRAINT", 41 },
   { "OBJECT_TABLE", 42 },
-  { "OBJECT_TABLESPACE", 43 },
-  { "OBJECT_TRANSFORM", 44 },
-  { "OBJECT_TRIGGER", 45 },
-  { "OBJECT_TSCONFIGURATION", 46 },
-  { "OBJECT_TSDICTIONARY", 47 },
-  { "OBJECT_TSPARSER", 48 },
-  { "OBJECT_TSTEMPLATE", 49 },
-  { "OBJECT_TYPE", 50 },
+  { "OBJECT_TABLESPACE", 44 },
+  { "OBJECT_TRANSFORM", 45 },
+  { "OBJECT_TRIGGER", 46 },
+  { "OBJECT_TSCONFIGURATION", 47 },
+  { "OBJECT_TSDICTIONARY", 48 },
+  { "OBJECT_TSPARSER", 49 },
+  { "OBJECT_TSTEMPLATE", 50 },
+  { "OBJECT_TYPE", 51 },
   { "OBJECT_TYPE_UNDEFINED", 0 },
-  { "OBJECT_USER_MAPPING", 51 },
-  { "OBJECT_VIEW", 52 },
+  { "OBJECT_USER_MAPPING", 52 },
+  { "OBJECT_VIEW", 53 },
+  { "OBJECT_YBPROFILE", 54 },
+  { "OBJECT_YBTABLEGROUP", 43 },
 };
 const ProtobufCEnumDescriptor pg_query__object_type__descriptor =
 {
@@ -36966,9 +37904,9 @@ const ProtobufCEnumDescriptor pg_query__object_type__descriptor =
   "ObjectType",
   "PgQuery__ObjectType",
   "pg_query",
-  53,
+  55,
   pg_query__object_type__enum_values_by_number,
-  53,
+  55,
   pg_query__object_type__enum_values_by_name,
   1,
   pg_query__object_type__value_ranges,
@@ -37294,6 +38232,36 @@ const ProtobufCEnumDescriptor pg_query__constr_type__descriptor =
   pg_query__constr_type__enum_values_by_name,
   1,
   pg_query__constr_type__value_ranges,
+  NULL,NULL,NULL,NULL   /* reserved[1234] */
+};
+static const ProtobufCEnumValue pg_query__yb_split_type__enum_values_by_number[3] =
+{
+  { "YB_SPLIT_TYPE_UNDEFINED", "PG_QUERY__YB_SPLIT_TYPE__YB_SPLIT_TYPE_UNDEFINED", 0 },
+  { "NUM_TABLETS", "PG_QUERY__YB_SPLIT_TYPE__NUM_TABLETS", 1 },
+  { "SPLIT_POINTS", "PG_QUERY__YB_SPLIT_TYPE__SPLIT_POINTS", 2 },
+};
+static const ProtobufCIntRange pg_query__yb_split_type__value_ranges[] = {
+{0, 0},{0, 3}
+};
+static const ProtobufCEnumValueIndex pg_query__yb_split_type__enum_values_by_name[3] =
+{
+  { "NUM_TABLETS", 1 },
+  { "SPLIT_POINTS", 2 },
+  { "YB_SPLIT_TYPE_UNDEFINED", 0 },
+};
+const ProtobufCEnumDescriptor pg_query__yb_split_type__descriptor =
+{
+  PROTOBUF_C__ENUM_DESCRIPTOR_MAGIC,
+  "pg_query.yb_split_type",
+  "yb_split_type",
+  "PgQuery__YbSplitType",
+  "pg_query",
+  3,
+  pg_query__yb_split_type__enum_values_by_number,
+  3,
+  pg_query__yb_split_type__enum_values_by_name,
+  1,
+  pg_query__yb_split_type__value_ranges,
   NULL,NULL,NULL,NULL   /* reserved[1234] */
 };
 static const ProtobufCEnumValue pg_query__import_foreign_schema_type__enum_values_by_number[4] =
@@ -37860,6 +38828,38 @@ const ProtobufCEnumDescriptor pg_query__coercion_form__descriptor =
   pg_query__coercion_form__value_ranges,
   NULL,NULL,NULL,NULL   /* reserved[1234] */
 };
+static const ProtobufCEnumValue pg_query__yb_concurrency_context__enum_values_by_number[4] =
+{
+  { "YB_CONCURRENCY_CONTEXT_UNDEFINED", "PG_QUERY__YB_CONCURRENCY_CONTEXT__YB_CONCURRENCY_CONTEXT_UNDEFINED", 0 },
+  { "YB_CONCURRENCY_DISABLED", "PG_QUERY__YB_CONCURRENCY_CONTEXT__YB_CONCURRENCY_DISABLED", 1 },
+  { "YB_CONCURRENCY_IMPLICIT_ENABLED", "PG_QUERY__YB_CONCURRENCY_CONTEXT__YB_CONCURRENCY_IMPLICIT_ENABLED", 2 },
+  { "YB_CONCURRENCY_EXPLICIT_ENABLED", "PG_QUERY__YB_CONCURRENCY_CONTEXT__YB_CONCURRENCY_EXPLICIT_ENABLED", 3 },
+};
+static const ProtobufCIntRange pg_query__yb_concurrency_context__value_ranges[] = {
+{0, 0},{0, 4}
+};
+static const ProtobufCEnumValueIndex pg_query__yb_concurrency_context__enum_values_by_name[4] =
+{
+  { "YB_CONCURRENCY_CONTEXT_UNDEFINED", 0 },
+  { "YB_CONCURRENCY_DISABLED", 1 },
+  { "YB_CONCURRENCY_EXPLICIT_ENABLED", 3 },
+  { "YB_CONCURRENCY_IMPLICIT_ENABLED", 2 },
+};
+const ProtobufCEnumDescriptor pg_query__yb_concurrency_context__descriptor =
+{
+  PROTOBUF_C__ENUM_DESCRIPTOR_MAGIC,
+  "pg_query.YbConcurrencyContext",
+  "YbConcurrencyContext",
+  "PgQuery__YbConcurrencyContext",
+  "pg_query",
+  4,
+  pg_query__yb_concurrency_context__enum_values_by_number,
+  4,
+  pg_query__yb_concurrency_context__enum_values_by_name,
+  1,
+  pg_query__yb_concurrency_context__value_ranges,
+  NULL,NULL,NULL,NULL   /* reserved[1234] */
+};
 static const ProtobufCEnumValue pg_query__bool_expr_type__enum_values_by_number[4] =
 {
   { "BOOL_EXPR_TYPE_UNDEFINED", "PG_QUERY__BOOL_EXPR_TYPE__BOOL_EXPR_TYPE_UNDEFINED", 0 },
@@ -38412,21 +39412,23 @@ const ProtobufCEnumDescriptor pg_query__set_op_strategy__descriptor =
   pg_query__set_op_strategy__value_ranges,
   NULL,NULL,NULL,NULL   /* reserved[1234] */
 };
-static const ProtobufCEnumValue pg_query__on_conflict_action__enum_values_by_number[4] =
+static const ProtobufCEnumValue pg_query__on_conflict_action__enum_values_by_number[5] =
 {
   { "ON_CONFLICT_ACTION_UNDEFINED", "PG_QUERY__ON_CONFLICT_ACTION__ON_CONFLICT_ACTION_UNDEFINED", 0 },
   { "ONCONFLICT_NONE", "PG_QUERY__ON_CONFLICT_ACTION__ONCONFLICT_NONE", 1 },
   { "ONCONFLICT_NOTHING", "PG_QUERY__ON_CONFLICT_ACTION__ONCONFLICT_NOTHING", 2 },
   { "ONCONFLICT_UPDATE", "PG_QUERY__ON_CONFLICT_ACTION__ONCONFLICT_UPDATE", 3 },
+  { "ONCONFLICT_YB_REPLACE", "PG_QUERY__ON_CONFLICT_ACTION__ONCONFLICT_YB_REPLACE", 4 },
 };
 static const ProtobufCIntRange pg_query__on_conflict_action__value_ranges[] = {
-{0, 0},{0, 4}
+{0, 0},{0, 5}
 };
-static const ProtobufCEnumValueIndex pg_query__on_conflict_action__enum_values_by_name[4] =
+static const ProtobufCEnumValueIndex pg_query__on_conflict_action__enum_values_by_name[5] =
 {
   { "ONCONFLICT_NONE", 1 },
   { "ONCONFLICT_NOTHING", 2 },
   { "ONCONFLICT_UPDATE", 3 },
+  { "ONCONFLICT_YB_REPLACE", 4 },
   { "ON_CONFLICT_ACTION_UNDEFINED", 0 },
 };
 const ProtobufCEnumDescriptor pg_query__on_conflict_action__descriptor =
@@ -38436,9 +39438,9 @@ const ProtobufCEnumDescriptor pg_query__on_conflict_action__descriptor =
   "OnConflictAction",
   "PgQuery__OnConflictAction",
   "pg_query",
-  4,
+  5,
   pg_query__on_conflict_action__enum_values_by_number,
-  4,
+  5,
   pg_query__on_conflict_action__enum_values_by_name,
   1,
   pg_query__on_conflict_action__value_ranges,
@@ -38612,7 +39614,7 @@ const ProtobufCEnumDescriptor pg_query__keyword_kind__descriptor =
   pg_query__keyword_kind__value_ranges,
   NULL,NULL,NULL,NULL   /* reserved[1234] */
 };
-static const ProtobufCEnumValue pg_query__token__enum_values_by_number[509] =
+static const ProtobufCEnumValue pg_query__token__enum_values_by_number[526] =
 {
   { "NUL", "PG_QUERY__TOKEN__NUL", 0 },
   { "ASCII_36", "PG_QUERY__TOKEN__ASCII_36", 36 },
@@ -38657,497 +39659,515 @@ static const ProtobufCEnumValue pg_query__token__enum_values_by_number[509] =
   { "ABORT_P", "PG_QUERY__TOKEN__ABORT_P", 277 },
   { "ABSOLUTE_P", "PG_QUERY__TOKEN__ABSOLUTE_P", 278 },
   { "ACCESS", "PG_QUERY__TOKEN__ACCESS", 279 },
-  { "ACTION", "PG_QUERY__TOKEN__ACTION", 280 },
-  { "ADD_P", "PG_QUERY__TOKEN__ADD_P", 281 },
-  { "ADMIN", "PG_QUERY__TOKEN__ADMIN", 282 },
-  { "AFTER", "PG_QUERY__TOKEN__AFTER", 283 },
-  { "AGGREGATE", "PG_QUERY__TOKEN__AGGREGATE", 284 },
-  { "ALL", "PG_QUERY__TOKEN__ALL", 285 },
-  { "ALSO", "PG_QUERY__TOKEN__ALSO", 286 },
-  { "ALTER", "PG_QUERY__TOKEN__ALTER", 287 },
-  { "ALWAYS", "PG_QUERY__TOKEN__ALWAYS", 288 },
-  { "ANALYSE", "PG_QUERY__TOKEN__ANALYSE", 289 },
-  { "ANALYZE", "PG_QUERY__TOKEN__ANALYZE", 290 },
-  { "AND", "PG_QUERY__TOKEN__AND", 291 },
-  { "ANY", "PG_QUERY__TOKEN__ANY", 292 },
-  { "ARRAY", "PG_QUERY__TOKEN__ARRAY", 293 },
-  { "AS", "PG_QUERY__TOKEN__AS", 294 },
-  { "ASC", "PG_QUERY__TOKEN__ASC", 295 },
-  { "ASENSITIVE", "PG_QUERY__TOKEN__ASENSITIVE", 296 },
-  { "ASSERTION", "PG_QUERY__TOKEN__ASSERTION", 297 },
-  { "ASSIGNMENT", "PG_QUERY__TOKEN__ASSIGNMENT", 298 },
-  { "ASYMMETRIC", "PG_QUERY__TOKEN__ASYMMETRIC", 299 },
-  { "ATOMIC", "PG_QUERY__TOKEN__ATOMIC", 300 },
-  { "AT", "PG_QUERY__TOKEN__AT", 301 },
-  { "ATTACH", "PG_QUERY__TOKEN__ATTACH", 302 },
-  { "ATTRIBUTE", "PG_QUERY__TOKEN__ATTRIBUTE", 303 },
-  { "AUTHORIZATION", "PG_QUERY__TOKEN__AUTHORIZATION", 304 },
-  { "BACKWARD", "PG_QUERY__TOKEN__BACKWARD", 305 },
-  { "BEFORE", "PG_QUERY__TOKEN__BEFORE", 306 },
-  { "BEGIN_P", "PG_QUERY__TOKEN__BEGIN_P", 307 },
-  { "BETWEEN", "PG_QUERY__TOKEN__BETWEEN", 308 },
-  { "BIGINT", "PG_QUERY__TOKEN__BIGINT", 309 },
-  { "BINARY", "PG_QUERY__TOKEN__BINARY", 310 },
-  { "BIT", "PG_QUERY__TOKEN__BIT", 311 },
-  { "BOOLEAN_P", "PG_QUERY__TOKEN__BOOLEAN_P", 312 },
-  { "BOTH", "PG_QUERY__TOKEN__BOTH", 313 },
-  { "BREADTH", "PG_QUERY__TOKEN__BREADTH", 314 },
-  { "BY", "PG_QUERY__TOKEN__BY", 315 },
-  { "CACHE", "PG_QUERY__TOKEN__CACHE", 316 },
-  { "CALL", "PG_QUERY__TOKEN__CALL", 317 },
-  { "CALLED", "PG_QUERY__TOKEN__CALLED", 318 },
-  { "CASCADE", "PG_QUERY__TOKEN__CASCADE", 319 },
-  { "CASCADED", "PG_QUERY__TOKEN__CASCADED", 320 },
-  { "CASE", "PG_QUERY__TOKEN__CASE", 321 },
-  { "CAST", "PG_QUERY__TOKEN__CAST", 322 },
-  { "CATALOG_P", "PG_QUERY__TOKEN__CATALOG_P", 323 },
-  { "CHAIN", "PG_QUERY__TOKEN__CHAIN", 324 },
-  { "CHAR_P", "PG_QUERY__TOKEN__CHAR_P", 325 },
-  { "CHARACTER", "PG_QUERY__TOKEN__CHARACTER", 326 },
-  { "CHARACTERISTICS", "PG_QUERY__TOKEN__CHARACTERISTICS", 327 },
-  { "CHECK", "PG_QUERY__TOKEN__CHECK", 328 },
-  { "CHECKPOINT", "PG_QUERY__TOKEN__CHECKPOINT", 329 },
-  { "CLASS", "PG_QUERY__TOKEN__CLASS", 330 },
-  { "CLOSE", "PG_QUERY__TOKEN__CLOSE", 331 },
-  { "CLUSTER", "PG_QUERY__TOKEN__CLUSTER", 332 },
-  { "COALESCE", "PG_QUERY__TOKEN__COALESCE", 333 },
-  { "COLLATE", "PG_QUERY__TOKEN__COLLATE", 334 },
-  { "COLLATION", "PG_QUERY__TOKEN__COLLATION", 335 },
-  { "COLUMN", "PG_QUERY__TOKEN__COLUMN", 336 },
-  { "COLUMNS", "PG_QUERY__TOKEN__COLUMNS", 337 },
-  { "COMMENT", "PG_QUERY__TOKEN__COMMENT", 338 },
-  { "COMMENTS", "PG_QUERY__TOKEN__COMMENTS", 339 },
-  { "COMMIT", "PG_QUERY__TOKEN__COMMIT", 340 },
-  { "COMMITTED", "PG_QUERY__TOKEN__COMMITTED", 341 },
-  { "COMPRESSION", "PG_QUERY__TOKEN__COMPRESSION", 342 },
-  { "CONCURRENTLY", "PG_QUERY__TOKEN__CONCURRENTLY", 343 },
-  { "CONFIGURATION", "PG_QUERY__TOKEN__CONFIGURATION", 344 },
-  { "CONFLICT", "PG_QUERY__TOKEN__CONFLICT", 345 },
-  { "CONNECTION", "PG_QUERY__TOKEN__CONNECTION", 346 },
-  { "CONSTRAINT", "PG_QUERY__TOKEN__CONSTRAINT", 347 },
-  { "CONSTRAINTS", "PG_QUERY__TOKEN__CONSTRAINTS", 348 },
-  { "CONTENT_P", "PG_QUERY__TOKEN__CONTENT_P", 349 },
-  { "CONTINUE_P", "PG_QUERY__TOKEN__CONTINUE_P", 350 },
-  { "CONVERSION_P", "PG_QUERY__TOKEN__CONVERSION_P", 351 },
-  { "COPY", "PG_QUERY__TOKEN__COPY", 352 },
-  { "COST", "PG_QUERY__TOKEN__COST", 353 },
-  { "CREATE", "PG_QUERY__TOKEN__CREATE", 354 },
-  { "CROSS", "PG_QUERY__TOKEN__CROSS", 355 },
-  { "CSV", "PG_QUERY__TOKEN__CSV", 356 },
-  { "CUBE", "PG_QUERY__TOKEN__CUBE", 357 },
-  { "CURRENT_P", "PG_QUERY__TOKEN__CURRENT_P", 358 },
-  { "CURRENT_CATALOG", "PG_QUERY__TOKEN__CURRENT_CATALOG", 359 },
-  { "CURRENT_DATE", "PG_QUERY__TOKEN__CURRENT_DATE", 360 },
-  { "CURRENT_ROLE", "PG_QUERY__TOKEN__CURRENT_ROLE", 361 },
-  { "CURRENT_SCHEMA", "PG_QUERY__TOKEN__CURRENT_SCHEMA", 362 },
-  { "CURRENT_TIME", "PG_QUERY__TOKEN__CURRENT_TIME", 363 },
-  { "CURRENT_TIMESTAMP", "PG_QUERY__TOKEN__CURRENT_TIMESTAMP", 364 },
-  { "CURRENT_USER", "PG_QUERY__TOKEN__CURRENT_USER", 365 },
-  { "CURSOR", "PG_QUERY__TOKEN__CURSOR", 366 },
-  { "CYCLE", "PG_QUERY__TOKEN__CYCLE", 367 },
-  { "DATA_P", "PG_QUERY__TOKEN__DATA_P", 368 },
-  { "DATABASE", "PG_QUERY__TOKEN__DATABASE", 369 },
-  { "DAY_P", "PG_QUERY__TOKEN__DAY_P", 370 },
-  { "DEALLOCATE", "PG_QUERY__TOKEN__DEALLOCATE", 371 },
-  { "DEC", "PG_QUERY__TOKEN__DEC", 372 },
-  { "DECIMAL_P", "PG_QUERY__TOKEN__DECIMAL_P", 373 },
-  { "DECLARE", "PG_QUERY__TOKEN__DECLARE", 374 },
-  { "DEFAULT", "PG_QUERY__TOKEN__DEFAULT", 375 },
-  { "DEFAULTS", "PG_QUERY__TOKEN__DEFAULTS", 376 },
-  { "DEFERRABLE", "PG_QUERY__TOKEN__DEFERRABLE", 377 },
-  { "DEFERRED", "PG_QUERY__TOKEN__DEFERRED", 378 },
-  { "DEFINER", "PG_QUERY__TOKEN__DEFINER", 379 },
-  { "DELETE_P", "PG_QUERY__TOKEN__DELETE_P", 380 },
-  { "DELIMITER", "PG_QUERY__TOKEN__DELIMITER", 381 },
-  { "DELIMITERS", "PG_QUERY__TOKEN__DELIMITERS", 382 },
-  { "DEPENDS", "PG_QUERY__TOKEN__DEPENDS", 383 },
-  { "DEPTH", "PG_QUERY__TOKEN__DEPTH", 384 },
-  { "DESC", "PG_QUERY__TOKEN__DESC", 385 },
-  { "DETACH", "PG_QUERY__TOKEN__DETACH", 386 },
-  { "DICTIONARY", "PG_QUERY__TOKEN__DICTIONARY", 387 },
-  { "DISABLE_P", "PG_QUERY__TOKEN__DISABLE_P", 388 },
-  { "DISCARD", "PG_QUERY__TOKEN__DISCARD", 389 },
-  { "DISTINCT", "PG_QUERY__TOKEN__DISTINCT", 390 },
-  { "DO", "PG_QUERY__TOKEN__DO", 391 },
-  { "DOCUMENT_P", "PG_QUERY__TOKEN__DOCUMENT_P", 392 },
-  { "DOMAIN_P", "PG_QUERY__TOKEN__DOMAIN_P", 393 },
-  { "DOUBLE_P", "PG_QUERY__TOKEN__DOUBLE_P", 394 },
-  { "DROP", "PG_QUERY__TOKEN__DROP", 395 },
-  { "EACH", "PG_QUERY__TOKEN__EACH", 396 },
-  { "ELSE", "PG_QUERY__TOKEN__ELSE", 397 },
-  { "ENABLE_P", "PG_QUERY__TOKEN__ENABLE_P", 398 },
-  { "ENCODING", "PG_QUERY__TOKEN__ENCODING", 399 },
-  { "ENCRYPTED", "PG_QUERY__TOKEN__ENCRYPTED", 400 },
-  { "END_P", "PG_QUERY__TOKEN__END_P", 401 },
-  { "ENUM_P", "PG_QUERY__TOKEN__ENUM_P", 402 },
-  { "ESCAPE", "PG_QUERY__TOKEN__ESCAPE", 403 },
-  { "EVENT", "PG_QUERY__TOKEN__EVENT", 404 },
-  { "EXCEPT", "PG_QUERY__TOKEN__EXCEPT", 405 },
-  { "EXCLUDE", "PG_QUERY__TOKEN__EXCLUDE", 406 },
-  { "EXCLUDING", "PG_QUERY__TOKEN__EXCLUDING", 407 },
-  { "EXCLUSIVE", "PG_QUERY__TOKEN__EXCLUSIVE", 408 },
-  { "EXECUTE", "PG_QUERY__TOKEN__EXECUTE", 409 },
-  { "EXISTS", "PG_QUERY__TOKEN__EXISTS", 410 },
-  { "EXPLAIN", "PG_QUERY__TOKEN__EXPLAIN", 411 },
-  { "EXPRESSION", "PG_QUERY__TOKEN__EXPRESSION", 412 },
-  { "EXTENSION", "PG_QUERY__TOKEN__EXTENSION", 413 },
-  { "EXTERNAL", "PG_QUERY__TOKEN__EXTERNAL", 414 },
-  { "EXTRACT", "PG_QUERY__TOKEN__EXTRACT", 415 },
-  { "FALSE_P", "PG_QUERY__TOKEN__FALSE_P", 416 },
-  { "FAMILY", "PG_QUERY__TOKEN__FAMILY", 417 },
-  { "FETCH", "PG_QUERY__TOKEN__FETCH", 418 },
-  { "FILTER", "PG_QUERY__TOKEN__FILTER", 419 },
-  { "FINALIZE", "PG_QUERY__TOKEN__FINALIZE", 420 },
-  { "FIRST_P", "PG_QUERY__TOKEN__FIRST_P", 421 },
-  { "FLOAT_P", "PG_QUERY__TOKEN__FLOAT_P", 422 },
-  { "FOLLOWING", "PG_QUERY__TOKEN__FOLLOWING", 423 },
-  { "FOR", "PG_QUERY__TOKEN__FOR", 424 },
-  { "FORCE", "PG_QUERY__TOKEN__FORCE", 425 },
-  { "FOREIGN", "PG_QUERY__TOKEN__FOREIGN", 426 },
-  { "FORWARD", "PG_QUERY__TOKEN__FORWARD", 427 },
-  { "FREEZE", "PG_QUERY__TOKEN__FREEZE", 428 },
-  { "FROM", "PG_QUERY__TOKEN__FROM", 429 },
-  { "FULL", "PG_QUERY__TOKEN__FULL", 430 },
-  { "FUNCTION", "PG_QUERY__TOKEN__FUNCTION", 431 },
-  { "FUNCTIONS", "PG_QUERY__TOKEN__FUNCTIONS", 432 },
-  { "GENERATED", "PG_QUERY__TOKEN__GENERATED", 433 },
-  { "GLOBAL", "PG_QUERY__TOKEN__GLOBAL", 434 },
-  { "GRANT", "PG_QUERY__TOKEN__GRANT", 435 },
-  { "GRANTED", "PG_QUERY__TOKEN__GRANTED", 436 },
-  { "GREATEST", "PG_QUERY__TOKEN__GREATEST", 437 },
-  { "GROUP_P", "PG_QUERY__TOKEN__GROUP_P", 438 },
-  { "GROUPING", "PG_QUERY__TOKEN__GROUPING", 439 },
-  { "GROUPS", "PG_QUERY__TOKEN__GROUPS", 440 },
-  { "HANDLER", "PG_QUERY__TOKEN__HANDLER", 441 },
-  { "HAVING", "PG_QUERY__TOKEN__HAVING", 442 },
-  { "HEADER_P", "PG_QUERY__TOKEN__HEADER_P", 443 },
-  { "HOLD", "PG_QUERY__TOKEN__HOLD", 444 },
-  { "HOUR_P", "PG_QUERY__TOKEN__HOUR_P", 445 },
-  { "IDENTITY_P", "PG_QUERY__TOKEN__IDENTITY_P", 446 },
-  { "IF_P", "PG_QUERY__TOKEN__IF_P", 447 },
-  { "ILIKE", "PG_QUERY__TOKEN__ILIKE", 448 },
-  { "IMMEDIATE", "PG_QUERY__TOKEN__IMMEDIATE", 449 },
-  { "IMMUTABLE", "PG_QUERY__TOKEN__IMMUTABLE", 450 },
-  { "IMPLICIT_P", "PG_QUERY__TOKEN__IMPLICIT_P", 451 },
-  { "IMPORT_P", "PG_QUERY__TOKEN__IMPORT_P", 452 },
-  { "IN_P", "PG_QUERY__TOKEN__IN_P", 453 },
-  { "INCLUDE", "PG_QUERY__TOKEN__INCLUDE", 454 },
-  { "INCLUDING", "PG_QUERY__TOKEN__INCLUDING", 455 },
-  { "INCREMENT", "PG_QUERY__TOKEN__INCREMENT", 456 },
-  { "INDEX", "PG_QUERY__TOKEN__INDEX", 457 },
-  { "INDEXES", "PG_QUERY__TOKEN__INDEXES", 458 },
-  { "INHERIT", "PG_QUERY__TOKEN__INHERIT", 459 },
-  { "INHERITS", "PG_QUERY__TOKEN__INHERITS", 460 },
-  { "INITIALLY", "PG_QUERY__TOKEN__INITIALLY", 461 },
-  { "INLINE_P", "PG_QUERY__TOKEN__INLINE_P", 462 },
-  { "INNER_P", "PG_QUERY__TOKEN__INNER_P", 463 },
-  { "INOUT", "PG_QUERY__TOKEN__INOUT", 464 },
-  { "INPUT_P", "PG_QUERY__TOKEN__INPUT_P", 465 },
-  { "INSENSITIVE", "PG_QUERY__TOKEN__INSENSITIVE", 466 },
-  { "INSERT", "PG_QUERY__TOKEN__INSERT", 467 },
-  { "INSTEAD", "PG_QUERY__TOKEN__INSTEAD", 468 },
-  { "INT_P", "PG_QUERY__TOKEN__INT_P", 469 },
-  { "INTEGER", "PG_QUERY__TOKEN__INTEGER", 470 },
-  { "INTERSECT", "PG_QUERY__TOKEN__INTERSECT", 471 },
-  { "INTERVAL", "PG_QUERY__TOKEN__INTERVAL", 472 },
-  { "INTO", "PG_QUERY__TOKEN__INTO", 473 },
-  { "INVOKER", "PG_QUERY__TOKEN__INVOKER", 474 },
-  { "IS", "PG_QUERY__TOKEN__IS", 475 },
-  { "ISNULL", "PG_QUERY__TOKEN__ISNULL", 476 },
-  { "ISOLATION", "PG_QUERY__TOKEN__ISOLATION", 477 },
-  { "JOIN", "PG_QUERY__TOKEN__JOIN", 478 },
-  { "KEY", "PG_QUERY__TOKEN__KEY", 479 },
-  { "LABEL", "PG_QUERY__TOKEN__LABEL", 480 },
-  { "LANGUAGE", "PG_QUERY__TOKEN__LANGUAGE", 481 },
-  { "LARGE_P", "PG_QUERY__TOKEN__LARGE_P", 482 },
-  { "LAST_P", "PG_QUERY__TOKEN__LAST_P", 483 },
-  { "LATERAL_P", "PG_QUERY__TOKEN__LATERAL_P", 484 },
-  { "LEADING", "PG_QUERY__TOKEN__LEADING", 485 },
-  { "LEAKPROOF", "PG_QUERY__TOKEN__LEAKPROOF", 486 },
-  { "LEAST", "PG_QUERY__TOKEN__LEAST", 487 },
-  { "LEFT", "PG_QUERY__TOKEN__LEFT", 488 },
-  { "LEVEL", "PG_QUERY__TOKEN__LEVEL", 489 },
-  { "LIKE", "PG_QUERY__TOKEN__LIKE", 490 },
-  { "LIMIT", "PG_QUERY__TOKEN__LIMIT", 491 },
-  { "LISTEN", "PG_QUERY__TOKEN__LISTEN", 492 },
-  { "LOAD", "PG_QUERY__TOKEN__LOAD", 493 },
-  { "LOCAL", "PG_QUERY__TOKEN__LOCAL", 494 },
-  { "LOCALTIME", "PG_QUERY__TOKEN__LOCALTIME", 495 },
-  { "LOCALTIMESTAMP", "PG_QUERY__TOKEN__LOCALTIMESTAMP", 496 },
-  { "LOCATION", "PG_QUERY__TOKEN__LOCATION", 497 },
-  { "LOCK_P", "PG_QUERY__TOKEN__LOCK_P", 498 },
-  { "LOCKED", "PG_QUERY__TOKEN__LOCKED", 499 },
-  { "LOGGED", "PG_QUERY__TOKEN__LOGGED", 500 },
-  { "MAPPING", "PG_QUERY__TOKEN__MAPPING", 501 },
-  { "MATCH", "PG_QUERY__TOKEN__MATCH", 502 },
-  { "MATCHED", "PG_QUERY__TOKEN__MATCHED", 503 },
-  { "MATERIALIZED", "PG_QUERY__TOKEN__MATERIALIZED", 504 },
-  { "MAXVALUE", "PG_QUERY__TOKEN__MAXVALUE", 505 },
-  { "MERGE", "PG_QUERY__TOKEN__MERGE", 506 },
-  { "METHOD", "PG_QUERY__TOKEN__METHOD", 507 },
-  { "MINUTE_P", "PG_QUERY__TOKEN__MINUTE_P", 508 },
-  { "MINVALUE", "PG_QUERY__TOKEN__MINVALUE", 509 },
-  { "MODE", "PG_QUERY__TOKEN__MODE", 510 },
-  { "MONTH_P", "PG_QUERY__TOKEN__MONTH_P", 511 },
-  { "MOVE", "PG_QUERY__TOKEN__MOVE", 512 },
-  { "NAME_P", "PG_QUERY__TOKEN__NAME_P", 513 },
-  { "NAMES", "PG_QUERY__TOKEN__NAMES", 514 },
-  { "NATIONAL", "PG_QUERY__TOKEN__NATIONAL", 515 },
-  { "NATURAL", "PG_QUERY__TOKEN__NATURAL", 516 },
-  { "NCHAR", "PG_QUERY__TOKEN__NCHAR", 517 },
-  { "NEW", "PG_QUERY__TOKEN__NEW", 518 },
-  { "NEXT", "PG_QUERY__TOKEN__NEXT", 519 },
-  { "NFC", "PG_QUERY__TOKEN__NFC", 520 },
-  { "NFD", "PG_QUERY__TOKEN__NFD", 521 },
-  { "NFKC", "PG_QUERY__TOKEN__NFKC", 522 },
-  { "NFKD", "PG_QUERY__TOKEN__NFKD", 523 },
-  { "NO", "PG_QUERY__TOKEN__NO", 524 },
-  { "NONE", "PG_QUERY__TOKEN__NONE", 525 },
-  { "NORMALIZE", "PG_QUERY__TOKEN__NORMALIZE", 526 },
-  { "NORMALIZED", "PG_QUERY__TOKEN__NORMALIZED", 527 },
-  { "NOT", "PG_QUERY__TOKEN__NOT", 528 },
-  { "NOTHING", "PG_QUERY__TOKEN__NOTHING", 529 },
-  { "NOTIFY", "PG_QUERY__TOKEN__NOTIFY", 530 },
-  { "NOTNULL", "PG_QUERY__TOKEN__NOTNULL", 531 },
-  { "NOWAIT", "PG_QUERY__TOKEN__NOWAIT", 532 },
-  { "NULL_P", "PG_QUERY__TOKEN__NULL_P", 533 },
-  { "NULLIF", "PG_QUERY__TOKEN__NULLIF", 534 },
-  { "NULLS_P", "PG_QUERY__TOKEN__NULLS_P", 535 },
-  { "NUMERIC", "PG_QUERY__TOKEN__NUMERIC", 536 },
-  { "OBJECT_P", "PG_QUERY__TOKEN__OBJECT_P", 537 },
-  { "OF", "PG_QUERY__TOKEN__OF", 538 },
-  { "OFF", "PG_QUERY__TOKEN__OFF", 539 },
-  { "OFFSET", "PG_QUERY__TOKEN__OFFSET", 540 },
-  { "OIDS", "PG_QUERY__TOKEN__OIDS", 541 },
-  { "OLD", "PG_QUERY__TOKEN__OLD", 542 },
-  { "ON", "PG_QUERY__TOKEN__ON", 543 },
-  { "ONLY", "PG_QUERY__TOKEN__ONLY", 544 },
-  { "OPERATOR", "PG_QUERY__TOKEN__OPERATOR", 545 },
-  { "OPTION", "PG_QUERY__TOKEN__OPTION", 546 },
-  { "OPTIONS", "PG_QUERY__TOKEN__OPTIONS", 547 },
-  { "OR", "PG_QUERY__TOKEN__OR", 548 },
-  { "ORDER", "PG_QUERY__TOKEN__ORDER", 549 },
-  { "ORDINALITY", "PG_QUERY__TOKEN__ORDINALITY", 550 },
-  { "OTHERS", "PG_QUERY__TOKEN__OTHERS", 551 },
-  { "OUT_P", "PG_QUERY__TOKEN__OUT_P", 552 },
-  { "OUTER_P", "PG_QUERY__TOKEN__OUTER_P", 553 },
-  { "OVER", "PG_QUERY__TOKEN__OVER", 554 },
-  { "OVERLAPS", "PG_QUERY__TOKEN__OVERLAPS", 555 },
-  { "OVERLAY", "PG_QUERY__TOKEN__OVERLAY", 556 },
-  { "OVERRIDING", "PG_QUERY__TOKEN__OVERRIDING", 557 },
-  { "OWNED", "PG_QUERY__TOKEN__OWNED", 558 },
-  { "OWNER", "PG_QUERY__TOKEN__OWNER", 559 },
-  { "PARALLEL", "PG_QUERY__TOKEN__PARALLEL", 560 },
-  { "PARAMETER", "PG_QUERY__TOKEN__PARAMETER", 561 },
-  { "PARSER", "PG_QUERY__TOKEN__PARSER", 562 },
-  { "PARTIAL", "PG_QUERY__TOKEN__PARTIAL", 563 },
-  { "PARTITION", "PG_QUERY__TOKEN__PARTITION", 564 },
-  { "PASSING", "PG_QUERY__TOKEN__PASSING", 565 },
-  { "PASSWORD", "PG_QUERY__TOKEN__PASSWORD", 566 },
-  { "PLACING", "PG_QUERY__TOKEN__PLACING", 567 },
-  { "PLANS", "PG_QUERY__TOKEN__PLANS", 568 },
-  { "POLICY", "PG_QUERY__TOKEN__POLICY", 569 },
-  { "POSITION", "PG_QUERY__TOKEN__POSITION", 570 },
-  { "PRECEDING", "PG_QUERY__TOKEN__PRECEDING", 571 },
-  { "PRECISION", "PG_QUERY__TOKEN__PRECISION", 572 },
-  { "PRESERVE", "PG_QUERY__TOKEN__PRESERVE", 573 },
-  { "PREPARE", "PG_QUERY__TOKEN__PREPARE", 574 },
-  { "PREPARED", "PG_QUERY__TOKEN__PREPARED", 575 },
-  { "PRIMARY", "PG_QUERY__TOKEN__PRIMARY", 576 },
-  { "PRIOR", "PG_QUERY__TOKEN__PRIOR", 577 },
-  { "PRIVILEGES", "PG_QUERY__TOKEN__PRIVILEGES", 578 },
-  { "PROCEDURAL", "PG_QUERY__TOKEN__PROCEDURAL", 579 },
-  { "PROCEDURE", "PG_QUERY__TOKEN__PROCEDURE", 580 },
-  { "PROCEDURES", "PG_QUERY__TOKEN__PROCEDURES", 581 },
-  { "PROGRAM", "PG_QUERY__TOKEN__PROGRAM", 582 },
-  { "PUBLICATION", "PG_QUERY__TOKEN__PUBLICATION", 583 },
-  { "QUOTE", "PG_QUERY__TOKEN__QUOTE", 584 },
-  { "RANGE", "PG_QUERY__TOKEN__RANGE", 585 },
-  { "READ", "PG_QUERY__TOKEN__READ", 586 },
-  { "REAL", "PG_QUERY__TOKEN__REAL", 587 },
-  { "REASSIGN", "PG_QUERY__TOKEN__REASSIGN", 588 },
-  { "RECHECK", "PG_QUERY__TOKEN__RECHECK", 589 },
-  { "RECURSIVE", "PG_QUERY__TOKEN__RECURSIVE", 590 },
-  { "REF_P", "PG_QUERY__TOKEN__REF_P", 591 },
-  { "REFERENCES", "PG_QUERY__TOKEN__REFERENCES", 592 },
-  { "REFERENCING", "PG_QUERY__TOKEN__REFERENCING", 593 },
-  { "REFRESH", "PG_QUERY__TOKEN__REFRESH", 594 },
-  { "REINDEX", "PG_QUERY__TOKEN__REINDEX", 595 },
-  { "RELATIVE_P", "PG_QUERY__TOKEN__RELATIVE_P", 596 },
-  { "RELEASE", "PG_QUERY__TOKEN__RELEASE", 597 },
-  { "RENAME", "PG_QUERY__TOKEN__RENAME", 598 },
-  { "REPEATABLE", "PG_QUERY__TOKEN__REPEATABLE", 599 },
-  { "REPLACE", "PG_QUERY__TOKEN__REPLACE", 600 },
-  { "REPLICA", "PG_QUERY__TOKEN__REPLICA", 601 },
-  { "RESET", "PG_QUERY__TOKEN__RESET", 602 },
-  { "RESTART", "PG_QUERY__TOKEN__RESTART", 603 },
-  { "RESTRICT", "PG_QUERY__TOKEN__RESTRICT", 604 },
-  { "RETURN", "PG_QUERY__TOKEN__RETURN", 605 },
-  { "RETURNING", "PG_QUERY__TOKEN__RETURNING", 606 },
-  { "RETURNS", "PG_QUERY__TOKEN__RETURNS", 607 },
-  { "REVOKE", "PG_QUERY__TOKEN__REVOKE", 608 },
-  { "RIGHT", "PG_QUERY__TOKEN__RIGHT", 609 },
-  { "ROLE", "PG_QUERY__TOKEN__ROLE", 610 },
-  { "ROLLBACK", "PG_QUERY__TOKEN__ROLLBACK", 611 },
-  { "ROLLUP", "PG_QUERY__TOKEN__ROLLUP", 612 },
-  { "ROUTINE", "PG_QUERY__TOKEN__ROUTINE", 613 },
-  { "ROUTINES", "PG_QUERY__TOKEN__ROUTINES", 614 },
-  { "ROW", "PG_QUERY__TOKEN__ROW", 615 },
-  { "ROWS", "PG_QUERY__TOKEN__ROWS", 616 },
-  { "RULE", "PG_QUERY__TOKEN__RULE", 617 },
-  { "SAVEPOINT", "PG_QUERY__TOKEN__SAVEPOINT", 618 },
-  { "SCHEMA", "PG_QUERY__TOKEN__SCHEMA", 619 },
-  { "SCHEMAS", "PG_QUERY__TOKEN__SCHEMAS", 620 },
-  { "SCROLL", "PG_QUERY__TOKEN__SCROLL", 621 },
-  { "SEARCH", "PG_QUERY__TOKEN__SEARCH", 622 },
-  { "SECOND_P", "PG_QUERY__TOKEN__SECOND_P", 623 },
-  { "SECURITY", "PG_QUERY__TOKEN__SECURITY", 624 },
-  { "SELECT", "PG_QUERY__TOKEN__SELECT", 625 },
-  { "SEQUENCE", "PG_QUERY__TOKEN__SEQUENCE", 626 },
-  { "SEQUENCES", "PG_QUERY__TOKEN__SEQUENCES", 627 },
-  { "SERIALIZABLE", "PG_QUERY__TOKEN__SERIALIZABLE", 628 },
-  { "SERVER", "PG_QUERY__TOKEN__SERVER", 629 },
-  { "SESSION", "PG_QUERY__TOKEN__SESSION", 630 },
-  { "SESSION_USER", "PG_QUERY__TOKEN__SESSION_USER", 631 },
-  { "SET", "PG_QUERY__TOKEN__SET", 632 },
-  { "SETS", "PG_QUERY__TOKEN__SETS", 633 },
-  { "SETOF", "PG_QUERY__TOKEN__SETOF", 634 },
-  { "SHARE", "PG_QUERY__TOKEN__SHARE", 635 },
-  { "SHOW", "PG_QUERY__TOKEN__SHOW", 636 },
-  { "SIMILAR", "PG_QUERY__TOKEN__SIMILAR", 637 },
-  { "SIMPLE", "PG_QUERY__TOKEN__SIMPLE", 638 },
-  { "SKIP", "PG_QUERY__TOKEN__SKIP", 639 },
-  { "SMALLINT", "PG_QUERY__TOKEN__SMALLINT", 640 },
-  { "SNAPSHOT", "PG_QUERY__TOKEN__SNAPSHOT", 641 },
-  { "SOME", "PG_QUERY__TOKEN__SOME", 642 },
-  { "SQL_P", "PG_QUERY__TOKEN__SQL_P", 643 },
-  { "STABLE", "PG_QUERY__TOKEN__STABLE", 644 },
-  { "STANDALONE_P", "PG_QUERY__TOKEN__STANDALONE_P", 645 },
-  { "START", "PG_QUERY__TOKEN__START", 646 },
-  { "STATEMENT", "PG_QUERY__TOKEN__STATEMENT", 647 },
-  { "STATISTICS", "PG_QUERY__TOKEN__STATISTICS", 648 },
-  { "STDIN", "PG_QUERY__TOKEN__STDIN", 649 },
-  { "STDOUT", "PG_QUERY__TOKEN__STDOUT", 650 },
-  { "STORAGE", "PG_QUERY__TOKEN__STORAGE", 651 },
-  { "STORED", "PG_QUERY__TOKEN__STORED", 652 },
-  { "STRICT_P", "PG_QUERY__TOKEN__STRICT_P", 653 },
-  { "STRIP_P", "PG_QUERY__TOKEN__STRIP_P", 654 },
-  { "SUBSCRIPTION", "PG_QUERY__TOKEN__SUBSCRIPTION", 655 },
-  { "SUBSTRING", "PG_QUERY__TOKEN__SUBSTRING", 656 },
-  { "SUPPORT", "PG_QUERY__TOKEN__SUPPORT", 657 },
-  { "SYMMETRIC", "PG_QUERY__TOKEN__SYMMETRIC", 658 },
-  { "SYSID", "PG_QUERY__TOKEN__SYSID", 659 },
-  { "SYSTEM_P", "PG_QUERY__TOKEN__SYSTEM_P", 660 },
-  { "TABLE", "PG_QUERY__TOKEN__TABLE", 661 },
-  { "TABLES", "PG_QUERY__TOKEN__TABLES", 662 },
-  { "TABLESAMPLE", "PG_QUERY__TOKEN__TABLESAMPLE", 663 },
-  { "TABLESPACE", "PG_QUERY__TOKEN__TABLESPACE", 664 },
-  { "TEMP", "PG_QUERY__TOKEN__TEMP", 665 },
-  { "TEMPLATE", "PG_QUERY__TOKEN__TEMPLATE", 666 },
-  { "TEMPORARY", "PG_QUERY__TOKEN__TEMPORARY", 667 },
-  { "TEXT_P", "PG_QUERY__TOKEN__TEXT_P", 668 },
-  { "THEN", "PG_QUERY__TOKEN__THEN", 669 },
-  { "TIES", "PG_QUERY__TOKEN__TIES", 670 },
-  { "TIME", "PG_QUERY__TOKEN__TIME", 671 },
-  { "TIMESTAMP", "PG_QUERY__TOKEN__TIMESTAMP", 672 },
-  { "TO", "PG_QUERY__TOKEN__TO", 673 },
-  { "TRAILING", "PG_QUERY__TOKEN__TRAILING", 674 },
-  { "TRANSACTION", "PG_QUERY__TOKEN__TRANSACTION", 675 },
-  { "TRANSFORM", "PG_QUERY__TOKEN__TRANSFORM", 676 },
-  { "TREAT", "PG_QUERY__TOKEN__TREAT", 677 },
-  { "TRIGGER", "PG_QUERY__TOKEN__TRIGGER", 678 },
-  { "TRIM", "PG_QUERY__TOKEN__TRIM", 679 },
-  { "TRUE_P", "PG_QUERY__TOKEN__TRUE_P", 680 },
-  { "TRUNCATE", "PG_QUERY__TOKEN__TRUNCATE", 681 },
-  { "TRUSTED", "PG_QUERY__TOKEN__TRUSTED", 682 },
-  { "TYPE_P", "PG_QUERY__TOKEN__TYPE_P", 683 },
-  { "TYPES_P", "PG_QUERY__TOKEN__TYPES_P", 684 },
-  { "UESCAPE", "PG_QUERY__TOKEN__UESCAPE", 685 },
-  { "UNBOUNDED", "PG_QUERY__TOKEN__UNBOUNDED", 686 },
-  { "UNCOMMITTED", "PG_QUERY__TOKEN__UNCOMMITTED", 687 },
-  { "UNENCRYPTED", "PG_QUERY__TOKEN__UNENCRYPTED", 688 },
-  { "UNION", "PG_QUERY__TOKEN__UNION", 689 },
-  { "UNIQUE", "PG_QUERY__TOKEN__UNIQUE", 690 },
-  { "UNKNOWN", "PG_QUERY__TOKEN__UNKNOWN", 691 },
-  { "UNLISTEN", "PG_QUERY__TOKEN__UNLISTEN", 692 },
-  { "UNLOGGED", "PG_QUERY__TOKEN__UNLOGGED", 693 },
-  { "UNTIL", "PG_QUERY__TOKEN__UNTIL", 694 },
-  { "UPDATE", "PG_QUERY__TOKEN__UPDATE", 695 },
-  { "USER", "PG_QUERY__TOKEN__USER", 696 },
-  { "USING", "PG_QUERY__TOKEN__USING", 697 },
-  { "VACUUM", "PG_QUERY__TOKEN__VACUUM", 698 },
-  { "VALID", "PG_QUERY__TOKEN__VALID", 699 },
-  { "VALIDATE", "PG_QUERY__TOKEN__VALIDATE", 700 },
-  { "VALIDATOR", "PG_QUERY__TOKEN__VALIDATOR", 701 },
-  { "VALUE_P", "PG_QUERY__TOKEN__VALUE_P", 702 },
-  { "VALUES", "PG_QUERY__TOKEN__VALUES", 703 },
-  { "VARCHAR", "PG_QUERY__TOKEN__VARCHAR", 704 },
-  { "VARIADIC", "PG_QUERY__TOKEN__VARIADIC", 705 },
-  { "VARYING", "PG_QUERY__TOKEN__VARYING", 706 },
-  { "VERBOSE", "PG_QUERY__TOKEN__VERBOSE", 707 },
-  { "VERSION_P", "PG_QUERY__TOKEN__VERSION_P", 708 },
-  { "VIEW", "PG_QUERY__TOKEN__VIEW", 709 },
-  { "VIEWS", "PG_QUERY__TOKEN__VIEWS", 710 },
-  { "VOLATILE", "PG_QUERY__TOKEN__VOLATILE", 711 },
-  { "WHEN", "PG_QUERY__TOKEN__WHEN", 712 },
-  { "WHERE", "PG_QUERY__TOKEN__WHERE", 713 },
-  { "WHITESPACE_P", "PG_QUERY__TOKEN__WHITESPACE_P", 714 },
-  { "WINDOW", "PG_QUERY__TOKEN__WINDOW", 715 },
-  { "WITH", "PG_QUERY__TOKEN__WITH", 716 },
-  { "WITHIN", "PG_QUERY__TOKEN__WITHIN", 717 },
-  { "WITHOUT", "PG_QUERY__TOKEN__WITHOUT", 718 },
-  { "WORK", "PG_QUERY__TOKEN__WORK", 719 },
-  { "WRAPPER", "PG_QUERY__TOKEN__WRAPPER", 720 },
-  { "WRITE", "PG_QUERY__TOKEN__WRITE", 721 },
-  { "XML_P", "PG_QUERY__TOKEN__XML_P", 722 },
-  { "XMLATTRIBUTES", "PG_QUERY__TOKEN__XMLATTRIBUTES", 723 },
-  { "XMLCONCAT", "PG_QUERY__TOKEN__XMLCONCAT", 724 },
-  { "XMLELEMENT", "PG_QUERY__TOKEN__XMLELEMENT", 725 },
-  { "XMLEXISTS", "PG_QUERY__TOKEN__XMLEXISTS", 726 },
-  { "XMLFOREST", "PG_QUERY__TOKEN__XMLFOREST", 727 },
-  { "XMLNAMESPACES", "PG_QUERY__TOKEN__XMLNAMESPACES", 728 },
-  { "XMLPARSE", "PG_QUERY__TOKEN__XMLPARSE", 729 },
-  { "XMLPI", "PG_QUERY__TOKEN__XMLPI", 730 },
-  { "XMLROOT", "PG_QUERY__TOKEN__XMLROOT", 731 },
-  { "XMLSERIALIZE", "PG_QUERY__TOKEN__XMLSERIALIZE", 732 },
-  { "XMLTABLE", "PG_QUERY__TOKEN__XMLTABLE", 733 },
-  { "YEAR_P", "PG_QUERY__TOKEN__YEAR_P", 734 },
-  { "YES_P", "PG_QUERY__TOKEN__YES_P", 735 },
-  { "ZONE", "PG_QUERY__TOKEN__ZONE", 736 },
-  { "NOT_LA", "PG_QUERY__TOKEN__NOT_LA", 737 },
-  { "NULLS_LA", "PG_QUERY__TOKEN__NULLS_LA", 738 },
-  { "WITH_LA", "PG_QUERY__TOKEN__WITH_LA", 739 },
-  { "MODE_TYPE_NAME", "PG_QUERY__TOKEN__MODE_TYPE_NAME", 740 },
-  { "MODE_PLPGSQL_EXPR", "PG_QUERY__TOKEN__MODE_PLPGSQL_EXPR", 741 },
-  { "MODE_PLPGSQL_ASSIGN1", "PG_QUERY__TOKEN__MODE_PLPGSQL_ASSIGN1", 742 },
-  { "MODE_PLPGSQL_ASSIGN2", "PG_QUERY__TOKEN__MODE_PLPGSQL_ASSIGN2", 743 },
-  { "MODE_PLPGSQL_ASSIGN3", "PG_QUERY__TOKEN__MODE_PLPGSQL_ASSIGN3", 744 },
-  { "UMINUS", "PG_QUERY__TOKEN__UMINUS", 745 },
+  { "ACCOUNT", "PG_QUERY__TOKEN__ACCOUNT", 280 },
+  { "ACTION", "PG_QUERY__TOKEN__ACTION", 281 },
+  { "ADD_P", "PG_QUERY__TOKEN__ADD_P", 282 },
+  { "ADMIN", "PG_QUERY__TOKEN__ADMIN", 283 },
+  { "AFTER", "PG_QUERY__TOKEN__AFTER", 284 },
+  { "AGGREGATE", "PG_QUERY__TOKEN__AGGREGATE", 285 },
+  { "ALL", "PG_QUERY__TOKEN__ALL", 286 },
+  { "ALSO", "PG_QUERY__TOKEN__ALSO", 287 },
+  { "ALTER", "PG_QUERY__TOKEN__ALTER", 288 },
+  { "ALWAYS", "PG_QUERY__TOKEN__ALWAYS", 289 },
+  { "ANALYSE", "PG_QUERY__TOKEN__ANALYSE", 290 },
+  { "ANALYZE", "PG_QUERY__TOKEN__ANALYZE", 291 },
+  { "AND", "PG_QUERY__TOKEN__AND", 292 },
+  { "ANY", "PG_QUERY__TOKEN__ANY", 293 },
+  { "ARRAY", "PG_QUERY__TOKEN__ARRAY", 294 },
+  { "AS", "PG_QUERY__TOKEN__AS", 295 },
+  { "ASC", "PG_QUERY__TOKEN__ASC", 296 },
+  { "ASENSITIVE", "PG_QUERY__TOKEN__ASENSITIVE", 297 },
+  { "ASSERTION", "PG_QUERY__TOKEN__ASSERTION", 298 },
+  { "ASSIGNMENT", "PG_QUERY__TOKEN__ASSIGNMENT", 299 },
+  { "ASYMMETRIC", "PG_QUERY__TOKEN__ASYMMETRIC", 300 },
+  { "ATOMIC", "PG_QUERY__TOKEN__ATOMIC", 301 },
+  { "AT", "PG_QUERY__TOKEN__AT", 302 },
+  { "ATTACH", "PG_QUERY__TOKEN__ATTACH", 303 },
+  { "ATTRIBUTE", "PG_QUERY__TOKEN__ATTRIBUTE", 304 },
+  { "AUTHORIZATION", "PG_QUERY__TOKEN__AUTHORIZATION", 305 },
+  { "BACKFILL", "PG_QUERY__TOKEN__BACKFILL", 306 },
+  { "BACKWARD", "PG_QUERY__TOKEN__BACKWARD", 307 },
+  { "BEFORE", "PG_QUERY__TOKEN__BEFORE", 308 },
+  { "BEGIN_P", "PG_QUERY__TOKEN__BEGIN_P", 309 },
+  { "BETWEEN", "PG_QUERY__TOKEN__BETWEEN", 310 },
+  { "BIGINT", "PG_QUERY__TOKEN__BIGINT", 311 },
+  { "BINARY", "PG_QUERY__TOKEN__BINARY", 312 },
+  { "BIT", "PG_QUERY__TOKEN__BIT", 313 },
+  { "BOOLEAN_P", "PG_QUERY__TOKEN__BOOLEAN_P", 314 },
+  { "BOTH", "PG_QUERY__TOKEN__BOTH", 315 },
+  { "BREADTH", "PG_QUERY__TOKEN__BREADTH", 316 },
+  { "BY", "PG_QUERY__TOKEN__BY", 317 },
+  { "CACHE", "PG_QUERY__TOKEN__CACHE", 318 },
+  { "CALL", "PG_QUERY__TOKEN__CALL", 319 },
+  { "CALLED", "PG_QUERY__TOKEN__CALLED", 320 },
+  { "CASCADE", "PG_QUERY__TOKEN__CASCADE", 321 },
+  { "CASCADED", "PG_QUERY__TOKEN__CASCADED", 322 },
+  { "CASE", "PG_QUERY__TOKEN__CASE", 323 },
+  { "CAST", "PG_QUERY__TOKEN__CAST", 324 },
+  { "CATALOG_P", "PG_QUERY__TOKEN__CATALOG_P", 325 },
+  { "CHAIN", "PG_QUERY__TOKEN__CHAIN", 326 },
+  { "CHANGE", "PG_QUERY__TOKEN__CHANGE", 327 },
+  { "CHAR_P", "PG_QUERY__TOKEN__CHAR_P", 328 },
+  { "CHARACTER", "PG_QUERY__TOKEN__CHARACTER", 329 },
+  { "CHARACTERISTICS", "PG_QUERY__TOKEN__CHARACTERISTICS", 330 },
+  { "CHECK", "PG_QUERY__TOKEN__CHECK", 331 },
+  { "CHECKPOINT", "PG_QUERY__TOKEN__CHECKPOINT", 332 },
+  { "CLASS", "PG_QUERY__TOKEN__CLASS", 333 },
+  { "CLOSE", "PG_QUERY__TOKEN__CLOSE", 334 },
+  { "CLUSTER", "PG_QUERY__TOKEN__CLUSTER", 335 },
+  { "COALESCE", "PG_QUERY__TOKEN__COALESCE", 336 },
+  { "COLLATE", "PG_QUERY__TOKEN__COLLATE", 337 },
+  { "COLLATION", "PG_QUERY__TOKEN__COLLATION", 338 },
+  { "COLOCATED", "PG_QUERY__TOKEN__COLOCATED", 339 },
+  { "COLOCATION", "PG_QUERY__TOKEN__COLOCATION", 340 },
+  { "COLUMN", "PG_QUERY__TOKEN__COLUMN", 341 },
+  { "COLUMNS", "PG_QUERY__TOKEN__COLUMNS", 342 },
+  { "COMMENT", "PG_QUERY__TOKEN__COMMENT", 343 },
+  { "COMMENTS", "PG_QUERY__TOKEN__COMMENTS", 344 },
+  { "COMMIT", "PG_QUERY__TOKEN__COMMIT", 345 },
+  { "COMMITTED", "PG_QUERY__TOKEN__COMMITTED", 346 },
+  { "COMPRESSION", "PG_QUERY__TOKEN__COMPRESSION", 347 },
+  { "CONCURRENTLY", "PG_QUERY__TOKEN__CONCURRENTLY", 348 },
+  { "CONFIGURATION", "PG_QUERY__TOKEN__CONFIGURATION", 349 },
+  { "CONFLICT", "PG_QUERY__TOKEN__CONFLICT", 350 },
+  { "CONNECTION", "PG_QUERY__TOKEN__CONNECTION", 351 },
+  { "CONSTRAINT", "PG_QUERY__TOKEN__CONSTRAINT", 352 },
+  { "CONSTRAINTS", "PG_QUERY__TOKEN__CONSTRAINTS", 353 },
+  { "CONTENT_P", "PG_QUERY__TOKEN__CONTENT_P", 354 },
+  { "CONTINUE_P", "PG_QUERY__TOKEN__CONTINUE_P", 355 },
+  { "CONVERSION_P", "PG_QUERY__TOKEN__CONVERSION_P", 356 },
+  { "COPY", "PG_QUERY__TOKEN__COPY", 357 },
+  { "COST", "PG_QUERY__TOKEN__COST", 358 },
+  { "CREATE", "PG_QUERY__TOKEN__CREATE", 359 },
+  { "CROSS", "PG_QUERY__TOKEN__CROSS", 360 },
+  { "CSV", "PG_QUERY__TOKEN__CSV", 361 },
+  { "CUBE", "PG_QUERY__TOKEN__CUBE", 362 },
+  { "CURRENT_P", "PG_QUERY__TOKEN__CURRENT_P", 363 },
+  { "CURRENT_CATALOG", "PG_QUERY__TOKEN__CURRENT_CATALOG", 364 },
+  { "CURRENT_DATE", "PG_QUERY__TOKEN__CURRENT_DATE", 365 },
+  { "CURRENT_ROLE", "PG_QUERY__TOKEN__CURRENT_ROLE", 366 },
+  { "CURRENT_SCHEMA", "PG_QUERY__TOKEN__CURRENT_SCHEMA", 367 },
+  { "CURRENT_TIME", "PG_QUERY__TOKEN__CURRENT_TIME", 368 },
+  { "CURRENT_TIMESTAMP", "PG_QUERY__TOKEN__CURRENT_TIMESTAMP", 369 },
+  { "CURRENT_USER", "PG_QUERY__TOKEN__CURRENT_USER", 370 },
+  { "CURSOR", "PG_QUERY__TOKEN__CURSOR", 371 },
+  { "CYCLE", "PG_QUERY__TOKEN__CYCLE", 372 },
+  { "DATA_P", "PG_QUERY__TOKEN__DATA_P", 373 },
+  { "DATABASE", "PG_QUERY__TOKEN__DATABASE", 374 },
+  { "DAY_P", "PG_QUERY__TOKEN__DAY_P", 375 },
+  { "DEALLOCATE", "PG_QUERY__TOKEN__DEALLOCATE", 376 },
+  { "DEC", "PG_QUERY__TOKEN__DEC", 377 },
+  { "DECIMAL_P", "PG_QUERY__TOKEN__DECIMAL_P", 378 },
+  { "DECLARE", "PG_QUERY__TOKEN__DECLARE", 379 },
+  { "DEFAULT", "PG_QUERY__TOKEN__DEFAULT", 380 },
+  { "DEFAULTS", "PG_QUERY__TOKEN__DEFAULTS", 381 },
+  { "DEFERRABLE", "PG_QUERY__TOKEN__DEFERRABLE", 382 },
+  { "DEFERRED", "PG_QUERY__TOKEN__DEFERRED", 383 },
+  { "DEFINER", "PG_QUERY__TOKEN__DEFINER", 384 },
+  { "DELETE_P", "PG_QUERY__TOKEN__DELETE_P", 385 },
+  { "DELIMITER", "PG_QUERY__TOKEN__DELIMITER", 386 },
+  { "DELIMITERS", "PG_QUERY__TOKEN__DELIMITERS", 387 },
+  { "DEPENDS", "PG_QUERY__TOKEN__DEPENDS", 388 },
+  { "DEPTH", "PG_QUERY__TOKEN__DEPTH", 389 },
+  { "DESC", "PG_QUERY__TOKEN__DESC", 390 },
+  { "DETACH", "PG_QUERY__TOKEN__DETACH", 391 },
+  { "DICTIONARY", "PG_QUERY__TOKEN__DICTIONARY", 392 },
+  { "DISABLE_P", "PG_QUERY__TOKEN__DISABLE_P", 393 },
+  { "DISCARD", "PG_QUERY__TOKEN__DISCARD", 394 },
+  { "DISTINCT", "PG_QUERY__TOKEN__DISTINCT", 395 },
+  { "DO", "PG_QUERY__TOKEN__DO", 396 },
+  { "DOCUMENT_P", "PG_QUERY__TOKEN__DOCUMENT_P", 397 },
+  { "DOMAIN_P", "PG_QUERY__TOKEN__DOMAIN_P", 398 },
+  { "DOUBLE_P", "PG_QUERY__TOKEN__DOUBLE_P", 399 },
+  { "DROP", "PG_QUERY__TOKEN__DROP", 400 },
+  { "EACH", "PG_QUERY__TOKEN__EACH", 401 },
+  { "ELSE", "PG_QUERY__TOKEN__ELSE", 402 },
+  { "ENABLE_P", "PG_QUERY__TOKEN__ENABLE_P", 403 },
+  { "ENCODING", "PG_QUERY__TOKEN__ENCODING", 404 },
+  { "ENCRYPTED", "PG_QUERY__TOKEN__ENCRYPTED", 405 },
+  { "END_P", "PG_QUERY__TOKEN__END_P", 406 },
+  { "ENUM_P", "PG_QUERY__TOKEN__ENUM_P", 407 },
+  { "ESCAPE", "PG_QUERY__TOKEN__ESCAPE", 408 },
+  { "EVENT", "PG_QUERY__TOKEN__EVENT", 409 },
+  { "EXCEPT", "PG_QUERY__TOKEN__EXCEPT", 410 },
+  { "EXCLUDE", "PG_QUERY__TOKEN__EXCLUDE", 411 },
+  { "EXCLUDING", "PG_QUERY__TOKEN__EXCLUDING", 412 },
+  { "EXCLUSIVE", "PG_QUERY__TOKEN__EXCLUSIVE", 413 },
+  { "EXECUTE", "PG_QUERY__TOKEN__EXECUTE", 414 },
+  { "EXISTS", "PG_QUERY__TOKEN__EXISTS", 415 },
+  { "EXPLAIN", "PG_QUERY__TOKEN__EXPLAIN", 416 },
+  { "EXPRESSION", "PG_QUERY__TOKEN__EXPRESSION", 417 },
+  { "EXTENSION", "PG_QUERY__TOKEN__EXTENSION", 418 },
+  { "EXTERNAL", "PG_QUERY__TOKEN__EXTERNAL", 419 },
+  { "EXTRACT", "PG_QUERY__TOKEN__EXTRACT", 420 },
+  { "FAILED_LOGIN_ATTEMPTS", "PG_QUERY__TOKEN__FAILED_LOGIN_ATTEMPTS", 421 },
+  { "FALSE_P", "PG_QUERY__TOKEN__FALSE_P", 422 },
+  { "FAMILY", "PG_QUERY__TOKEN__FAMILY", 423 },
+  { "FETCH", "PG_QUERY__TOKEN__FETCH", 424 },
+  { "FILTER", "PG_QUERY__TOKEN__FILTER", 425 },
+  { "FINALIZE", "PG_QUERY__TOKEN__FINALIZE", 426 },
+  { "FIRST_P", "PG_QUERY__TOKEN__FIRST_P", 427 },
+  { "FLOAT_P", "PG_QUERY__TOKEN__FLOAT_P", 428 },
+  { "FOLLOWING", "PG_QUERY__TOKEN__FOLLOWING", 429 },
+  { "FOR", "PG_QUERY__TOKEN__FOR", 430 },
+  { "FORCE", "PG_QUERY__TOKEN__FORCE", 431 },
+  { "FOREIGN", "PG_QUERY__TOKEN__FOREIGN", 432 },
+  { "FORWARD", "PG_QUERY__TOKEN__FORWARD", 433 },
+  { "FREEZE", "PG_QUERY__TOKEN__FREEZE", 434 },
+  { "FROM", "PG_QUERY__TOKEN__FROM", 435 },
+  { "FULL", "PG_QUERY__TOKEN__FULL", 436 },
+  { "FUNCTION", "PG_QUERY__TOKEN__FUNCTION", 437 },
+  { "FUNCTIONS", "PG_QUERY__TOKEN__FUNCTIONS", 438 },
+  { "GENERATED", "PG_QUERY__TOKEN__GENERATED", 439 },
+  { "GLOBAL", "PG_QUERY__TOKEN__GLOBAL", 440 },
+  { "GRANT", "PG_QUERY__TOKEN__GRANT", 441 },
+  { "GRANTED", "PG_QUERY__TOKEN__GRANTED", 442 },
+  { "GREATEST", "PG_QUERY__TOKEN__GREATEST", 443 },
+  { "GROUP_P", "PG_QUERY__TOKEN__GROUP_P", 444 },
+  { "GROUPING", "PG_QUERY__TOKEN__GROUPING", 445 },
+  { "GROUPS", "PG_QUERY__TOKEN__GROUPS", 446 },
+  { "HANDLER", "PG_QUERY__TOKEN__HANDLER", 447 },
+  { "HASH", "PG_QUERY__TOKEN__HASH", 448 },
+  { "HAVING", "PG_QUERY__TOKEN__HAVING", 449 },
+  { "HEADER_P", "PG_QUERY__TOKEN__HEADER_P", 450 },
+  { "HOLD", "PG_QUERY__TOKEN__HOLD", 451 },
+  { "HOUR_P", "PG_QUERY__TOKEN__HOUR_P", 452 },
+  { "IDENTITY_P", "PG_QUERY__TOKEN__IDENTITY_P", 453 },
+  { "IF_P", "PG_QUERY__TOKEN__IF_P", 454 },
+  { "ILIKE", "PG_QUERY__TOKEN__ILIKE", 455 },
+  { "IMMEDIATE", "PG_QUERY__TOKEN__IMMEDIATE", 456 },
+  { "IMMUTABLE", "PG_QUERY__TOKEN__IMMUTABLE", 457 },
+  { "IMPLICIT_P", "PG_QUERY__TOKEN__IMPLICIT_P", 458 },
+  { "IMPORT_P", "PG_QUERY__TOKEN__IMPORT_P", 459 },
+  { "IN_P", "PG_QUERY__TOKEN__IN_P", 460 },
+  { "INCLUDE", "PG_QUERY__TOKEN__INCLUDE", 461 },
+  { "INCLUDING", "PG_QUERY__TOKEN__INCLUDING", 462 },
+  { "INCREMENT", "PG_QUERY__TOKEN__INCREMENT", 463 },
+  { "INDEX", "PG_QUERY__TOKEN__INDEX", 464 },
+  { "INDEXES", "PG_QUERY__TOKEN__INDEXES", 465 },
+  { "INHERIT", "PG_QUERY__TOKEN__INHERIT", 466 },
+  { "INHERITS", "PG_QUERY__TOKEN__INHERITS", 467 },
+  { "INITIALLY", "PG_QUERY__TOKEN__INITIALLY", 468 },
+  { "INLINE_P", "PG_QUERY__TOKEN__INLINE_P", 469 },
+  { "INNER_P", "PG_QUERY__TOKEN__INNER_P", 470 },
+  { "INOUT", "PG_QUERY__TOKEN__INOUT", 471 },
+  { "INPUT_P", "PG_QUERY__TOKEN__INPUT_P", 472 },
+  { "INSENSITIVE", "PG_QUERY__TOKEN__INSENSITIVE", 473 },
+  { "INSERT", "PG_QUERY__TOKEN__INSERT", 474 },
+  { "INSTEAD", "PG_QUERY__TOKEN__INSTEAD", 475 },
+  { "INT_P", "PG_QUERY__TOKEN__INT_P", 476 },
+  { "INTEGER", "PG_QUERY__TOKEN__INTEGER", 477 },
+  { "INTERSECT", "PG_QUERY__TOKEN__INTERSECT", 478 },
+  { "INTERVAL", "PG_QUERY__TOKEN__INTERVAL", 479 },
+  { "INTO", "PG_QUERY__TOKEN__INTO", 480 },
+  { "INVOKER", "PG_QUERY__TOKEN__INVOKER", 481 },
+  { "IS", "PG_QUERY__TOKEN__IS", 482 },
+  { "ISNULL", "PG_QUERY__TOKEN__ISNULL", 483 },
+  { "ISOLATION", "PG_QUERY__TOKEN__ISOLATION", 484 },
+  { "JOIN", "PG_QUERY__TOKEN__JOIN", 485 },
+  { "KEY", "PG_QUERY__TOKEN__KEY", 486 },
+  { "LABEL", "PG_QUERY__TOKEN__LABEL", 487 },
+  { "LANGUAGE", "PG_QUERY__TOKEN__LANGUAGE", 488 },
+  { "LARGE_P", "PG_QUERY__TOKEN__LARGE_P", 489 },
+  { "LAST_P", "PG_QUERY__TOKEN__LAST_P", 490 },
+  { "LATERAL_P", "PG_QUERY__TOKEN__LATERAL_P", 491 },
+  { "LEADING", "PG_QUERY__TOKEN__LEADING", 492 },
+  { "LEAKPROOF", "PG_QUERY__TOKEN__LEAKPROOF", 493 },
+  { "LEAST", "PG_QUERY__TOKEN__LEAST", 494 },
+  { "LEFT", "PG_QUERY__TOKEN__LEFT", 495 },
+  { "LEVEL", "PG_QUERY__TOKEN__LEVEL", 496 },
+  { "LIKE", "PG_QUERY__TOKEN__LIKE", 497 },
+  { "LIMIT", "PG_QUERY__TOKEN__LIMIT", 498 },
+  { "LISTEN", "PG_QUERY__TOKEN__LISTEN", 499 },
+  { "LOAD", "PG_QUERY__TOKEN__LOAD", 500 },
+  { "LOCAL", "PG_QUERY__TOKEN__LOCAL", 501 },
+  { "LOCALTIME", "PG_QUERY__TOKEN__LOCALTIME", 502 },
+  { "LOCALTIMESTAMP", "PG_QUERY__TOKEN__LOCALTIMESTAMP", 503 },
+  { "LOCATION", "PG_QUERY__TOKEN__LOCATION", 504 },
+  { "LOCK_P", "PG_QUERY__TOKEN__LOCK_P", 505 },
+  { "LOCKED", "PG_QUERY__TOKEN__LOCKED", 506 },
+  { "LOGGED", "PG_QUERY__TOKEN__LOGGED", 507 },
+  { "MAPPING", "PG_QUERY__TOKEN__MAPPING", 508 },
+  { "MATCH", "PG_QUERY__TOKEN__MATCH", 509 },
+  { "MATCHED", "PG_QUERY__TOKEN__MATCHED", 510 },
+  { "MATERIALIZED", "PG_QUERY__TOKEN__MATERIALIZED", 511 },
+  { "MAXVALUE", "PG_QUERY__TOKEN__MAXVALUE", 512 },
+  { "MERGE", "PG_QUERY__TOKEN__MERGE", 513 },
+  { "METHOD", "PG_QUERY__TOKEN__METHOD", 514 },
+  { "MINUTE_P", "PG_QUERY__TOKEN__MINUTE_P", 515 },
+  { "MINVALUE", "PG_QUERY__TOKEN__MINVALUE", 516 },
+  { "MODE", "PG_QUERY__TOKEN__MODE", 517 },
+  { "MONTH_P", "PG_QUERY__TOKEN__MONTH_P", 518 },
+  { "MOVE", "PG_QUERY__TOKEN__MOVE", 519 },
+  { "NAME_P", "PG_QUERY__TOKEN__NAME_P", 520 },
+  { "NAMES", "PG_QUERY__TOKEN__NAMES", 521 },
+  { "NATIONAL", "PG_QUERY__TOKEN__NATIONAL", 522 },
+  { "NATURAL", "PG_QUERY__TOKEN__NATURAL", 523 },
+  { "NCHAR", "PG_QUERY__TOKEN__NCHAR", 524 },
+  { "NEW", "PG_QUERY__TOKEN__NEW", 525 },
+  { "NEXT", "PG_QUERY__TOKEN__NEXT", 526 },
+  { "NFC", "PG_QUERY__TOKEN__NFC", 527 },
+  { "NFD", "PG_QUERY__TOKEN__NFD", 528 },
+  { "NFKC", "PG_QUERY__TOKEN__NFKC", 529 },
+  { "NFKD", "PG_QUERY__TOKEN__NFKD", 530 },
+  { "NO", "PG_QUERY__TOKEN__NO", 531 },
+  { "NONCONCURRENTLY", "PG_QUERY__TOKEN__NONCONCURRENTLY", 532 },
+  { "NONE", "PG_QUERY__TOKEN__NONE", 533 },
+  { "NORMALIZE", "PG_QUERY__TOKEN__NORMALIZE", 534 },
+  { "NORMALIZED", "PG_QUERY__TOKEN__NORMALIZED", 535 },
+  { "NOPROFILE", "PG_QUERY__TOKEN__NOPROFILE", 536 },
+  { "NOT", "PG_QUERY__TOKEN__NOT", 537 },
+  { "NOTHING", "PG_QUERY__TOKEN__NOTHING", 538 },
+  { "NOTIFY", "PG_QUERY__TOKEN__NOTIFY", 539 },
+  { "NOTNULL", "PG_QUERY__TOKEN__NOTNULL", 540 },
+  { "NOWAIT", "PG_QUERY__TOKEN__NOWAIT", 541 },
+  { "NULL_P", "PG_QUERY__TOKEN__NULL_P", 542 },
+  { "NULLIF", "PG_QUERY__TOKEN__NULLIF", 543 },
+  { "NULLS_P", "PG_QUERY__TOKEN__NULLS_P", 544 },
+  { "NUMERIC", "PG_QUERY__TOKEN__NUMERIC", 545 },
+  { "OBJECT_P", "PG_QUERY__TOKEN__OBJECT_P", 546 },
+  { "OF", "PG_QUERY__TOKEN__OF", 547 },
+  { "OFF", "PG_QUERY__TOKEN__OFF", 548 },
+  { "OFFSET", "PG_QUERY__TOKEN__OFFSET", 549 },
+  { "OIDS", "PG_QUERY__TOKEN__OIDS", 550 },
+  { "OLD", "PG_QUERY__TOKEN__OLD", 551 },
+  { "ON", "PG_QUERY__TOKEN__ON", 552 },
+  { "ONLY", "PG_QUERY__TOKEN__ONLY", 553 },
+  { "OPERATOR", "PG_QUERY__TOKEN__OPERATOR", 554 },
+  { "OPTION", "PG_QUERY__TOKEN__OPTION", 555 },
+  { "OPTIONS", "PG_QUERY__TOKEN__OPTIONS", 556 },
+  { "OR", "PG_QUERY__TOKEN__OR", 557 },
+  { "ORDER", "PG_QUERY__TOKEN__ORDER", 558 },
+  { "ORDINALITY", "PG_QUERY__TOKEN__ORDINALITY", 559 },
+  { "OTHERS", "PG_QUERY__TOKEN__OTHERS", 560 },
+  { "OUT_P", "PG_QUERY__TOKEN__OUT_P", 561 },
+  { "OUTER_P", "PG_QUERY__TOKEN__OUTER_P", 562 },
+  { "OVER", "PG_QUERY__TOKEN__OVER", 563 },
+  { "OVERLAPS", "PG_QUERY__TOKEN__OVERLAPS", 564 },
+  { "OVERLAY", "PG_QUERY__TOKEN__OVERLAY", 565 },
+  { "OVERRIDING", "PG_QUERY__TOKEN__OVERRIDING", 566 },
+  { "OWNED", "PG_QUERY__TOKEN__OWNED", 567 },
+  { "OWNER", "PG_QUERY__TOKEN__OWNER", 568 },
+  { "PARALLEL", "PG_QUERY__TOKEN__PARALLEL", 569 },
+  { "PARAMETER", "PG_QUERY__TOKEN__PARAMETER", 570 },
+  { "PARSER", "PG_QUERY__TOKEN__PARSER", 571 },
+  { "PARTIAL", "PG_QUERY__TOKEN__PARTIAL", 572 },
+  { "PARTITION", "PG_QUERY__TOKEN__PARTITION", 573 },
+  { "PASSING", "PG_QUERY__TOKEN__PASSING", 574 },
+  { "PASSWORD", "PG_QUERY__TOKEN__PASSWORD", 575 },
+  { "PLACING", "PG_QUERY__TOKEN__PLACING", 576 },
+  { "PLANS", "PG_QUERY__TOKEN__PLANS", 577 },
+  { "POLICY", "PG_QUERY__TOKEN__POLICY", 578 },
+  { "POSITION", "PG_QUERY__TOKEN__POSITION", 579 },
+  { "PRECEDING", "PG_QUERY__TOKEN__PRECEDING", 580 },
+  { "PRECISION", "PG_QUERY__TOKEN__PRECISION", 581 },
+  { "PRESERVE", "PG_QUERY__TOKEN__PRESERVE", 582 },
+  { "PREPARE", "PG_QUERY__TOKEN__PREPARE", 583 },
+  { "PREPARED", "PG_QUERY__TOKEN__PREPARED", 584 },
+  { "PRIMARY", "PG_QUERY__TOKEN__PRIMARY", 585 },
+  { "PRIOR", "PG_QUERY__TOKEN__PRIOR", 586 },
+  { "PRIVILEGES", "PG_QUERY__TOKEN__PRIVILEGES", 587 },
+  { "PROCEDURAL", "PG_QUERY__TOKEN__PROCEDURAL", 588 },
+  { "PROCEDURE", "PG_QUERY__TOKEN__PROCEDURE", 589 },
+  { "PROCEDURES", "PG_QUERY__TOKEN__PROCEDURES", 590 },
+  { "PROFILE", "PG_QUERY__TOKEN__PROFILE", 591 },
+  { "PROGRAM", "PG_QUERY__TOKEN__PROGRAM", 592 },
+  { "PUBLICATION", "PG_QUERY__TOKEN__PUBLICATION", 593 },
+  { "QUOTE", "PG_QUERY__TOKEN__QUOTE", 594 },
+  { "RANGE", "PG_QUERY__TOKEN__RANGE", 595 },
+  { "READ", "PG_QUERY__TOKEN__READ", 596 },
+  { "REAL", "PG_QUERY__TOKEN__REAL", 597 },
+  { "REASSIGN", "PG_QUERY__TOKEN__REASSIGN", 598 },
+  { "RECHECK", "PG_QUERY__TOKEN__RECHECK", 599 },
+  { "RECURSIVE", "PG_QUERY__TOKEN__RECURSIVE", 600 },
+  { "REF_P", "PG_QUERY__TOKEN__REF_P", 601 },
+  { "REFERENCES", "PG_QUERY__TOKEN__REFERENCES", 602 },
+  { "REFERENCING", "PG_QUERY__TOKEN__REFERENCING", 603 },
+  { "REFRESH", "PG_QUERY__TOKEN__REFRESH", 604 },
+  { "REINDEX", "PG_QUERY__TOKEN__REINDEX", 605 },
+  { "RELATIVE_P", "PG_QUERY__TOKEN__RELATIVE_P", 606 },
+  { "RELEASE", "PG_QUERY__TOKEN__RELEASE", 607 },
+  { "RENAME", "PG_QUERY__TOKEN__RENAME", 608 },
+  { "REPEATABLE", "PG_QUERY__TOKEN__REPEATABLE", 609 },
+  { "REPLACE", "PG_QUERY__TOKEN__REPLACE", 610 },
+  { "REPLICA", "PG_QUERY__TOKEN__REPLICA", 611 },
+  { "RESET", "PG_QUERY__TOKEN__RESET", 612 },
+  { "RESTART", "PG_QUERY__TOKEN__RESTART", 613 },
+  { "RESTRICT", "PG_QUERY__TOKEN__RESTRICT", 614 },
+  { "RETURN", "PG_QUERY__TOKEN__RETURN", 615 },
+  { "RETURNING", "PG_QUERY__TOKEN__RETURNING", 616 },
+  { "RETURNS", "PG_QUERY__TOKEN__RETURNS", 617 },
+  { "REVOKE", "PG_QUERY__TOKEN__REVOKE", 618 },
+  { "RIGHT", "PG_QUERY__TOKEN__RIGHT", 619 },
+  { "ROLE", "PG_QUERY__TOKEN__ROLE", 620 },
+  { "ROLLBACK", "PG_QUERY__TOKEN__ROLLBACK", 621 },
+  { "ROLLUP", "PG_QUERY__TOKEN__ROLLUP", 622 },
+  { "ROUTINE", "PG_QUERY__TOKEN__ROUTINE", 623 },
+  { "ROUTINES", "PG_QUERY__TOKEN__ROUTINES", 624 },
+  { "ROW", "PG_QUERY__TOKEN__ROW", 625 },
+  { "ROWS", "PG_QUERY__TOKEN__ROWS", 626 },
+  { "RULE", "PG_QUERY__TOKEN__RULE", 627 },
+  { "SAVEPOINT", "PG_QUERY__TOKEN__SAVEPOINT", 628 },
+  { "SCHEMA", "PG_QUERY__TOKEN__SCHEMA", 629 },
+  { "SCHEMAS", "PG_QUERY__TOKEN__SCHEMAS", 630 },
+  { "SCROLL", "PG_QUERY__TOKEN__SCROLL", 631 },
+  { "SEARCH", "PG_QUERY__TOKEN__SEARCH", 632 },
+  { "SECOND_P", "PG_QUERY__TOKEN__SECOND_P", 633 },
+  { "SECURITY", "PG_QUERY__TOKEN__SECURITY", 634 },
+  { "SELECT", "PG_QUERY__TOKEN__SELECT", 635 },
+  { "SEQUENCE", "PG_QUERY__TOKEN__SEQUENCE", 636 },
+  { "SEQUENCES", "PG_QUERY__TOKEN__SEQUENCES", 637 },
+  { "SERIALIZABLE", "PG_QUERY__TOKEN__SERIALIZABLE", 638 },
+  { "SERVER", "PG_QUERY__TOKEN__SERVER", 639 },
+  { "SESSION", "PG_QUERY__TOKEN__SESSION", 640 },
+  { "SESSION_USER", "PG_QUERY__TOKEN__SESSION_USER", 641 },
+  { "SET", "PG_QUERY__TOKEN__SET", 642 },
+  { "SETS", "PG_QUERY__TOKEN__SETS", 643 },
+  { "SETOF", "PG_QUERY__TOKEN__SETOF", 644 },
+  { "SHARE", "PG_QUERY__TOKEN__SHARE", 645 },
+  { "SHOW", "PG_QUERY__TOKEN__SHOW", 646 },
+  { "SIMILAR", "PG_QUERY__TOKEN__SIMILAR", 647 },
+  { "SIMPLE", "PG_QUERY__TOKEN__SIMPLE", 648 },
+  { "SKIP", "PG_QUERY__TOKEN__SKIP", 649 },
+  { "SMALLINT", "PG_QUERY__TOKEN__SMALLINT", 650 },
+  { "SNAPSHOT", "PG_QUERY__TOKEN__SNAPSHOT", 651 },
+  { "SOME", "PG_QUERY__TOKEN__SOME", 652 },
+  { "SPLIT", "PG_QUERY__TOKEN__SPLIT", 653 },
+  { "SQL_P", "PG_QUERY__TOKEN__SQL_P", 654 },
+  { "STABLE", "PG_QUERY__TOKEN__STABLE", 655 },
+  { "STANDALONE_P", "PG_QUERY__TOKEN__STANDALONE_P", 656 },
+  { "START", "PG_QUERY__TOKEN__START", 657 },
+  { "STATEMENT", "PG_QUERY__TOKEN__STATEMENT", 658 },
+  { "STATISTICS", "PG_QUERY__TOKEN__STATISTICS", 659 },
+  { "STDIN", "PG_QUERY__TOKEN__STDIN", 660 },
+  { "STDOUT", "PG_QUERY__TOKEN__STDOUT", 661 },
+  { "STORAGE", "PG_QUERY__TOKEN__STORAGE", 662 },
+  { "STORED", "PG_QUERY__TOKEN__STORED", 663 },
+  { "STRICT_P", "PG_QUERY__TOKEN__STRICT_P", 664 },
+  { "STRIP_P", "PG_QUERY__TOKEN__STRIP_P", 665 },
+  { "SUBSCRIPTION", "PG_QUERY__TOKEN__SUBSCRIPTION", 666 },
+  { "SUBSTRING", "PG_QUERY__TOKEN__SUBSTRING", 667 },
+  { "SUPPORT", "PG_QUERY__TOKEN__SUPPORT", 668 },
+  { "SYMMETRIC", "PG_QUERY__TOKEN__SYMMETRIC", 669 },
+  { "SYSID", "PG_QUERY__TOKEN__SYSID", 670 },
+  { "SYSTEM_P", "PG_QUERY__TOKEN__SYSTEM_P", 671 },
+  { "TABLE", "PG_QUERY__TOKEN__TABLE", 672 },
+  { "TABLEGROUP", "PG_QUERY__TOKEN__TABLEGROUP", 673 },
+  { "TABLEGROUPS", "PG_QUERY__TOKEN__TABLEGROUPS", 674 },
+  { "TABLES", "PG_QUERY__TOKEN__TABLES", 675 },
+  { "TABLESAMPLE", "PG_QUERY__TOKEN__TABLESAMPLE", 676 },
+  { "TABLESPACE", "PG_QUERY__TOKEN__TABLESPACE", 677 },
+  { "TABLETS", "PG_QUERY__TOKEN__TABLETS", 678 },
+  { "TEMP", "PG_QUERY__TOKEN__TEMP", 679 },
+  { "TEMPLATE", "PG_QUERY__TOKEN__TEMPLATE", 680 },
+  { "TEMPORARY", "PG_QUERY__TOKEN__TEMPORARY", 681 },
+  { "TEXT_P", "PG_QUERY__TOKEN__TEXT_P", 682 },
+  { "THEN", "PG_QUERY__TOKEN__THEN", 683 },
+  { "TIES", "PG_QUERY__TOKEN__TIES", 684 },
+  { "TIME", "PG_QUERY__TOKEN__TIME", 685 },
+  { "TIMESTAMP", "PG_QUERY__TOKEN__TIMESTAMP", 686 },
+  { "TO", "PG_QUERY__TOKEN__TO", 687 },
+  { "TRAILING", "PG_QUERY__TOKEN__TRAILING", 688 },
+  { "TRANSACTION", "PG_QUERY__TOKEN__TRANSACTION", 689 },
+  { "TRANSFORM", "PG_QUERY__TOKEN__TRANSFORM", 690 },
+  { "TREAT", "PG_QUERY__TOKEN__TREAT", 691 },
+  { "TRIGGER", "PG_QUERY__TOKEN__TRIGGER", 692 },
+  { "TRIM", "PG_QUERY__TOKEN__TRIM", 693 },
+  { "TRUE_P", "PG_QUERY__TOKEN__TRUE_P", 694 },
+  { "TRUNCATE", "PG_QUERY__TOKEN__TRUNCATE", 695 },
+  { "TRUSTED", "PG_QUERY__TOKEN__TRUSTED", 696 },
+  { "TYPE_P", "PG_QUERY__TOKEN__TYPE_P", 697 },
+  { "TYPES_P", "PG_QUERY__TOKEN__TYPES_P", 698 },
+  { "UESCAPE", "PG_QUERY__TOKEN__UESCAPE", 699 },
+  { "UNBOUNDED", "PG_QUERY__TOKEN__UNBOUNDED", 700 },
+  { "UNCOMMITTED", "PG_QUERY__TOKEN__UNCOMMITTED", 701 },
+  { "UNENCRYPTED", "PG_QUERY__TOKEN__UNENCRYPTED", 702 },
+  { "UNION", "PG_QUERY__TOKEN__UNION", 703 },
+  { "UNIQUE", "PG_QUERY__TOKEN__UNIQUE", 704 },
+  { "UNKNOWN", "PG_QUERY__TOKEN__UNKNOWN", 705 },
+  { "UNLISTEN", "PG_QUERY__TOKEN__UNLISTEN", 706 },
+  { "UNLOCK", "PG_QUERY__TOKEN__UNLOCK", 707 },
+  { "UNLOGGED", "PG_QUERY__TOKEN__UNLOGGED", 708 },
+  { "UNTIL", "PG_QUERY__TOKEN__UNTIL", 709 },
+  { "UPDATE", "PG_QUERY__TOKEN__UPDATE", 710 },
+  { "USER", "PG_QUERY__TOKEN__USER", 711 },
+  { "USING", "PG_QUERY__TOKEN__USING", 712 },
+  { "VACUUM", "PG_QUERY__TOKEN__VACUUM", 713 },
+  { "VALID", "PG_QUERY__TOKEN__VALID", 714 },
+  { "VALIDATE", "PG_QUERY__TOKEN__VALIDATE", 715 },
+  { "VALIDATOR", "PG_QUERY__TOKEN__VALIDATOR", 716 },
+  { "VALUE_P", "PG_QUERY__TOKEN__VALUE_P", 717 },
+  { "VALUES", "PG_QUERY__TOKEN__VALUES", 718 },
+  { "VARCHAR", "PG_QUERY__TOKEN__VARCHAR", 719 },
+  { "VARIADIC", "PG_QUERY__TOKEN__VARIADIC", 720 },
+  { "VARYING", "PG_QUERY__TOKEN__VARYING", 721 },
+  { "VERBOSE", "PG_QUERY__TOKEN__VERBOSE", 722 },
+  { "VERSION_P", "PG_QUERY__TOKEN__VERSION_P", 723 },
+  { "VIEW", "PG_QUERY__TOKEN__VIEW", 724 },
+  { "VIEWS", "PG_QUERY__TOKEN__VIEWS", 725 },
+  { "VOLATILE", "PG_QUERY__TOKEN__VOLATILE", 726 },
+  { "WHEN", "PG_QUERY__TOKEN__WHEN", 727 },
+  { "WHERE", "PG_QUERY__TOKEN__WHERE", 728 },
+  { "WHITESPACE_P", "PG_QUERY__TOKEN__WHITESPACE_P", 729 },
+  { "WINDOW", "PG_QUERY__TOKEN__WINDOW", 730 },
+  { "WITH", "PG_QUERY__TOKEN__WITH", 731 },
+  { "WITHIN", "PG_QUERY__TOKEN__WITHIN", 732 },
+  { "WITHOUT", "PG_QUERY__TOKEN__WITHOUT", 733 },
+  { "WORK", "PG_QUERY__TOKEN__WORK", 734 },
+  { "WRAPPER", "PG_QUERY__TOKEN__WRAPPER", 735 },
+  { "WRITE", "PG_QUERY__TOKEN__WRITE", 736 },
+  { "XML_P", "PG_QUERY__TOKEN__XML_P", 737 },
+  { "XMLATTRIBUTES", "PG_QUERY__TOKEN__XMLATTRIBUTES", 738 },
+  { "XMLCONCAT", "PG_QUERY__TOKEN__XMLCONCAT", 739 },
+  { "XMLELEMENT", "PG_QUERY__TOKEN__XMLELEMENT", 740 },
+  { "XMLEXISTS", "PG_QUERY__TOKEN__XMLEXISTS", 741 },
+  { "XMLFOREST", "PG_QUERY__TOKEN__XMLFOREST", 742 },
+  { "XMLNAMESPACES", "PG_QUERY__TOKEN__XMLNAMESPACES", 743 },
+  { "XMLPARSE", "PG_QUERY__TOKEN__XMLPARSE", 744 },
+  { "XMLPI", "PG_QUERY__TOKEN__XMLPI", 745 },
+  { "XMLROOT", "PG_QUERY__TOKEN__XMLROOT", 746 },
+  { "XMLSERIALIZE", "PG_QUERY__TOKEN__XMLSERIALIZE", 747 },
+  { "XMLTABLE", "PG_QUERY__TOKEN__XMLTABLE", 748 },
+  { "YEAR_P", "PG_QUERY__TOKEN__YEAR_P", 749 },
+  { "YES_P", "PG_QUERY__TOKEN__YES_P", 750 },
+  { "ZONE", "PG_QUERY__TOKEN__ZONE", 751 },
+  { "NOT_LA", "PG_QUERY__TOKEN__NOT_LA", 752 },
+  { "NULLS_LA", "PG_QUERY__TOKEN__NULLS_LA", 753 },
+  { "WITH_LA", "PG_QUERY__TOKEN__WITH_LA", 754 },
+  { "MODE_TYPE_NAME", "PG_QUERY__TOKEN__MODE_TYPE_NAME", 755 },
+  { "MODE_PLPGSQL_EXPR", "PG_QUERY__TOKEN__MODE_PLPGSQL_EXPR", 756 },
+  { "MODE_PLPGSQL_ASSIGN1", "PG_QUERY__TOKEN__MODE_PLPGSQL_ASSIGN1", 757 },
+  { "MODE_PLPGSQL_ASSIGN2", "PG_QUERY__TOKEN__MODE_PLPGSQL_ASSIGN2", 758 },
+  { "MODE_PLPGSQL_ASSIGN3", "PG_QUERY__TOKEN__MODE_PLPGSQL_ASSIGN3", 759 },
+  { "NO_OPCLASS", "PG_QUERY__TOKEN__NO_OPCLASS", 760 },
+  { "EXPR_LIST", "PG_QUERY__TOKEN__EXPR_LIST", 761 },
+  { "UMINUS", "PG_QUERY__TOKEN__UMINUS", 762 },
 };
 static const ProtobufCIntRange pg_query__token__value_ranges[] = {
-{0, 0},{36, 1},{40, 3},{58, 11},{91, 17},{258, 21},{0, 509}
+{0, 0},{36, 1},{40, 3},{58, 11},{91, 17},{258, 21},{0, 526}
 };
-static const ProtobufCEnumValueIndex pg_query__token__enum_values_by_name[509] =
+static const ProtobufCEnumValueIndex pg_query__token__enum_values_by_name[526] =
 {
   { "ABORT_P", 40 },
   { "ABSOLUTE_P", 41 },
   { "ACCESS", 42 },
-  { "ACTION", 43 },
-  { "ADD_P", 44 },
-  { "ADMIN", 45 },
-  { "AFTER", 46 },
-  { "AGGREGATE", 47 },
-  { "ALL", 48 },
-  { "ALSO", 49 },
-  { "ALTER", 50 },
-  { "ALWAYS", 51 },
-  { "ANALYSE", 52 },
-  { "ANALYZE", 53 },
-  { "AND", 54 },
-  { "ANY", 55 },
-  { "ARRAY", 56 },
-  { "AS", 57 },
-  { "ASC", 58 },
+  { "ACCOUNT", 43 },
+  { "ACTION", 44 },
+  { "ADD_P", 45 },
+  { "ADMIN", 46 },
+  { "AFTER", 47 },
+  { "AGGREGATE", 48 },
+  { "ALL", 49 },
+  { "ALSO", 50 },
+  { "ALTER", 51 },
+  { "ALWAYS", 52 },
+  { "ANALYSE", 53 },
+  { "ANALYZE", 54 },
+  { "AND", 55 },
+  { "ANY", 56 },
+  { "ARRAY", 57 },
+  { "AS", 58 },
+  { "ASC", 59 },
   { "ASCII_36", 1 },
   { "ASCII_37", 2 },
   { "ASCII_40", 3 },
@@ -39168,476 +40188,492 @@ static const ProtobufCEnumValueIndex pg_query__token__enum_values_by_name[509] =
   { "ASCII_92", 18 },
   { "ASCII_93", 19 },
   { "ASCII_94", 20 },
-  { "ASENSITIVE", 59 },
-  { "ASSERTION", 60 },
-  { "ASSIGNMENT", 61 },
-  { "ASYMMETRIC", 62 },
-  { "AT", 64 },
-  { "ATOMIC", 63 },
-  { "ATTACH", 65 },
-  { "ATTRIBUTE", 66 },
-  { "AUTHORIZATION", 67 },
-  { "BACKWARD", 68 },
+  { "ASENSITIVE", 60 },
+  { "ASSERTION", 61 },
+  { "ASSIGNMENT", 62 },
+  { "ASYMMETRIC", 63 },
+  { "AT", 65 },
+  { "ATOMIC", 64 },
+  { "ATTACH", 66 },
+  { "ATTRIBUTE", 67 },
+  { "AUTHORIZATION", 68 },
+  { "BACKFILL", 69 },
+  { "BACKWARD", 70 },
   { "BCONST", 26 },
-  { "BEFORE", 69 },
-  { "BEGIN_P", 70 },
-  { "BETWEEN", 71 },
-  { "BIGINT", 72 },
-  { "BINARY", 73 },
-  { "BIT", 74 },
-  { "BOOLEAN_P", 75 },
-  { "BOTH", 76 },
-  { "BREADTH", 77 },
-  { "BY", 78 },
-  { "CACHE", 79 },
-  { "CALL", 80 },
-  { "CALLED", 81 },
-  { "CASCADE", 82 },
-  { "CASCADED", 83 },
-  { "CASE", 84 },
-  { "CAST", 85 },
-  { "CATALOG_P", 86 },
-  { "CHAIN", 87 },
-  { "CHARACTER", 89 },
-  { "CHARACTERISTICS", 90 },
-  { "CHAR_P", 88 },
-  { "CHECK", 91 },
-  { "CHECKPOINT", 92 },
-  { "CLASS", 93 },
-  { "CLOSE", 94 },
-  { "CLUSTER", 95 },
-  { "COALESCE", 96 },
-  { "COLLATE", 97 },
-  { "COLLATION", 98 },
+  { "BEFORE", 71 },
+  { "BEGIN_P", 72 },
+  { "BETWEEN", 73 },
+  { "BIGINT", 74 },
+  { "BINARY", 75 },
+  { "BIT", 76 },
+  { "BOOLEAN_P", 77 },
+  { "BOTH", 78 },
+  { "BREADTH", 79 },
+  { "BY", 80 },
+  { "CACHE", 81 },
+  { "CALL", 82 },
+  { "CALLED", 83 },
+  { "CASCADE", 84 },
+  { "CASCADED", 85 },
+  { "CASE", 86 },
+  { "CAST", 87 },
+  { "CATALOG_P", 88 },
+  { "CHAIN", 89 },
+  { "CHANGE", 90 },
+  { "CHARACTER", 92 },
+  { "CHARACTERISTICS", 93 },
+  { "CHAR_P", 91 },
+  { "CHECK", 94 },
+  { "CHECKPOINT", 95 },
+  { "CLASS", 96 },
+  { "CLOSE", 97 },
+  { "CLUSTER", 98 },
+  { "COALESCE", 99 },
+  { "COLLATE", 100 },
+  { "COLLATION", 101 },
+  { "COLOCATED", 102 },
+  { "COLOCATION", 103 },
   { "COLON_EQUALS", 33 },
-  { "COLUMN", 99 },
-  { "COLUMNS", 100 },
-  { "COMMENT", 101 },
-  { "COMMENTS", 102 },
-  { "COMMIT", 103 },
-  { "COMMITTED", 104 },
-  { "COMPRESSION", 105 },
-  { "CONCURRENTLY", 106 },
-  { "CONFIGURATION", 107 },
-  { "CONFLICT", 108 },
-  { "CONNECTION", 109 },
-  { "CONSTRAINT", 110 },
-  { "CONSTRAINTS", 111 },
-  { "CONTENT_P", 112 },
-  { "CONTINUE_P", 113 },
-  { "CONVERSION_P", 114 },
-  { "COPY", 115 },
-  { "COST", 116 },
-  { "CREATE", 117 },
-  { "CROSS", 118 },
-  { "CSV", 119 },
-  { "CUBE", 120 },
-  { "CURRENT_CATALOG", 122 },
-  { "CURRENT_DATE", 123 },
-  { "CURRENT_P", 121 },
-  { "CURRENT_ROLE", 124 },
-  { "CURRENT_SCHEMA", 125 },
-  { "CURRENT_TIME", 126 },
-  { "CURRENT_TIMESTAMP", 127 },
-  { "CURRENT_USER", 128 },
-  { "CURSOR", 129 },
-  { "CYCLE", 130 },
+  { "COLUMN", 104 },
+  { "COLUMNS", 105 },
+  { "COMMENT", 106 },
+  { "COMMENTS", 107 },
+  { "COMMIT", 108 },
+  { "COMMITTED", 109 },
+  { "COMPRESSION", 110 },
+  { "CONCURRENTLY", 111 },
+  { "CONFIGURATION", 112 },
+  { "CONFLICT", 113 },
+  { "CONNECTION", 114 },
+  { "CONSTRAINT", 115 },
+  { "CONSTRAINTS", 116 },
+  { "CONTENT_P", 117 },
+  { "CONTINUE_P", 118 },
+  { "CONVERSION_P", 119 },
+  { "COPY", 120 },
+  { "COST", 121 },
+  { "CREATE", 122 },
+  { "CROSS", 123 },
+  { "CSV", 124 },
+  { "CUBE", 125 },
+  { "CURRENT_CATALOG", 127 },
+  { "CURRENT_DATE", 128 },
+  { "CURRENT_P", 126 },
+  { "CURRENT_ROLE", 129 },
+  { "CURRENT_SCHEMA", 130 },
+  { "CURRENT_TIME", 131 },
+  { "CURRENT_TIMESTAMP", 132 },
+  { "CURRENT_USER", 133 },
+  { "CURSOR", 134 },
+  { "CYCLE", 135 },
   { "C_COMMENT", 39 },
-  { "DATABASE", 132 },
-  { "DATA_P", 131 },
-  { "DAY_P", 133 },
-  { "DEALLOCATE", 134 },
-  { "DEC", 135 },
-  { "DECIMAL_P", 136 },
-  { "DECLARE", 137 },
-  { "DEFAULT", 138 },
-  { "DEFAULTS", 139 },
-  { "DEFERRABLE", 140 },
-  { "DEFERRED", 141 },
-  { "DEFINER", 142 },
-  { "DELETE_P", 143 },
-  { "DELIMITER", 144 },
-  { "DELIMITERS", 145 },
-  { "DEPENDS", 146 },
-  { "DEPTH", 147 },
-  { "DESC", 148 },
-  { "DETACH", 149 },
-  { "DICTIONARY", 150 },
-  { "DISABLE_P", 151 },
-  { "DISCARD", 152 },
-  { "DISTINCT", 153 },
-  { "DO", 154 },
-  { "DOCUMENT_P", 155 },
-  { "DOMAIN_P", 156 },
+  { "DATABASE", 137 },
+  { "DATA_P", 136 },
+  { "DAY_P", 138 },
+  { "DEALLOCATE", 139 },
+  { "DEC", 140 },
+  { "DECIMAL_P", 141 },
+  { "DECLARE", 142 },
+  { "DEFAULT", 143 },
+  { "DEFAULTS", 144 },
+  { "DEFERRABLE", 145 },
+  { "DEFERRED", 146 },
+  { "DEFINER", 147 },
+  { "DELETE_P", 148 },
+  { "DELIMITER", 149 },
+  { "DELIMITERS", 150 },
+  { "DEPENDS", 151 },
+  { "DEPTH", 152 },
+  { "DESC", 153 },
+  { "DETACH", 154 },
+  { "DICTIONARY", 155 },
+  { "DISABLE_P", 156 },
+  { "DISCARD", 157 },
+  { "DISTINCT", 158 },
+  { "DO", 159 },
+  { "DOCUMENT_P", 160 },
+  { "DOMAIN_P", 161 },
   { "DOT_DOT", 32 },
-  { "DOUBLE_P", 157 },
-  { "DROP", 158 },
-  { "EACH", 159 },
-  { "ELSE", 160 },
-  { "ENABLE_P", 161 },
-  { "ENCODING", 162 },
-  { "ENCRYPTED", 163 },
-  { "END_P", 164 },
-  { "ENUM_P", 165 },
+  { "DOUBLE_P", 162 },
+  { "DROP", 163 },
+  { "EACH", 164 },
+  { "ELSE", 165 },
+  { "ENABLE_P", 166 },
+  { "ENCODING", 167 },
+  { "ENCRYPTED", 168 },
+  { "END_P", 169 },
+  { "ENUM_P", 170 },
   { "EQUALS_GREATER", 34 },
-  { "ESCAPE", 166 },
-  { "EVENT", 167 },
-  { "EXCEPT", 168 },
-  { "EXCLUDE", 169 },
-  { "EXCLUDING", 170 },
-  { "EXCLUSIVE", 171 },
-  { "EXECUTE", 172 },
-  { "EXISTS", 173 },
-  { "EXPLAIN", 174 },
-  { "EXPRESSION", 175 },
-  { "EXTENSION", 176 },
-  { "EXTERNAL", 177 },
-  { "EXTRACT", 178 },
-  { "FALSE_P", 179 },
-  { "FAMILY", 180 },
+  { "ESCAPE", 171 },
+  { "EVENT", 172 },
+  { "EXCEPT", 173 },
+  { "EXCLUDE", 174 },
+  { "EXCLUDING", 175 },
+  { "EXCLUSIVE", 176 },
+  { "EXECUTE", 177 },
+  { "EXISTS", 178 },
+  { "EXPLAIN", 179 },
+  { "EXPRESSION", 180 },
+  { "EXPR_LIST", 524 },
+  { "EXTENSION", 181 },
+  { "EXTERNAL", 182 },
+  { "EXTRACT", 183 },
+  { "FAILED_LOGIN_ATTEMPTS", 184 },
+  { "FALSE_P", 185 },
+  { "FAMILY", 186 },
   { "FCONST", 23 },
-  { "FETCH", 181 },
-  { "FILTER", 182 },
-  { "FINALIZE", 183 },
-  { "FIRST_P", 184 },
-  { "FLOAT_P", 185 },
-  { "FOLLOWING", 186 },
-  { "FOR", 187 },
-  { "FORCE", 188 },
-  { "FOREIGN", 189 },
-  { "FORWARD", 190 },
-  { "FREEZE", 191 },
-  { "FROM", 192 },
-  { "FULL", 193 },
-  { "FUNCTION", 194 },
-  { "FUNCTIONS", 195 },
-  { "GENERATED", 196 },
-  { "GLOBAL", 197 },
-  { "GRANT", 198 },
-  { "GRANTED", 199 },
+  { "FETCH", 187 },
+  { "FILTER", 188 },
+  { "FINALIZE", 189 },
+  { "FIRST_P", 190 },
+  { "FLOAT_P", 191 },
+  { "FOLLOWING", 192 },
+  { "FOR", 193 },
+  { "FORCE", 194 },
+  { "FOREIGN", 195 },
+  { "FORWARD", 196 },
+  { "FREEZE", 197 },
+  { "FROM", 198 },
+  { "FULL", 199 },
+  { "FUNCTION", 200 },
+  { "FUNCTIONS", 201 },
+  { "GENERATED", 202 },
+  { "GLOBAL", 203 },
+  { "GRANT", 204 },
+  { "GRANTED", 205 },
   { "GREATER_EQUALS", 36 },
-  { "GREATEST", 200 },
-  { "GROUPING", 202 },
-  { "GROUPS", 203 },
-  { "GROUP_P", 201 },
-  { "HANDLER", 204 },
-  { "HAVING", 205 },
-  { "HEADER_P", 206 },
-  { "HOLD", 207 },
-  { "HOUR_P", 208 },
+  { "GREATEST", 206 },
+  { "GROUPING", 208 },
+  { "GROUPS", 209 },
+  { "GROUP_P", 207 },
+  { "HANDLER", 210 },
+  { "HASH", 211 },
+  { "HAVING", 212 },
+  { "HEADER_P", 213 },
+  { "HOLD", 214 },
+  { "HOUR_P", 215 },
   { "ICONST", 29 },
   { "IDENT", 21 },
-  { "IDENTITY_P", 209 },
-  { "IF_P", 210 },
-  { "ILIKE", 211 },
-  { "IMMEDIATE", 212 },
-  { "IMMUTABLE", 213 },
-  { "IMPLICIT_P", 214 },
-  { "IMPORT_P", 215 },
-  { "INCLUDE", 217 },
-  { "INCLUDING", 218 },
-  { "INCREMENT", 219 },
-  { "INDEX", 220 },
-  { "INDEXES", 221 },
-  { "INHERIT", 222 },
-  { "INHERITS", 223 },
-  { "INITIALLY", 224 },
-  { "INLINE_P", 225 },
-  { "INNER_P", 226 },
-  { "INOUT", 227 },
-  { "INPUT_P", 228 },
-  { "INSENSITIVE", 229 },
-  { "INSERT", 230 },
-  { "INSTEAD", 231 },
-  { "INTEGER", 233 },
-  { "INTERSECT", 234 },
-  { "INTERVAL", 235 },
-  { "INTO", 236 },
-  { "INT_P", 232 },
-  { "INVOKER", 237 },
-  { "IN_P", 216 },
-  { "IS", 238 },
-  { "ISNULL", 239 },
-  { "ISOLATION", 240 },
-  { "JOIN", 241 },
-  { "KEY", 242 },
-  { "LABEL", 243 },
-  { "LANGUAGE", 244 },
-  { "LARGE_P", 245 },
-  { "LAST_P", 246 },
-  { "LATERAL_P", 247 },
-  { "LEADING", 248 },
-  { "LEAKPROOF", 249 },
-  { "LEAST", 250 },
-  { "LEFT", 251 },
+  { "IDENTITY_P", 216 },
+  { "IF_P", 217 },
+  { "ILIKE", 218 },
+  { "IMMEDIATE", 219 },
+  { "IMMUTABLE", 220 },
+  { "IMPLICIT_P", 221 },
+  { "IMPORT_P", 222 },
+  { "INCLUDE", 224 },
+  { "INCLUDING", 225 },
+  { "INCREMENT", 226 },
+  { "INDEX", 227 },
+  { "INDEXES", 228 },
+  { "INHERIT", 229 },
+  { "INHERITS", 230 },
+  { "INITIALLY", 231 },
+  { "INLINE_P", 232 },
+  { "INNER_P", 233 },
+  { "INOUT", 234 },
+  { "INPUT_P", 235 },
+  { "INSENSITIVE", 236 },
+  { "INSERT", 237 },
+  { "INSTEAD", 238 },
+  { "INTEGER", 240 },
+  { "INTERSECT", 241 },
+  { "INTERVAL", 242 },
+  { "INTO", 243 },
+  { "INT_P", 239 },
+  { "INVOKER", 244 },
+  { "IN_P", 223 },
+  { "IS", 245 },
+  { "ISNULL", 246 },
+  { "ISOLATION", 247 },
+  { "JOIN", 248 },
+  { "KEY", 249 },
+  { "LABEL", 250 },
+  { "LANGUAGE", 251 },
+  { "LARGE_P", 252 },
+  { "LAST_P", 253 },
+  { "LATERAL_P", 254 },
+  { "LEADING", 255 },
+  { "LEAKPROOF", 256 },
+  { "LEAST", 257 },
+  { "LEFT", 258 },
   { "LESS_EQUALS", 35 },
-  { "LEVEL", 252 },
-  { "LIKE", 253 },
-  { "LIMIT", 254 },
-  { "LISTEN", 255 },
-  { "LOAD", 256 },
-  { "LOCAL", 257 },
-  { "LOCALTIME", 258 },
-  { "LOCALTIMESTAMP", 259 },
-  { "LOCATION", 260 },
-  { "LOCKED", 262 },
-  { "LOCK_P", 261 },
-  { "LOGGED", 263 },
-  { "MAPPING", 264 },
-  { "MATCH", 265 },
-  { "MATCHED", 266 },
-  { "MATERIALIZED", 267 },
-  { "MAXVALUE", 268 },
-  { "MERGE", 269 },
-  { "METHOD", 270 },
-  { "MINUTE_P", 271 },
-  { "MINVALUE", 272 },
-  { "MODE", 273 },
-  { "MODE_PLPGSQL_ASSIGN1", 505 },
-  { "MODE_PLPGSQL_ASSIGN2", 506 },
-  { "MODE_PLPGSQL_ASSIGN3", 507 },
-  { "MODE_PLPGSQL_EXPR", 504 },
-  { "MODE_TYPE_NAME", 503 },
-  { "MONTH_P", 274 },
-  { "MOVE", 275 },
-  { "NAMES", 277 },
-  { "NAME_P", 276 },
-  { "NATIONAL", 278 },
-  { "NATURAL", 279 },
-  { "NCHAR", 280 },
-  { "NEW", 281 },
-  { "NEXT", 282 },
-  { "NFC", 283 },
-  { "NFD", 284 },
-  { "NFKC", 285 },
-  { "NFKD", 286 },
-  { "NO", 287 },
-  { "NONE", 288 },
-  { "NORMALIZE", 289 },
-  { "NORMALIZED", 290 },
-  { "NOT", 291 },
-  { "NOTHING", 292 },
-  { "NOTIFY", 293 },
-  { "NOTNULL", 294 },
+  { "LEVEL", 259 },
+  { "LIKE", 260 },
+  { "LIMIT", 261 },
+  { "LISTEN", 262 },
+  { "LOAD", 263 },
+  { "LOCAL", 264 },
+  { "LOCALTIME", 265 },
+  { "LOCALTIMESTAMP", 266 },
+  { "LOCATION", 267 },
+  { "LOCKED", 269 },
+  { "LOCK_P", 268 },
+  { "LOGGED", 270 },
+  { "MAPPING", 271 },
+  { "MATCH", 272 },
+  { "MATCHED", 273 },
+  { "MATERIALIZED", 274 },
+  { "MAXVALUE", 275 },
+  { "MERGE", 276 },
+  { "METHOD", 277 },
+  { "MINUTE_P", 278 },
+  { "MINVALUE", 279 },
+  { "MODE", 280 },
+  { "MODE_PLPGSQL_ASSIGN1", 520 },
+  { "MODE_PLPGSQL_ASSIGN2", 521 },
+  { "MODE_PLPGSQL_ASSIGN3", 522 },
+  { "MODE_PLPGSQL_EXPR", 519 },
+  { "MODE_TYPE_NAME", 518 },
+  { "MONTH_P", 281 },
+  { "MOVE", 282 },
+  { "NAMES", 284 },
+  { "NAME_P", 283 },
+  { "NATIONAL", 285 },
+  { "NATURAL", 286 },
+  { "NCHAR", 287 },
+  { "NEW", 288 },
+  { "NEXT", 289 },
+  { "NFC", 290 },
+  { "NFD", 291 },
+  { "NFKC", 292 },
+  { "NFKD", 293 },
+  { "NO", 294 },
+  { "NONCONCURRENTLY", 295 },
+  { "NONE", 296 },
+  { "NOPROFILE", 299 },
+  { "NORMALIZE", 297 },
+  { "NORMALIZED", 298 },
+  { "NOT", 300 },
+  { "NOTHING", 301 },
+  { "NOTIFY", 302 },
+  { "NOTNULL", 303 },
   { "NOT_EQUALS", 37 },
-  { "NOT_LA", 500 },
-  { "NOWAIT", 295 },
+  { "NOT_LA", 515 },
+  { "NOWAIT", 304 },
+  { "NO_OPCLASS", 523 },
   { "NUL", 0 },
-  { "NULLIF", 297 },
-  { "NULLS_LA", 501 },
-  { "NULLS_P", 298 },
-  { "NULL_P", 296 },
-  { "NUMERIC", 299 },
-  { "OBJECT_P", 300 },
-  { "OF", 301 },
-  { "OFF", 302 },
-  { "OFFSET", 303 },
-  { "OIDS", 304 },
-  { "OLD", 305 },
-  { "ON", 306 },
-  { "ONLY", 307 },
-  { "OPERATOR", 308 },
-  { "OPTION", 309 },
-  { "OPTIONS", 310 },
-  { "OR", 311 },
-  { "ORDER", 312 },
-  { "ORDINALITY", 313 },
-  { "OTHERS", 314 },
-  { "OUTER_P", 316 },
-  { "OUT_P", 315 },
-  { "OVER", 317 },
-  { "OVERLAPS", 318 },
-  { "OVERLAY", 319 },
-  { "OVERRIDING", 320 },
-  { "OWNED", 321 },
-  { "OWNER", 322 },
+  { "NULLIF", 306 },
+  { "NULLS_LA", 516 },
+  { "NULLS_P", 307 },
+  { "NULL_P", 305 },
+  { "NUMERIC", 308 },
+  { "OBJECT_P", 309 },
+  { "OF", 310 },
+  { "OFF", 311 },
+  { "OFFSET", 312 },
+  { "OIDS", 313 },
+  { "OLD", 314 },
+  { "ON", 315 },
+  { "ONLY", 316 },
+  { "OPERATOR", 317 },
+  { "OPTION", 318 },
+  { "OPTIONS", 319 },
+  { "OR", 320 },
+  { "ORDER", 321 },
+  { "ORDINALITY", 322 },
+  { "OTHERS", 323 },
+  { "OUTER_P", 325 },
+  { "OUT_P", 324 },
+  { "OVER", 326 },
+  { "OVERLAPS", 327 },
+  { "OVERLAY", 328 },
+  { "OVERRIDING", 329 },
+  { "OWNED", 330 },
+  { "OWNER", 331 },
   { "Op", 28 },
-  { "PARALLEL", 323 },
+  { "PARALLEL", 332 },
   { "PARAM", 30 },
-  { "PARAMETER", 324 },
-  { "PARSER", 325 },
-  { "PARTIAL", 326 },
-  { "PARTITION", 327 },
-  { "PASSING", 328 },
-  { "PASSWORD", 329 },
-  { "PLACING", 330 },
-  { "PLANS", 331 },
-  { "POLICY", 332 },
-  { "POSITION", 333 },
-  { "PRECEDING", 334 },
-  { "PRECISION", 335 },
-  { "PREPARE", 337 },
-  { "PREPARED", 338 },
-  { "PRESERVE", 336 },
-  { "PRIMARY", 339 },
-  { "PRIOR", 340 },
-  { "PRIVILEGES", 341 },
-  { "PROCEDURAL", 342 },
-  { "PROCEDURE", 343 },
-  { "PROCEDURES", 344 },
-  { "PROGRAM", 345 },
-  { "PUBLICATION", 346 },
-  { "QUOTE", 347 },
-  { "RANGE", 348 },
-  { "READ", 349 },
-  { "REAL", 350 },
-  { "REASSIGN", 351 },
-  { "RECHECK", 352 },
-  { "RECURSIVE", 353 },
-  { "REFERENCES", 355 },
-  { "REFERENCING", 356 },
-  { "REFRESH", 357 },
-  { "REF_P", 354 },
-  { "REINDEX", 358 },
-  { "RELATIVE_P", 359 },
-  { "RELEASE", 360 },
-  { "RENAME", 361 },
-  { "REPEATABLE", 362 },
-  { "REPLACE", 363 },
-  { "REPLICA", 364 },
-  { "RESET", 365 },
-  { "RESTART", 366 },
-  { "RESTRICT", 367 },
-  { "RETURN", 368 },
-  { "RETURNING", 369 },
-  { "RETURNS", 370 },
-  { "REVOKE", 371 },
-  { "RIGHT", 372 },
-  { "ROLE", 373 },
-  { "ROLLBACK", 374 },
-  { "ROLLUP", 375 },
-  { "ROUTINE", 376 },
-  { "ROUTINES", 377 },
-  { "ROW", 378 },
-  { "ROWS", 379 },
-  { "RULE", 380 },
-  { "SAVEPOINT", 381 },
-  { "SCHEMA", 382 },
-  { "SCHEMAS", 383 },
+  { "PARAMETER", 333 },
+  { "PARSER", 334 },
+  { "PARTIAL", 335 },
+  { "PARTITION", 336 },
+  { "PASSING", 337 },
+  { "PASSWORD", 338 },
+  { "PLACING", 339 },
+  { "PLANS", 340 },
+  { "POLICY", 341 },
+  { "POSITION", 342 },
+  { "PRECEDING", 343 },
+  { "PRECISION", 344 },
+  { "PREPARE", 346 },
+  { "PREPARED", 347 },
+  { "PRESERVE", 345 },
+  { "PRIMARY", 348 },
+  { "PRIOR", 349 },
+  { "PRIVILEGES", 350 },
+  { "PROCEDURAL", 351 },
+  { "PROCEDURE", 352 },
+  { "PROCEDURES", 353 },
+  { "PROFILE", 354 },
+  { "PROGRAM", 355 },
+  { "PUBLICATION", 356 },
+  { "QUOTE", 357 },
+  { "RANGE", 358 },
+  { "READ", 359 },
+  { "REAL", 360 },
+  { "REASSIGN", 361 },
+  { "RECHECK", 362 },
+  { "RECURSIVE", 363 },
+  { "REFERENCES", 365 },
+  { "REFERENCING", 366 },
+  { "REFRESH", 367 },
+  { "REF_P", 364 },
+  { "REINDEX", 368 },
+  { "RELATIVE_P", 369 },
+  { "RELEASE", 370 },
+  { "RENAME", 371 },
+  { "REPEATABLE", 372 },
+  { "REPLACE", 373 },
+  { "REPLICA", 374 },
+  { "RESET", 375 },
+  { "RESTART", 376 },
+  { "RESTRICT", 377 },
+  { "RETURN", 378 },
+  { "RETURNING", 379 },
+  { "RETURNS", 380 },
+  { "REVOKE", 381 },
+  { "RIGHT", 382 },
+  { "ROLE", 383 },
+  { "ROLLBACK", 384 },
+  { "ROLLUP", 385 },
+  { "ROUTINE", 386 },
+  { "ROUTINES", 387 },
+  { "ROW", 388 },
+  { "ROWS", 389 },
+  { "RULE", 390 },
+  { "SAVEPOINT", 391 },
+  { "SCHEMA", 392 },
+  { "SCHEMAS", 393 },
   { "SCONST", 24 },
-  { "SCROLL", 384 },
-  { "SEARCH", 385 },
-  { "SECOND_P", 386 },
-  { "SECURITY", 387 },
-  { "SELECT", 388 },
-  { "SEQUENCE", 389 },
-  { "SEQUENCES", 390 },
-  { "SERIALIZABLE", 391 },
-  { "SERVER", 392 },
-  { "SESSION", 393 },
-  { "SESSION_USER", 394 },
-  { "SET", 395 },
-  { "SETOF", 397 },
-  { "SETS", 396 },
-  { "SHARE", 398 },
-  { "SHOW", 399 },
-  { "SIMILAR", 400 },
-  { "SIMPLE", 401 },
-  { "SKIP", 402 },
-  { "SMALLINT", 403 },
-  { "SNAPSHOT", 404 },
-  { "SOME", 405 },
+  { "SCROLL", 394 },
+  { "SEARCH", 395 },
+  { "SECOND_P", 396 },
+  { "SECURITY", 397 },
+  { "SELECT", 398 },
+  { "SEQUENCE", 399 },
+  { "SEQUENCES", 400 },
+  { "SERIALIZABLE", 401 },
+  { "SERVER", 402 },
+  { "SESSION", 403 },
+  { "SESSION_USER", 404 },
+  { "SET", 405 },
+  { "SETOF", 407 },
+  { "SETS", 406 },
+  { "SHARE", 408 },
+  { "SHOW", 409 },
+  { "SIMILAR", 410 },
+  { "SIMPLE", 411 },
+  { "SKIP", 412 },
+  { "SMALLINT", 413 },
+  { "SNAPSHOT", 414 },
+  { "SOME", 415 },
+  { "SPLIT", 416 },
   { "SQL_COMMENT", 38 },
-  { "SQL_P", 406 },
-  { "STABLE", 407 },
-  { "STANDALONE_P", 408 },
-  { "START", 409 },
-  { "STATEMENT", 410 },
-  { "STATISTICS", 411 },
-  { "STDIN", 412 },
-  { "STDOUT", 413 },
-  { "STORAGE", 414 },
-  { "STORED", 415 },
-  { "STRICT_P", 416 },
-  { "STRIP_P", 417 },
-  { "SUBSCRIPTION", 418 },
-  { "SUBSTRING", 419 },
-  { "SUPPORT", 420 },
-  { "SYMMETRIC", 421 },
-  { "SYSID", 422 },
-  { "SYSTEM_P", 423 },
-  { "TABLE", 424 },
-  { "TABLES", 425 },
-  { "TABLESAMPLE", 426 },
-  { "TABLESPACE", 427 },
-  { "TEMP", 428 },
-  { "TEMPLATE", 429 },
-  { "TEMPORARY", 430 },
-  { "TEXT_P", 431 },
-  { "THEN", 432 },
-  { "TIES", 433 },
-  { "TIME", 434 },
-  { "TIMESTAMP", 435 },
-  { "TO", 436 },
-  { "TRAILING", 437 },
-  { "TRANSACTION", 438 },
-  { "TRANSFORM", 439 },
-  { "TREAT", 440 },
-  { "TRIGGER", 441 },
-  { "TRIM", 442 },
-  { "TRUE_P", 443 },
-  { "TRUNCATE", 444 },
-  { "TRUSTED", 445 },
+  { "SQL_P", 417 },
+  { "STABLE", 418 },
+  { "STANDALONE_P", 419 },
+  { "START", 420 },
+  { "STATEMENT", 421 },
+  { "STATISTICS", 422 },
+  { "STDIN", 423 },
+  { "STDOUT", 424 },
+  { "STORAGE", 425 },
+  { "STORED", 426 },
+  { "STRICT_P", 427 },
+  { "STRIP_P", 428 },
+  { "SUBSCRIPTION", 429 },
+  { "SUBSTRING", 430 },
+  { "SUPPORT", 431 },
+  { "SYMMETRIC", 432 },
+  { "SYSID", 433 },
+  { "SYSTEM_P", 434 },
+  { "TABLE", 435 },
+  { "TABLEGROUP", 436 },
+  { "TABLEGROUPS", 437 },
+  { "TABLES", 438 },
+  { "TABLESAMPLE", 439 },
+  { "TABLESPACE", 440 },
+  { "TABLETS", 441 },
+  { "TEMP", 442 },
+  { "TEMPLATE", 443 },
+  { "TEMPORARY", 444 },
+  { "TEXT_P", 445 },
+  { "THEN", 446 },
+  { "TIES", 447 },
+  { "TIME", 448 },
+  { "TIMESTAMP", 449 },
+  { "TO", 450 },
+  { "TRAILING", 451 },
+  { "TRANSACTION", 452 },
+  { "TRANSFORM", 453 },
+  { "TREAT", 454 },
+  { "TRIGGER", 455 },
+  { "TRIM", 456 },
+  { "TRUE_P", 457 },
+  { "TRUNCATE", 458 },
+  { "TRUSTED", 459 },
   { "TYPECAST", 31 },
-  { "TYPES_P", 447 },
-  { "TYPE_P", 446 },
-  { "UESCAPE", 448 },
+  { "TYPES_P", 461 },
+  { "TYPE_P", 460 },
+  { "UESCAPE", 462 },
   { "UIDENT", 22 },
-  { "UMINUS", 508 },
-  { "UNBOUNDED", 449 },
-  { "UNCOMMITTED", 450 },
-  { "UNENCRYPTED", 451 },
-  { "UNION", 452 },
-  { "UNIQUE", 453 },
-  { "UNKNOWN", 454 },
-  { "UNLISTEN", 455 },
-  { "UNLOGGED", 456 },
-  { "UNTIL", 457 },
-  { "UPDATE", 458 },
+  { "UMINUS", 525 },
+  { "UNBOUNDED", 463 },
+  { "UNCOMMITTED", 464 },
+  { "UNENCRYPTED", 465 },
+  { "UNION", 466 },
+  { "UNIQUE", 467 },
+  { "UNKNOWN", 468 },
+  { "UNLISTEN", 469 },
+  { "UNLOCK", 470 },
+  { "UNLOGGED", 471 },
+  { "UNTIL", 472 },
+  { "UPDATE", 473 },
   { "USCONST", 25 },
-  { "USER", 459 },
-  { "USING", 460 },
-  { "VACUUM", 461 },
-  { "VALID", 462 },
-  { "VALIDATE", 463 },
-  { "VALIDATOR", 464 },
-  { "VALUES", 466 },
-  { "VALUE_P", 465 },
-  { "VARCHAR", 467 },
-  { "VARIADIC", 468 },
-  { "VARYING", 469 },
-  { "VERBOSE", 470 },
-  { "VERSION_P", 471 },
-  { "VIEW", 472 },
-  { "VIEWS", 473 },
-  { "VOLATILE", 474 },
-  { "WHEN", 475 },
-  { "WHERE", 476 },
-  { "WHITESPACE_P", 477 },
-  { "WINDOW", 478 },
-  { "WITH", 479 },
-  { "WITHIN", 480 },
-  { "WITHOUT", 481 },
-  { "WITH_LA", 502 },
-  { "WORK", 482 },
-  { "WRAPPER", 483 },
-  { "WRITE", 484 },
+  { "USER", 474 },
+  { "USING", 475 },
+  { "VACUUM", 476 },
+  { "VALID", 477 },
+  { "VALIDATE", 478 },
+  { "VALIDATOR", 479 },
+  { "VALUES", 481 },
+  { "VALUE_P", 480 },
+  { "VARCHAR", 482 },
+  { "VARIADIC", 483 },
+  { "VARYING", 484 },
+  { "VERBOSE", 485 },
+  { "VERSION_P", 486 },
+  { "VIEW", 487 },
+  { "VIEWS", 488 },
+  { "VOLATILE", 489 },
+  { "WHEN", 490 },
+  { "WHERE", 491 },
+  { "WHITESPACE_P", 492 },
+  { "WINDOW", 493 },
+  { "WITH", 494 },
+  { "WITHIN", 495 },
+  { "WITHOUT", 496 },
+  { "WITH_LA", 517 },
+  { "WORK", 497 },
+  { "WRAPPER", 498 },
+  { "WRITE", 499 },
   { "XCONST", 27 },
-  { "XMLATTRIBUTES", 486 },
-  { "XMLCONCAT", 487 },
-  { "XMLELEMENT", 488 },
-  { "XMLEXISTS", 489 },
-  { "XMLFOREST", 490 },
-  { "XMLNAMESPACES", 491 },
-  { "XMLPARSE", 492 },
-  { "XMLPI", 493 },
-  { "XMLROOT", 494 },
-  { "XMLSERIALIZE", 495 },
-  { "XMLTABLE", 496 },
-  { "XML_P", 485 },
-  { "YEAR_P", 497 },
-  { "YES_P", 498 },
-  { "ZONE", 499 },
+  { "XMLATTRIBUTES", 501 },
+  { "XMLCONCAT", 502 },
+  { "XMLELEMENT", 503 },
+  { "XMLEXISTS", 504 },
+  { "XMLFOREST", 505 },
+  { "XMLNAMESPACES", 506 },
+  { "XMLPARSE", 507 },
+  { "XMLPI", 508 },
+  { "XMLROOT", 509 },
+  { "XMLSERIALIZE", 510 },
+  { "XMLTABLE", 511 },
+  { "XML_P", 500 },
+  { "YEAR_P", 512 },
+  { "YES_P", 513 },
+  { "ZONE", 514 },
 };
 const ProtobufCEnumDescriptor pg_query__token__descriptor =
 {
@@ -39646,9 +40682,9 @@ const ProtobufCEnumDescriptor pg_query__token__descriptor =
   "Token",
   "PgQuery__Token",
   "pg_query",
-  509,
+  526,
   pg_query__token__enum_values_by_number,
-  509,
+  526,
   pg_query__token__enum_values_by_name,
   6,
   pg_query__token__value_ranges,

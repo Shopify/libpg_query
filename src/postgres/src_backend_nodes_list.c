@@ -11,13 +11,14 @@
  * - list_copy
  * - lcons
  * - new_head_cell
+ * - list_copy_deep
+ * - lappend_oid
  * - list_make3_impl
  * - list_make4_impl
  * - list_delete_cell
  * - list_delete_nth_cell
  * - list_free
  * - list_free_private
- * - list_copy_deep
  * - list_copy_tail
  * - list_truncate
  *--------------------------------------------------------------------
@@ -367,7 +368,20 @@ lappend(List *list, void *datum)
 /*
  * Append an OID to the specified list. See lappend()
  */
+List *
+lappend_oid(List *list, Oid datum)
+{
+	Assert(IsOidList(list));
 
+	if (list == NIL)
+		list = new_list(T_OidList, 1);
+	else
+		new_tail_cell(list);
+
+	llast_oid(list) = datum;
+	check_list_invariants(list);
+	return list;
+}
 
 /*
  * Make room for a new cell at position 'pos' (measured from 0).
