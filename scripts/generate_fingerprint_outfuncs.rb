@@ -257,6 +257,7 @@ class Generator
     ['RawStmt', 'stmt_len'] => :skip,
     ['RawStmt', 'stmt_location'] => :skip,
     ['YbBackfillInfo', 'read_time'] => :skip,
+    ['YbCreateProfileStmt', 'prffailedloginattempts'] => :skip,
   }
   INT_TYPES = ['bits32', 'uint32', 'int', 'int32', 'uint16', 'int16', 'Oid', 'Index', 'AclMode', 'AttrNumber', 'SubTransactionId']
   LONG_INT_TYPES = ['long', 'uint64']
