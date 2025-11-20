@@ -27,7 +27,7 @@ class Generator
   TYPE_OVERRIDES = {
     ['Query', 'queryId'] => :skip, # we intentionally do not print the queryId field
     ['YbBackfillInfo', 'read_time'] => :skip, # skip this, it is a uint64_t and we don't have a protobuf for it
-    ['YBCreateProfileStmt', 'prffailedloginattempts'] => :skip, # skip this because it generates an Integer field for some reason
+    ['YbCreateProfileStmt', 'prffailedloginattempts'] => :skip, # skip this because it generates an Integer field for some reason
   }
   OUTNAME_OVERRIDES = {
     ['CreateForeignTableStmt', 'base'] => 'base_stmt',
