@@ -133,7 +133,7 @@ static Node * _readNode(PgQuery__Node *msg)
 						ac->val.bsval = *makeBitString(pstrdup(msg->a_const->bsval->bsval));
 						break;
 					case PG_QUERY__A__CONST__VAL__NOT_SET:
-					case _PG_QUERY__A__CONST__VAL__CASE_IS_INT_SIZE:
+					default:
 						Assert(false);
 						break;
 				}
