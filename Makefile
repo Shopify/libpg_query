@@ -121,10 +121,10 @@ move_source:
 	cd $(PGDIR); patch -p1 < $(root_dir)/patches/09_allow_trailing_junk.patch
 	cd $(PGDIR); ./configure $(PG_CONFIGURE_FLAGS)
 	cd $(PGDIR); rm -f src/pl/plpgsql/src/pl_gram.h
-	cd $(PGDIR); make -C src/pl/plpgsql/src pl_gram.h
-	cd $(PGDIR); make -C src/port pg_config_paths.h
-	cd $(PGDIR); make -C src/backend generated-headers
-	cd $(PGDIR); make -C src/backend parser-recursive # Triggers copying of includes to where they belong, as well as generating gram.c/scan.c
+	cd $(PGDIR); YB_SRC_ROOT=$(root_dir)/../yugabyte-db YB_BUILD_ROOT=$(root_dir)/../yugabyte-db/build make -C src/pl/plpgsql/src pl_gram.h
+	cd $(PGDIR); YB_SRC_ROOT=$(root_dir)/../yugabyte-db YB_BUILD_ROOT=$(root_dir)/../yugabyte-db/build make -C src/port pg_config_paths.h
+	cd $(PGDIR); YB_SRC_ROOT=$(root_dir)/../yugabyte-db YB_BUILD_ROOT=$(root_dir)/../yugabyte-db/build make -C src/backend generated-headers
+	cd $(PGDIR); YB_SRC_ROOT=$(root_dir)/../yugabyte-db YB_BUILD_ROOT=$(root_dir)/../yugabyte-db/build make -C src/backend parser-recursive # Triggers copying of includes to where they belong, as well as generating gram.c/scan.c
 	# This causes compatibility problems on some Linux distros, with "xlocale.h" not being available
 	echo "#undef HAVE_LOCALE_T" >> $(PGDIR)/src/include/pg_config.h
 	echo "#undef LOCALE_T_IN_XLOCALE" >> $(PGDIR)/src/include/pg_config.h
