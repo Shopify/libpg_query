@@ -185,7 +185,7 @@ extract_source:
 	fi
 	# Generate and copy PL/pgSQL headers
 	@echo "Generating PL/pgSQL headers..."
-	@cd $(PGDIR)/src/pl/plpgsql/src && $(MAKE) plerrcodes.h pl_reserved_kwlist_d.h pl_unreserved_kwlist_d.h pl_reserved_kwlist.h pl_unreserved_kwlist.h || echo "Warning: Could not generate some PL/pgSQL headers"
+	@cd $(PGDIR)/src/pl/plpgsql/src && YB_SRC_ROOT=$(root_dir)/../yugabyte-db YB_BUILD_ROOT=$(root_dir)/../yugabyte-db/build $(MAKE) plerrcodes.h pl_reserved_kwlist_d.h pl_unreserved_kwlist_d.h pl_reserved_kwlist.h pl_unreserved_kwlist.h || echo "Warning: Could not generate some PL/pgSQL headers"
 	@for f in plerrcodes.h pl_reserved_kwlist_d.h pl_unreserved_kwlist_d.h pl_reserved_kwlist.h pl_unreserved_kwlist.h; do \
 		if [ -f $(PGDIR)/src/pl/plpgsql/src/$$f ]; then \
 			cp $(PGDIR)/src/pl/plpgsql/src/$$f ./src/postgres/ && echo "Copied $$f"; \
