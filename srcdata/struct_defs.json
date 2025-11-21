@@ -8818,10 +8818,8 @@
       "comment": "/*----------\n * OnConflictExpr - represents an ON CONFLICT DO ... expression\n *\n * The optimizer requires a list of inference elements, and optionally a WHERE\n * clause to infer a unique index.  The unique index (or, occasionally,\n * indexes) inferred are used to arbitrate whether or not the alternative ON\n * CONFLICT path is taken.\n *----------\n */\n"
     }
   },
-  "nodes/lockoptions": {
-  },
-  "nodes/nodes": {
-  },
+  "nodes/lockoptions": {},
+  "nodes/nodes": {},
   "nodes/params": {
     "ParamExternData": {
       "fields": [
@@ -8935,10 +8933,8 @@
       "comment": "/* type of argument for ParamsErrorCallback */\n"
     }
   },
-  "access/attnum": {
-  },
-  "c": {
-  },
+  "access/attnum": {},
+  "c": {},
   "postgres": {
     "varatt_external": {
       "fields": [
@@ -8997,8 +8993,7 @@
       "comment": "/*\n * A NullableDatum is used in places where both a Datum and its nullness needs\n * to be stored. This can be more efficient than storing datums and nullness\n * in separate arrays, due to better spatial locality, even if more space may\n * be wasted due to padding.\n */\n"
     }
   },
-  "postgres_ext": {
-  },
+  "postgres_ext": {},
   "commands/vacuum": {
     "VacAttrStats": {
       "fields": [
@@ -9287,10 +9282,8 @@
       "comment": "/*\n * BlockId:\n *\n * this is a storage type for BlockNumber.  in other words, this type\n * is used for on-disk structures (e.g., in HeapTupleData) whereas\n * BlockNumber is the type on which calculations are performed (e.g.,\n * in access method code).\n *\n * there doesn't appear to be any reason to have separate types except\n * for the fact that BlockIds can be SHORTALIGN'd (and therefore any\n * structures that contains them, such as ItemPointerData, can also be\n * SHORTALIGN'd).  this is an important consideration for reducing the\n * space requirements of the line pointer (ItemIdData) array on each\n * page and the header of each heap or index tuple, so it doesn't seem\n * wise to change this without good reason.\n */\n"
     }
   },
-  "access/sdir": {
-  },
-  "mb/pg_wchar": {
-  },
+  "access/sdir": {},
+  "mb/pg_wchar": {},
   "../backend/parser/gram": {
     "YYLTYPE": {
       "fields": [

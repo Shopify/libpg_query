@@ -55,18 +55,13 @@ typedef struct MemoryContextCallback
  * GetCurrentMemoryContext() is the default allocation context for palloc().
  * Avoid accessing it directly!  Instead, use MemoryContextSwitchTo()
  * to change the setting.
- *
- * MODIFIED for libpg_query: Removed __thread to avoid TLS issues in parser-only mode
  */
-extern PGDLLIMPORT MemoryContext CurrentMemoryContext;
+extern PGDLLIMPORT __thread  MemoryContext CurrentMemoryContext;
 
 /*
  * This enables running query-layer code in a multi-threaded constext by using
  * thread-local variables instead of globals.
  * Currently only used for expression evaluation in DocDB (i.e. for pushdown).
- *
- * MODIFIED for libpg_query: Always return false to disable multi-threaded mode
- * and use the standard PostgreSQL memory context system.
  */
 static inline bool IsMultiThreadedMode() {
 	/*
@@ -74,7 +69,7 @@ static inline bool IsMultiThreadedMode() {
 	 * TODO Consider using a specific global variable or compiler flag
 	 * for this.
 	 */
-	return false; /* MODIFIED: Always use single-threaded mode for parser-only use */
+	return CurrentMemoryContext == NULL;
 }
 
 extern MemoryContext GetThreadLocalCurrentMemoryContext();

@@ -4366,12 +4366,9 @@
       "comment": "/*\n * LimitOption -\n *\tLIMIT option of query\n *\n * This is needed in both parsenodes.h and plannodes.h, so put it here...\n */\n"
     }
   },
-  "nodes/params": {
-  },
-  "access/attnum": {
-  },
-  "c": {
-  },
+  "nodes/params": {},
+  "access/attnum": {},
+  "c": {},
   "postgres": {
     "vartag_external": {
       "values": [
@@ -4398,8 +4395,7 @@
       "comment": "/*\n * Type tag for the various sorts of \"TOAST pointer\" datums.  The peculiar\n * value for VARTAG_ONDISK comes from a requirement for on-disk compatibility\n * with a previous notion that the tag field was the pointer datum's length.\n */\n"
     }
   },
-  "postgres_ext": {
-  },
+  "postgres_ext": {},
   "commands/vacuum": {
     "VacOptValue": {
       "values": [
@@ -4426,8 +4422,7 @@
       "comment": "/*\n * Values used by index_cleanup and truncate params.\n *\n * VACOPTVALUE_UNSPECIFIED is used as an initial placeholder when VACUUM\n * command has no explicit value.  When that happens the final usable value\n * comes from the corresponding reloption (though the reloption default is\n * usually used).\n */\n"
     }
   },
-  "storage/block": {
-  },
+  "storage/block": {},
   "access/sdir": {
     "ScanDirection": {
       "values": [
