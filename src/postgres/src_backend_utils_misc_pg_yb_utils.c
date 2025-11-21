@@ -120,6 +120,7 @@
 #include "funcapi.h"
 #include "mb/pg_wchar.h"
 
+// MODIFIED for libpg_query: Use local YB headers instead of external repo
 #include "yb/yql/pggate/util/ybc_util.h"
 #include "yb/yql/pggate/ybc_pggate.h"
 #include "pgstat.h"

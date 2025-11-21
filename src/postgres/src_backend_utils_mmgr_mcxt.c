@@ -198,8 +198,10 @@ YbPgMemSubConsumption(Size sz)
 /*
  * CurrentMemoryContext
  *		Default memory context for allocations.
+ *
+ * MODIFIED for libpg_query: Removed __thread to avoid TLS issues in parser-only mode
  */
-__thread MemoryContext CurrentMemoryContext = NULL;
+MemoryContext CurrentMemoryContext = NULL;
 
 
 
